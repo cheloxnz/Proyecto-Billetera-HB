@@ -21,25 +21,25 @@ const Drawer = createDrawerNavigator();
 
 
 const PositionConsolidated = ({navigation}) => {
-    
+
     return (
             <View style={styles.container}>
-                {/* NAVBAR VA EN TODOS LOS SCREEN  */}              
-                  <NavBar navigation={navigation}/>                
+                {/* NAVBAR VA EN TODOS LOS SCREEN  */}
+                <NavBar navigation={navigation}/>
                   <ImageBackground
                     source={require('../assets/consolidated_dot.png')}
                     style={styles.background}
                   >
-                {/* ACA SE PONE EL COMPONENTE DEL SCREEN A RENDERIZAR */}  
+                {/* ACA SE PONE EL COMPONENTE DEL SCREEN A RENDERIZAR */}
                       <Principal navigation={navigation}/>
-                      
-                  </ImageBackground> 
+
+                  </ImageBackground>
 
 
-                 {/* FOOTER VA EN TODOS LOS SCREEN  */}   
+                 {/* FOOTER VA EN TODOS LOS SCREEN  */}
                   <FooterNew navigation={navigation}/>
-            </View>  
-      
+            </View>
+
     )
 }
 
@@ -50,13 +50,14 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         top: getStatusBarHeight(),
-        justifyContent:'space-between'
-        
+        justifyContent:'space-between',
+        backgroundColor: "black"
+
     },
     component:{
       flex:1
     },
-    
+
     background: {
       flex: 1,
       width: '100%',
@@ -84,12 +85,12 @@ const mapDispatchToProps = dispatch => {
 function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator 
+      <Drawer.Navigator
       initialRouteName="Home"
       drawerContentOptions={{
         activeTintColor: 'black',
-        activeBackgroundColor:'yellow', 
-        inactiveTintColor:'gray'      
+        activeBackgroundColor:'yellow',
+        inactiveTintColor:'gray'
 
       }}
       drawerStyle={{
@@ -111,4 +112,3 @@ function App() {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-

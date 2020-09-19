@@ -7,7 +7,7 @@ import { getAccount } from '../actions';
 
 
 const Principal = ({navigation, getAccount, account, onlineUser}) => {
-    
+
     useEffect(()=> {
         getAccount(onlineUser.id)
     },[onlineUser])
@@ -96,8 +96,8 @@ const Principal = ({navigation, getAccount, account, onlineUser}) => {
                         </View>
                     </ScrollView>
                 </View>
-            </View>  
-            
+            </View>
+
     )
 }
 const styles = StyleSheet.create({
@@ -105,8 +105,9 @@ const styles = StyleSheet.create({
     contenedorPadre: {
         width: '100%',
         height: '100%',
+        flex: 1,
         justifyContent: 'space-between'
-    },  
+    },
 
     homeCont: {
         width: '25%',
