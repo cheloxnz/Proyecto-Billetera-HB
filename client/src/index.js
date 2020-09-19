@@ -11,7 +11,6 @@ import {
   RegisterThird,
   RegisterFourty,
   PositionConsolidated,
-  ScreenTransfers,
 } from './screens';
 
 const Router = createStackNavigator(
@@ -25,7 +24,7 @@ const Router = createStackNavigator(
     ActiveEmail,
     ForgotPasswordScreen,
     PositionConsolidated,
-    ScreenTransfers,
+    
   },
   {
     initialRouteName: 'HomeScreen',
