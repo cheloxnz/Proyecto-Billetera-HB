@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { getAccount } from '../actions';
+import { color } from 'react-native-reanimated';
 
 
 
@@ -23,10 +24,10 @@ const Principal = ({navigation, getAccount, account, onlineUser}) => {
                         </View>
                         <View style={styles.contentBotones}>
                             <View style={styles.contentRecargar}>
-                                <Button title='Load' onPress ={() => navigation.toggleDrawer()}  style={styles.botonRecargar}/>
+                                <Button title='Load' onPress ={() => navigation.toggleDrawer()} color='black'/>
                             </View>
                             <View style={styles.contentEnviar}>
-                                <Button title='Send' onPress ={() => navigation.navigate("Transfers")} style={styles.botonEnviar}/>
+                                <Button title='Send' onPress ={() => navigation.navigate("Transfers")} color='black'/>
                             </View>
                         </View>
                     </View>
@@ -217,7 +218,8 @@ const styles = StyleSheet.create({
     },
     ingresos: {
         color: 'green'
-    }
+    },
+
 })
 
 const mapStateToProps = state => {
