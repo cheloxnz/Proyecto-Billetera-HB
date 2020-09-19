@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 60,
         borderRadius: 10,
         backgroundColor: 'white',
-        marginBottom: 5
+        marginBottom: 5,
     },
     contentInfo: {
         alignItems: 'center',
