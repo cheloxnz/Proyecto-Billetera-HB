@@ -168,12 +168,12 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     contentHijoDos: {
-        width: '70%',
+        width: '90%',
         marginTop: 4,
-        marginHorizontal: 60,
         borderRadius: 10,
         backgroundColor: 'white',
         marginBottom: 5,
+        marginHorizontal: 20,
     },
     contentInfo: {
         alignItems: 'center',
