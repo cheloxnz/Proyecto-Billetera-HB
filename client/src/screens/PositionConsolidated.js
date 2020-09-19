@@ -84,7 +84,22 @@ const mapDispatchToProps = dispatch => {
 function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator 
+      initialRouteName="Home"
+      drawerContentOptions={{
+        activeTintColor: 'black',
+        activeBackgroundColor:'yellow', 
+        inactiveTintColor:'gray'      
+
+      }}
+      drawerStyle={{
+        borderColor:'yellow',
+        borderWidth:2,
+        marginTop:'15%',
+        backgroundColor:'white',
+        
+      }}
+      >
         <Drawer.Screen name="Home" component={PositionConsolidated} />
         <Drawer.Screen name="Transfers" component={ScreenTransfers} />
         <Drawer.Screen name="Mycard" component={Mycard} />
@@ -95,5 +110,7 @@ function App() {
     </NavigationContainer>
   );
 }
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
