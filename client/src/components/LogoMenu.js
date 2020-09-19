@@ -8,9 +8,9 @@ const LogoMenu = () => (
 
 const styles = StyleSheet.create({
     imageBars: {
-        width: "35%",
+        width: "22%",
         height: "100%",
-
+        paddingRight: "3.4em",
     },
 });
 

@@ -4,37 +4,37 @@ import { Icon } from 'react-native-elements';
 
 
 const FooterNew = ({navigation}) => {
-    
+
 
   return (
       <View style={styles.footer}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}  >
                 <View style={styles.icons}>
-                    <Icon name='home' size={50} />
-                    <Text>Home</Text>
+                    <Icon name='home' size={40} />
+                    <Text style={styles.text}>Home</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Transfers')}>
                 <View style={styles.icons}>
-                    <Icon name='autorenew' size={50} />
-                    <Text>Transfers</Text>
+                    <Icon name='autorenew' size={40} />
+                    <Text style={styles.text}>Transfers</Text>
                 </View>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.navigate('Mycard')} >
                 <View style={styles.icons}>
-                    <Icon  name='payment' size={50} />
-                    <Text>Card</Text>
+                    <Icon  name='payment' size={40} />
+                    <Text style={styles.text}>Card</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Payments')}>
                 <View style={styles.icons}>
-                    <Icon   name='assessment' size={50} />
-                    <Text>Pays</Text>
+                    <Icon   name='assessment' size={40} />
+                    <Text style={styles.text}>Pays</Text>
                 </View>
             </TouchableOpacity>
 
-           
+
         </View>
   );
 };
@@ -43,7 +43,7 @@ const FooterNew = ({navigation}) => {
 const styles = StyleSheet.create({
     footer: {
         width: "100%",
-        height:'9%',
+        height:'8%',
         backgroundColor:'#F7FE2E',
         borderTopColor:'yellow',
         borderTopWidth:2,
@@ -52,11 +52,14 @@ const styles = StyleSheet.create({
     },
     icons: {
         height:'100%',
-        //backgroundColor:'orange',
         borderRadius:10,
         alignItems:'center',
         justifyContent:'center'
       },
+    text: {
+      position: 'relative',
+      top: -7
+    }
 })
 
 
