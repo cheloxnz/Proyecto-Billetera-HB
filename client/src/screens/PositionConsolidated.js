@@ -97,7 +97,6 @@ function App() {
         borderWidth:2,
         marginTop:'15%',
         backgroundColor:'white',
-        
       }}
       >
         <Drawer.Screen name="Home" component={PositionConsolidated} />
