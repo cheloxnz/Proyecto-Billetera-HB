@@ -104,7 +104,6 @@ function App() {
         <Drawer.Screen name="Mycard" component={Mycard} />
         <Drawer.Screen name="Payments" component={Payments} />
 
-
       </Drawer.Navigator>
     </NavigationContainer>
   );
