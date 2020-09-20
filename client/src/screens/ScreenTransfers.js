@@ -52,7 +52,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, get
                 type="clear"
                 titleStyle={{ color: 'black', fontSize: 18 }}
                 containerStyle={{ marginVertical: 10, borderRadius: 10 }}
-                onPress={(navigation) => navigation.navigate('InputTransfer')}
+                onPress={() => navigation.navigate('Accounts')}
               />
             </View>
           </View>
@@ -76,7 +76,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, get
           </View>
         </View>
       </View>
-      <FooterNew />
+      <FooterNew navigation={navigation} />
     </View>
     </ImageBackground>
   )

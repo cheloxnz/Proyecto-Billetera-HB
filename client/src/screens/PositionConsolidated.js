@@ -120,7 +120,7 @@ function App() {
               />
             ),
           }} />
-        <Drawer.Screen name="Banelco Keys" component={ForgotPasswordScreen}
+        <Drawer.Screen name="BanelcoKeys" component={ForgotPasswordScreen}
           options={{
             title: 'Banelco Keys',
             drawerIcon: ({ focused, size }) => (
@@ -153,7 +153,7 @@ function App() {
               />
             ),
           }} />
-        <Drawer.Screen name="My Card" component={ScreenMyCard}
+        <Drawer.Screen name="Card" component={ScreenMyCard}
           options={{
             title: 'My Card',
             drawerIcon: ({ focused, size }) => (
@@ -164,7 +164,7 @@ function App() {
               />
             ),
           }} />
-        <Drawer.Screen name='Buy and Sell BitCoins' component={BuyaSell}
+        <Drawer.Screen name='BuyBitCoins' component={BuyaSell}
           options={{
             title: 'Buy and Sell BitCoins',
             drawerIcon: ({ focused, size }) => (
@@ -175,7 +175,6 @@ function App() {
               />
             ),
           }} />
-
       </Drawer.Navigator>
     </NavigationContainer>
   );
