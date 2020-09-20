@@ -12,23 +12,23 @@ const Navbar = ({navigation}) => {
     return (
                 <View style={styles.header}>
                         <View style={styles.menuContent}>
-                            <TouchableOpacity onPress={() => navigation.openDrawer()}   >
+                            <TouchableOpacity onPress={() => navigation.openDrawer()}>
                                 <LogoMenu />
                             </TouchableOpacity>
                         </View>
-                    
+
                         <View style={styles.icon} >
-                            <LogoPostCons/> 
+                            <LogoPostCons/>
                         </View>
-                    
+
                         <View style={styles.bellContent}>
                             <Notification />
                         </View>
-                </View>          
-       
+                </View>
+
     )
 };
-    
+
 const styles = StyleSheet.create({
     header: {
         width: "100%",
@@ -36,29 +36,29 @@ const styles = StyleSheet.create({
         backgroundColor: "#F7FE2E",
         height: "7%",
         justifyContent: "space-between",
-        
-    },
-    bellContent: {
-        width: 150,
-        alignItems: "center",
-        marginTop: 6,
-        alignItems: 'flex-start',
-        marginLeft: 24
-    },
-    icon: {
-        width: 120,
-        alignItems: "flex-start",
-        paddingTop: 6,
-        marginLeft: 20,
-        marginTop: 6,
+        borderBottomWidth: 3,
+        borderBottomColor: "black",
+        borderStyle: 'solid',
+        borderBottomLeftRadius: 7,
+        borderBottomRightRadius: 7,
     },
     menuContent: {
-        width: 150,
-        alignItems: "flex-start",
-        marginLeft: 6,
+        width: "44.35%",
+        alignItems: "center",
         marginTop: 6,
     },
-  
+    icon: {
+        width: "11.3%",
+        alignItems: "center",
+        marginTop: 6,
+        justifyContent: 'center',
+    },
+    bellContent: {
+        width: "44.35%",
+        alignItems: "center",
+        marginTop: 6,
+    },
+
 })
 
 export default connect()(Navbar)

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { getAccount } from '../actions';
+import { color } from 'react-native-reanimated';
 
 
 
@@ -23,81 +24,88 @@ const Principal = ({ navigation, getAccount, account, onlineUser }) => {
                     </View>
                     <View style={styles.contentBotones}>
                         <View style={styles.contentRecargar}>
-                            <Button title='Load' onPress={() => navigation.toggleDrawer()} style={styles.botonRecargar} />
+                            <Button title='Load' onPress={() => navigation.toggleDrawer()} color='black' />
                         </View>
                         <View style={styles.contentEnviar}>
-                            <Button title='Send' onPress={() => navigation.navigate("Transfers")} style={styles.botonEnviar} />
+                            <Button title='Send' onPress={() => navigation.navigate("Transfers")} color='black' />
                         </View>
                     </View>
                 </View>
-                <Text style={styles.mov}>Movements</Text>
-                <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
-
-                <ScrollView style={styles.contentHijoDos}>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>Netflix</Text>
-                        <Text style={styles.gastos}>- $500</Text>
+                <View style={styles.contentBotones}>
+                    <View style={styles.contentRecargar}>
+                        <Button title='Load' onPress={() => navigation.toggleDrawer()} style={styles.botonRecargar} />
                     </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>Fulano de Tal</Text>
-                        <Text style={styles.ingresos}>+ $1800</Text>
+                    <View style={styles.contentEnviar}>
+                        <Button title='Send' onPress={() => navigation.navigate("Transfers")} style={styles.botonEnviar} />
                     </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>Pago fácil</Text>
-                        <Text style={styles.gastos}>- $600</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>YPF</Text>
-                        <Text style={styles.gastos}>- $2500</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>McDonald</Text>
-                        <Text style={styles.gastos}>- $750</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>Netflix</Text>
-                        <Text style={styles.gastos}>- $500</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>Fulano de Tal</Text>
-                        <Text style={styles.ingresos}>+ $1800</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>Pago fácil</Text>
-                        <Text style={styles.gastos}>- $600</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>YPF</Text>
-                        <Text style={styles.gastos}>- $2500</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>McDonald</Text>
-                        <Text style={styles.gastos}>- $750</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>Netflix</Text>
-                        <Text style={styles.gastos}>- $500</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>Fulano de Tal</Text>
-                        <Text style={styles.ingresos}>+ $1800</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>Pago fácil</Text>
-                        <Text style={styles.gastos}>- $600</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>YPF</Text>
-                        <Text style={styles.gastos}>- $2500</Text>
-                    </View>
-                    <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>McDonald</Text>
-                        <Text style={styles.gastos}>- $750</Text>
-                    </View>
-                </ScrollView>
+                </View>
             </View>
-        </View>
+            <Text style={styles.mov}>Movements</Text>
+            <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
 
+            <ScrollView style={styles.contentHijoDos}>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>Netflix</Text>
+                    <Text style={styles.gastos}>- $500</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>Fulano de Tal</Text>
+                    <Text style={styles.ingresos}>+ $1800</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>Pago fácil</Text>
+                    <Text style={styles.gastos}>- $600</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>YPF</Text>
+                    <Text style={styles.gastos}>- $2500</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>McDonald</Text>
+                    <Text style={styles.gastos}>- $750</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>Netflix</Text>
+                    <Text style={styles.gastos}>- $500</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>Fulano de Tal</Text>
+                    <Text style={styles.ingresos}>+ $1800</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>Pago fácil</Text>
+                    <Text style={styles.gastos}>- $600</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>YPF</Text>
+                    <Text style={styles.gastos}>- $2500</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>McDonald</Text>
+                    <Text style={styles.gastos}>- $750</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>Netflix</Text>
+                    <Text style={styles.gastos}>- $500</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>Fulano de Tal</Text>
+                    <Text style={styles.ingresos}>+ $1800</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>Pago fácil</Text>
+                    <Text style={styles.gastos}>- $600</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>YPF</Text>
+                    <Text style={styles.gastos}>- $2500</Text>
+                </View>
+                <View style={styles.contentMov}>
+                    <Text style={styles.servicio}>McDonald</Text>
+                    <Text style={styles.gastos}>- $750</Text>
+                </View>
+            </ScrollView>
+        </View>
     )
 }
 const styles = StyleSheet.create({
@@ -105,6 +113,7 @@ const styles = StyleSheet.create({
     contenedorPadre: {
         width: '100%',
         height: '100%',
+        flex: 1,
         justifyContent: 'space-between'
     },
 
@@ -167,11 +176,12 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     contentHijoDos: {
-        width: '70%',
+        width: '90%',
         marginTop: 4,
-        marginHorizontal: 60,
         borderRadius: 10,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        marginBottom: 5,
+        marginHorizontal: 20,
     },
     contentInfo: {
         alignItems: 'center',
@@ -215,7 +225,8 @@ const styles = StyleSheet.create({
     },
     ingresos: {
         color: 'green'
-    }
+    },
+
 })
 
 const mapStateToProps = state => {

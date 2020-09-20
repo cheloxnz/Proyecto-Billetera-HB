@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 import Constants from 'expo-constants';
 
-
 const Background = ({ children }) => (
   <ImageBackground
     source={require('../assets/background_dot.png')}
@@ -37,3 +36,4 @@ const styles = StyleSheet.create({
 });
 
 export default memo(Background);
+//asd
