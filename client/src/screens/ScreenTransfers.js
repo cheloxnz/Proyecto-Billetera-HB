@@ -7,6 +7,8 @@ import SearchB from '../components/SearchB';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Alert, ScrollView } from 'react-native';
 import { getAllContacts, getAllUsers } from '../actions'
 import UserAvatar from 'react-native-user-avatar';
+import NavBar from '../components/NavBar';
+import FooterNew from '../components/FooterNew';
 
 
 const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, getAllUsers }) => {
@@ -35,26 +37,9 @@ const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, get
   );
   return (
     <View style={styles.content}>
+      <NavBar navigation={navigation} />
+
       <View style={styles.contenedorPadre}>
-        <View style={styles.contenedorDeHeader}>
-
-          <View style={styles.contenedorDeMenu}>
-            <View style={styles.contenedorIcono}>
-              <Icon name={'bars'} style={styles.sortDown} size={25} />
-            </View>
-          </View>
-
-          <View style={styles.contenedorDeTitulo}>
-            <Text style={styles.titulo}>Transfers</Text>
-          </View>
-
-          <View style={styles.contenedorDeAcciones}>
-            <View style={styles.contenedorIconoD}>
-              <Icon name={'angle-down'} style={styles.sortDown} size={25} />
-            </View>
-          </View>
-        </View>
-
         <View style={styles.contenedorCentral}>
           <View style={styles.contenedorUp}>
             <View style={styles.contenedorHave}>
@@ -86,10 +71,8 @@ const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, get
             </View>
           </View>
         </View>
-
-        <View style={styles.footerPadre}>
-        </View>
       </View>
+      <FooterNew />
     </View>
   )
 }
