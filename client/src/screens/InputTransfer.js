@@ -20,13 +20,14 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer }
     }, [transfer])
 
     const handleOnChange = (e) => {
+        console.log(state)
         setState({
             ...state,
             [e.target.name]: e.target.value
         })
     }
     const handleTransfer = () => {
-        if (account) doTransfer(account.dataValues.CVU, state.CVU, state.amount)
+        if (account) doTransfer(account.CVU, state.CVU, state.amount)
         //hacer alerta
     }
 

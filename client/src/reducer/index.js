@@ -9,6 +9,7 @@ import {
   GET_ALL_CONTACTS,
   GET_ACCOUNT,
   CREATE_ACCOUNT,
+  DO_TRANSFER
 } from "../actions";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   userRegister: {},
   contacts: {},
   account: {},
+  transfer: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -71,6 +73,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         account: action.payload
       }
+    case DO_TRANSFER:
+      return {
+        ...state,
+        transfer: action.payload
+    }
     default:
       return state;
   }

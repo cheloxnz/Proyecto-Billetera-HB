@@ -11,6 +11,7 @@ export const UPDATE_USER = 'UPDATE_USER'
 export const CREATE_ACCOUNT = 'CREATE_ACCOUNT'
 export const GET_ALL_CONTACTS = 'GET_ALL_CONTACTS';
 export const GET_ACCOUNT = 'GET_ACCOUNT';
+export const DO_TRANSFER = 'DO_TRANSFER';
 
 
 
@@ -145,6 +146,22 @@ export function getAccount(id) {
     .then((data) => {
       dispatch({
         type: GET_ACCOUNT,
+        payload: data
+      })
+    })
+  }
+}
+
+
+export function doTransfer(CVUFrom, CVU, amount) {
+  console.log(CVUFrom,CVU, amount, "los parametros")
+  return function (dispatch) {
+    return axios
+    .post(`http://localhost:3005/transfers/${CVUFrom}`, {CVU, amount})
+    .then((result) => result.data)
+    .then((data) => {
+      dispatch({
+        type: DO_TRANSFER,
         payload: data
       })
     })
