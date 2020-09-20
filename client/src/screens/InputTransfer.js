@@ -32,7 +32,7 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer }
 
     return (
         <Background>
-            <BackButton onPress={() => navigation.navigate('Principal')} />
+            <BackButton goBack={() => navigation.navigate("Transfers")} />
 
             <Text style={styles.top}>TRANSFER</Text>
             <Text style={styles.from}>FROM: {onlineUser.name ? onlineUser.name.toUpperCase() + ' ' + onlineUser.surname.toUpperCase() : ''}</Text>
