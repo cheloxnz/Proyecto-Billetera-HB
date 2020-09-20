@@ -21,7 +21,7 @@ const FooterNew = ({ navigation }) => {
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('My Card')} >
+            <TouchableOpacity onPress={() => navigation.navigate('Card')} >
                 <View style={styles.icons}>
                     <Icon name='payment' size={40} />
                     <Text style={styles.text}>Card</Text>
