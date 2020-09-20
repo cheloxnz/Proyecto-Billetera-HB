@@ -6,7 +6,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import NavBar from '../components/NavBar';
-import Principal from './Principal'
+import Principal from './Principal';
 import FooterNew from '../components/FooterNew';
 import ScreenTransfers from './ScreenTransfers';
 import ForgotPasswordScreen from './ForgotPasswordScreen';
@@ -31,7 +31,6 @@ const PositionConsolidated = ({ navigation }) => {
       >
         {/* ACA SE PONE EL COMPONENTE DEL SCREEN A RENDERIZAR */}
         <Principal navigation={navigation} />
-        <ForgotPasswordScreen navigation={navigation} />
 
       </ImageBackground>
 

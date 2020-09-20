@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { getAccount } from '../actions';
-import { color } from 'react-native-reanimated';
-
+import { Divider } from 'react-native-paper';
 
 
 const Principal = ({ navigation, getAccount, account, onlineUser }) => {
+
 
     useEffect(() => {
         getAccount(onlineUser.id)
@@ -22,18 +22,10 @@ const Principal = ({ navigation, getAccount, account, onlineUser }) => {
                         <Text style={styles.saldo}>{onlineUser.name + " " + onlineUser.surname}</Text>
                         <Text style={styles.parrafoSaldo}>Balance</Text>
                     </View>
-                    <View style={styles.contentBotones}>
-                        <View style={styles.contentRecargar}>
-                            <Button title='Load' onPress={() => navigation.toggleDrawer()} color='black' />
-                        </View>
-                        <View style={styles.contentEnviar}>
-                            <Button title='Send' onPress={() => navigation.navigate("Transfers")} color='black' />
-                        </View>
-                    </View>
                 </View>
                 <View style={styles.contentBotones}>
                     <View style={styles.contentRecargar}>
-                        <Button title='Load' onPress={() => navigation.toggleDrawer()} style={styles.botonRecargar} />
+                        <Button title='Load' onPress={() => navigation.navigate('InputTransfer')} style={styles.botonRecargar} />
                     </View>
                     <View style={styles.contentEnviar}>
                         <Button title='Send' onPress={() => navigation.navigate("Transfers")} style={styles.botonEnviar} />
@@ -48,58 +40,72 @@ const Principal = ({ navigation, getAccount, account, onlineUser }) => {
                     <Text style={styles.servicio}>Netflix</Text>
                     <Text style={styles.gastos}>- $500</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>Fulano de Tal</Text>
                     <Text style={styles.ingresos}>+ $1800</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>Pago fácil</Text>
                     <Text style={styles.gastos}>- $600</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>YPF</Text>
                     <Text style={styles.gastos}>- $2500</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>McDonald</Text>
                     <Text style={styles.gastos}>- $750</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>Netflix</Text>
                     <Text style={styles.gastos}>- $500</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>Fulano de Tal</Text>
                     <Text style={styles.ingresos}>+ $1800</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>Pago fácil</Text>
                     <Text style={styles.gastos}>- $600</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>YPF</Text>
                     <Text style={styles.gastos}>- $2500</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>McDonald</Text>
                     <Text style={styles.gastos}>- $750</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>Netflix</Text>
                     <Text style={styles.gastos}>- $500</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>Fulano de Tal</Text>
                     <Text style={styles.ingresos}>+ $1800</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>Pago fácil</Text>
                     <Text style={styles.gastos}>- $600</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>YPF</Text>
                     <Text style={styles.gastos}>- $2500</Text>
                 </View>
+                <Divider />
                 <View style={styles.contentMov}>
                     <Text style={styles.servicio}>McDonald</Text>
                     <Text style={styles.gastos}>- $750</Text>
@@ -164,7 +170,7 @@ const styles = StyleSheet.create({
     },
     contentHijo: {
         width: '90%',
-        height: '30%',
+        height: '70%',
         marginVertical: 10,
         marginHorizontal: 20,
         borderRadius: 10,
@@ -176,14 +182,16 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     contentHijoDos: {
-        width: '90%',
-        marginTop: 4,
-        borderRadius: 10,
+        width: '70%',
+        height: '30%',
+        marginTop: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
         backgroundColor: 'white',
-        marginBottom: 5,
-        marginHorizontal: 20,
+        marginHorizontal: 80
     },
     contentInfo: {
+        height: '30%',
         alignItems: 'center',
         marginVertical: 25
     },

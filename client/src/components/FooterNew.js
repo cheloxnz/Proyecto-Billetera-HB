@@ -1,13 +1,13 @@
 import React from "react";
-import {View, Text, TextInput, StyleSheet, TouchableOpacity, Button} from "react-native";
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Button } from "react-native";
 import { Icon } from 'react-native-elements';
 
 
-const FooterNew = ({navigation}) => {
+const FooterNew = ({ navigation }) => {
 
 
-  return (
-      <View style={styles.footer}>
+    return (
+        <View style={styles.footer}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}  >
                 <View style={styles.icons}>
                     <Icon name='home' size={40} />
@@ -21,44 +21,44 @@ const FooterNew = ({navigation}) => {
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Mycard')} >
+            <TouchableOpacity onPress={() => navigation.navigate('My Card')} >
                 <View style={styles.icons}>
-                    <Icon  name='payment' size={40} />
+                    <Icon name='payment' size={40} />
                     <Text style={styles.text}>Card</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Payments')}>
                 <View style={styles.icons}>
-                    <Icon   name='assessment' size={40} />
+                    <Icon name='assessment' size={40} />
                     <Text style={styles.text}>Pays</Text>
                 </View>
             </TouchableOpacity>
 
 
         </View>
-  );
+    );
 };
 
 
 const styles = StyleSheet.create({
     footer: {
         width: "100%",
-        height:'8%',
-        backgroundColor:'#F7FE2E',
-        borderTopColor:'yellow',
-        borderTopWidth:2,
-        flexDirection:'row',
-        justifyContent:'space-around',
+        height: '8%',
+        backgroundColor: '#F7FE2E',
+        borderTopColor: 'yellow',
+        borderTopWidth: 2,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
     icons: {
-        height:'100%',
-        borderRadius:10,
-        alignItems:'center',
-        justifyContent:'center'
-      },
+        height: '100%',
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     text: {
-      position: 'relative',
-      top: -7
+        position: 'relative',
+        top: -7
     }
 })
 
