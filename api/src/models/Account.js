@@ -17,9 +17,9 @@ module.exports = sequelize => {
         balance: {
             type: DataTypes.FLOAT,
             defaultValue: 500,
-            get() {
+            /*get() {
                 return () => this.getDataValue('balance');
-            },
+            },*/
         },
         state: {
             type: DataTypes.ENUM,

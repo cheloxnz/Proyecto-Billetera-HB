@@ -4,11 +4,12 @@ import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Constants from 'expo-constants';
 import SearchB from '../components/SearchB';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Alert, ScrollView } from 'react-native';
+import { ImageBackground, SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Alert, ScrollView } from 'react-native';
 import { getAllContacts, getAllUsers } from '../actions'
 import UserAvatar from 'react-native-user-avatar';
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
+
 
 
 const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, getAllUsers }) => {
@@ -36,6 +37,9 @@ const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, get
     <Item title={item.name + ' ' + item.surname} />
   );
   return (
+    <ImageBackground 
+      source={require('../assets/consolidated_dot.png')}
+      style={styles.background}>
     <View style={styles.content}>
       <NavBar navigation={navigation} />
 
@@ -74,6 +78,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, get
       </View>
       <FooterNew />
     </View>
+    </ImageBackground>
   )
 }
 
@@ -199,7 +204,11 @@ const styles = StyleSheet.create({
   },
   iconFriend: {
     alignSelf: 'flex-start'
-  }
+  },
+  background: {
+    flex: 1,
+    width: '100%',
+  },
 
 })
 
