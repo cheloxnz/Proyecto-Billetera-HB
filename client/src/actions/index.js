@@ -126,12 +126,12 @@ export function setPinUser(idUser, pin) {
 export function getAllContacts(id) {
   return function (dispatch) {
     return axios
-    .get(`http://localhost:3005/users/${id}`)
-    .then((result) => console.log(result.data.friends))
-    .then((data) => {
+    .get(`http://localhost:3005/contacts/user/${id}`)
+    .then((result) => result.data.friends)
+    .then((friends) => {
       dispatch({
         type: GET_ALL_CONTACTS,
-        payload: data
+        payload: friends
       })
     })
   }

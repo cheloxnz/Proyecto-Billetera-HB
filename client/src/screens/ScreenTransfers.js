@@ -16,10 +16,10 @@ const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, get
 
 
   useEffect(() => {
-    getAllContacts(onlineUser.id)
-  }, [onlineUser])
-  console.log(contacts)
-
+  getAllContacts(onlineUser.id)
+  },[onlineUser])
+  console.log(getAllContacts)
+  /*!contacts? onlineUser.id ? getAllContacts(onlineUser.id)*/
   var DATA = []
   contacts ? DATA = contacts : []
 
@@ -52,7 +52,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, get
                 type="clear"
                 titleStyle={{ color: 'black', fontSize: 18 }}
                 containerStyle={{ marginVertical: 10, borderRadius: 10 }}
-                onPress={() => navigation.navigate('InputTransfer')}
+                onPress={(navigation) => navigation.navigate('InputTransfer')}
               />
             </View>
           </View>
