@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { emailValidator } from '../core/utils';
 import Background from '../components/Background';
@@ -7,7 +7,6 @@ import BackButton from '../components/BackButton';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
 import TextInput from '../components/TextInput';
-import { theme } from '../core/theme';
 import Button from '../components/Button';
 
 const ForgotPasswordScreen = ({ navigation }) => {
@@ -26,7 +25,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate('LoginScreen')} />
+      <BackButton goBack={() => navigation.navigate('Principal')} />
 
       <Logo />
 
@@ -68,8 +67,9 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   label: {
-    color: 'black',
+    color: 'white',
     width: '100%',
+    marginRight: 10
   },
 });
 
