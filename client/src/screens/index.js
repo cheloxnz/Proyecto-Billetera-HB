@@ -8,5 +8,7 @@ export { default as ActiveEmail } from './ActiveEmail';
 export { default as RegisterFourty } from "./RegisterFourty";
 export { default as PositionConsolidated } from "./PositionConsolidated";
 export { default as ScreenTransfers } from './ScreenTransfers';
+export { default as BuyaSell } from './BuyaSell';
+export { default as InputTransfer } from './InputTransfer';
 
 
