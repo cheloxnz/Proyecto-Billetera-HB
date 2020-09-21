@@ -46,7 +46,10 @@ const HomeScreen = ({ navigation, registerUser, updateUserData, onlineUser, crea
       .then(createAccount(1))
       .then(registerUser('facuriva@gmail.com', '12345678')
         .then((res) => updateUserData(body2, 2)
-        .then(createAccount(2)))
+        .then(createAccount(2)
+          .then(createAccount(3)
+            .then(createAccount(4)
+              .then(createAccount(5))))))
           )
         )
     } }>

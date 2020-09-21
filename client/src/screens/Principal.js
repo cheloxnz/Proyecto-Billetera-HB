@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { getAccount } from '../actions';
+import { getAccount, getTransfers } from '../actions';
 import { Divider } from 'react-native-paper';
 
 
-const Principal = ({ navigation, getAccount, account, onlineUser }) => {
+const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, allTransfers}) => {
 
 
     useEffect(() => {
         getAccount(onlineUser.id)
+
     }, [onlineUser])
+    account? getTransfers(account.CVU): null
     return (
                 <View style={styles.contenedorPadre}>
         
@@ -241,13 +243,15 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         account: state.account,
-        onlineUser: state.onlineUser
+        onlineUser: state.onlineUser,
+        allTransfers: state.allTransfers,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAccount: (id) => dispatch(getAccount(id))
+        getAccount: (id) => dispatch(getAccount(id) ),
+        getTransfers: (cvu) => dispatch(getTransfers(cvu)),
     }
 }
 
