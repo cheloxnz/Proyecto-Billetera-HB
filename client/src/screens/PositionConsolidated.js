@@ -14,6 +14,7 @@ import ScreenMyCard from './ScreenMyCard';
 import ScreenPayments from './ScreenPayments';
 import BuyaSell from './BuyaSell';
 import InputTransfer from './InputTransfer';
+import HomeScreen from './HomeScreen';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Drawer = createDrawerNavigator();

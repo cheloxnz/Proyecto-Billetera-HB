@@ -9,7 +9,7 @@ import { Button } from 'react-native-paper';
 import { doTransfer } from '../actions/index'
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts}) => {
+const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts }) => {
 	const [state, setState] = useState('')
 	const [transf, setTransf] = useState('')
 	const [balance2, setBalance] = useState(account.balance)
@@ -20,7 +20,7 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 		if (transfer?.balance) setBalance(transfer.balance)
 	}, [transfer])
 
-	
+
 	const handleOnChange = (e) => {
 		console.log(state)
 		setState({
@@ -33,50 +33,50 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 		//hacer alerta
 	}
 	var namesList = []
-	contacts? namesList = contacts.map((c) => c.name): namesList = []
+	contacts ? namesList = contacts.map((c) => c.name) : namesList = []
 
 	return (
 		<Background>
 			<BackButton goBack={() => navigation.navigate("Transfers")} />
-			<View style= {styles.container}>
-			<Text style={styles.top}>TRANSFER</Text>
-			<Text style={styles.from}>FROM: {onlineUser.name ? onlineUser.name.toUpperCase() + ' ' + onlineUser.surname.toUpperCase() : ''}</Text>
-				<View style = {{marginVertical: 40}} >
+			<View style={styles.container}>
+				<Text style={styles.top}>TRANSFER</Text>
+				<Text style={styles.from}>FROM: {onlineUser.name ? onlineUser.name.toUpperCase() + ' ' + onlineUser.surname.toUpperCase() : ''}</Text>
+				<View style={{ marginVertical: 40 }} >
 					<Text style={styles.balance}>MY BALANCE: ${balance2}</Text>
-				<View>
-					<Text style={styles.cont}>Select your contact: </Text>
-					<DropDownPicker
-						zIndex={ 100000 }
-						searchable={true}
-						searchablePlaceholder="Search your contact: "
-        		placeholder='Contacts'
-        		items={namesList}
-						onChangeItem={item => setState(item)}
+					<View style={styles.inputCvu}>
+						<Text style={styles.cont}>CVU</Text>
+						<TextInput
+							inputStyle={{ color: 'yellow' }}
+							style={styles.textInput}
+							name='CVU'
+							value={state.CVU}
+							onChange={e => handleOnChange(e)}
+							editable={false}
 						/>
-				</View>
-				<View>
-					<Text style={styles.cont}>CVU</Text>
-					<TextInput
-						inputStyle = {{ color: 'yellow' }}
-						style = {styles.textInput}
-						name = 'CVU'
-						value = {state.CVU}
-						onChange = {e => handleOnChange(e)} 
-						editable =  { false }
+					</View>
+					<View style={styles.inputAmount}>
+						<Text style={styles.cont}>AMOUNT</Text>
+						<TextInput
+							style={styles.textInput}
+							keyboardType='number-pad'
+							name='amount'
+							value={state.amount}
+							onChange={e => handleOnChange(e)} />
+					</View>
+					<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > account.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
+					<View style={styles.contenedorDrop}>
+						<Text style={styles.cont}>SELECT CONTACT: </Text>
+						<DropDownPicker
+							zIndex={100000}
+							searchable={true}
+							searchablePlaceholder="Search your contact: "
+							items={namesList}
+							placeholder='Contacts'
+							onChangeItem={item => setState(item)}
 						/>
+					</View>
 				</View>
-				<View>
-					<Text style={styles.cont}>AMOUNT</Text>
-					<TextInput
-						style = {styles.textInput}
-						keyboardType='number-pad'
-						name='amount'
-						value={state.amount}
-						onChange={e => handleOnChange(e)} />
-				</View>
-				<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > account.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
-			</View>
-			<Button icon="cash-usd" color="#FFFFFF" mode="contained" style={styles.boton} onPress={() => handleTransfer()}> Transfer NOW!</Button>
+				<Button icon="cash-usd" color="#FFFFFF" mode="contained" style={styles.boton} onPress={() => handleTransfer()}> Transfer NOW!</Button>
 			</View>
 		</Background>
 	)
@@ -86,17 +86,25 @@ const styles = StyleSheet.create({
 		color: theme.colors.primary,
 		fontSize: 16,
 		alignSelf: "center",
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		marginBottom: 20
 	},
 	balance: {
 		backgroundColor: 'yellow',
 		alignSelf: 'center',
 		position: 'relative',
-		bottom: 55,
+		bottom: 8,
 		padding: 6,
 		paddingLeft: 19,
 		paddingRight: 19,
 		fontSize: 18,
+		marginTop: 30
+	},
+	inputCvu: {
+		marginTop: 30
+	},
+	inputAmount: {
+		marginTop: 30
 	},
 	from: {
 		position: 'relative',
@@ -105,11 +113,11 @@ const styles = StyleSheet.create({
 	},
 	top: {
 		position: 'absolute',
-		top: 30,
+		top: 10,
 		color: theme.colors.primary,
 		fontSize: 32,
 		fontWeight: '700',
-		letterSpacing: 3
+		letterSpacing: 3,
 	},
 	boton: {
 		position: 'absolute',
@@ -133,7 +141,10 @@ const styles = StyleSheet.create({
 	container: {
 		width: '100%',
 		height: '100%',
-		marginVertical: 100
+		marginTop: 70
+	},
+	contenedorDrop: {
+		marginTop: 30
 	}
 })
 
