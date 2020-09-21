@@ -14,6 +14,7 @@ import ScreenMyCard from './ScreenMyCard';
 import ScreenPayments from './ScreenPayments';
 import BuyaSell from './BuyaSell';
 import InputTransfer from './InputTransfer';
+import HomeScreen from './HomeScreen';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Drawer = createDrawerNavigator();
@@ -170,6 +171,17 @@ function App() {
             drawerIcon: ({ focused, size }) => (
               <FontAwesome
                 name='bitcoin'
+                size={20}
+                color={focused ? 'black' : '#ccc'}
+              />
+            ),
+          }} />
+        <Drawer.Screen name='Log Out' component={HomeScreen}
+          options={{
+            title: 'Log Out',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='sign-out-alt'
                 size={20}
                 color={focused ? 'black' : '#ccc'}
               />
