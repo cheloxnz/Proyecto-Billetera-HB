@@ -44,19 +44,16 @@ const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, get
             </View>
           </View>
         </View>
-        <View style={styles.contenedorUp}>
           <View style={styles.contenedorHave}>
               <Button
                 title="Do a transfer"
                 type="clear"
                 titleStyle={{ color: 'black', fontSize: 18 }}
-                containerStyle={{ marginVertical: 10, borderRadius: 10 }}
+                containerStyle={{ marginVertical: 40, borderRadius: 10, backgroundColor: 'white', width: '50%', alignSelf: 'center' }}
                 onPress={() => navigation.navigate('InputTransfer')}
               />
           </View>  
         </View>
-          
-      </View>
       <FooterNew navigation={navigation} />
     </View>
     </ImageBackground>
@@ -111,17 +108,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '84%',
   },
-  contenedorUp: {
-    width: '100%',
-    height: '10%',
-    flexDirection: 'row',
-  },
   contenedorHave: {
     width: '100%',
-    height: '100%',
+    height: '80%',
     marginTop: 4,
     borderRadius: 10,
-    backgroundColor: '#E8E8E8'
   },
   contenedorNo: {
     width: '48%',
