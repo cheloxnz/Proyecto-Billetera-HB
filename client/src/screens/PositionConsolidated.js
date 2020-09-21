@@ -110,9 +110,9 @@ function App() {
             ),
           }} />
 
-        <Drawer.Screen name="Accounts" component={InputTransfer}
+        <Drawer.Screen name="InputTransfer" component={InputTransfer}
           options={{
-            title: 'Accounts',
+            title: 'InputTransfer',
             drawerIcon: ({ focused, size }) => (
               <FontAwesome
                 name='dollar'
