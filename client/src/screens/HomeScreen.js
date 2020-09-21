@@ -24,6 +24,19 @@ const HomeScreen = ({ navigation, registerUser, updateUserData, onlineUser, crea
     "birthDate" : "12/12/1200",
     "role" : "Client",
     }
+    let body2 = {
+     "phone" : 3512642969,
+    "address" : "gral paz 400",
+    "province" : "salsipuedes",
+    "postalCode" : 5001,
+    "city" : "Cordoba",
+    "dni" : 40111111,
+    "name" : "Facu",
+    "surname" : "Rivadero",
+    "username" : "facurivadero",
+    "birthDate" : "12/12/1800",
+    "role" : "Client", 
+    }
   
  return (
   <Background>
@@ -31,6 +44,10 @@ const HomeScreen = ({ navigation, registerUser, updateUserData, onlineUser, crea
       registerUser("admin@gmail.com", "12345678")
       .then((res) => updateUserData(body, 1)
       .then(createAccount(1))
+      .then(registerUser('facuriva@gmail.com', '12345678')
+        .then((res) => updateUserData(body2, 2)
+        .then(createAccount(2)))
+          )
         )
     } }>
       <Logo />

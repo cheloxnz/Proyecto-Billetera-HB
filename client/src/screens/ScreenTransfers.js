@@ -4,54 +4,33 @@ import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Constants from 'expo-constants';
 import SearchB from '../components/SearchB';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Alert, ScrollView } from 'react-native';
+import ContactsList from '../components/ContactsList';
+import { ImageBackground, SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Alert, ScrollView } from 'react-native';
 import { getAllContacts, getAllUsers } from '../actions'
-import UserAvatar from 'react-native-user-avatar';
+
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
+
 
 
 const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, getAllUsers }) => {
 
 
   useEffect(() => {
-    getAllContacts(onlineUser.id)
-  }, [onlineUser])
-  console.log(contacts)
+  getAllContacts(onlineUser.id)
+  },[onlineUser])
+  console.log(getAllContacts)
 
-  var DATA = []
-  contacts ? DATA = contacts : []
-
-  const Item = ({ title }) => (
-    <View style={styles.item}>
-      <View style={styles.iconFriend}>
-        <UserAvatar size={10} name={title} />
-      </View>
-      <View>
-        <Text style={styles.title}>{title}</Text>
-      </View>
-    </View>
-  );
-  const renderItem = ({ item }) => (
-    <Item title={item.name + ' ' + item.surname} />
-  );
   return (
+    <ImageBackground 
+      source={require('../assets/consolidated_dot.png')}
+      style={styles.background}>
     <View style={styles.content}>
       <NavBar navigation={navigation} />
 
       <View style={styles.contenedorPadre}>
         <View style={styles.contenedorCentral}>
-          <View style={styles.contenedorUp}>
-            <View style={styles.contenedorHave}>
-              <Button
-                title="Do a transfer"
-                type="clear"
-                titleStyle={{ color: 'black', fontSize: 18 }}
-                containerStyle={{ marginVertical: 10, borderRadius: 10 }}
-                onPress={() => navigation.navigate('Accounts')}
-              />
-            </View>
-          </View>
+          
           <View style={styles.contenedorSearch}>
             <Text style={styles.parrafoSearch}>If you have Henry Bank, search for it by username</Text>
             <SearchB />
@@ -61,19 +40,23 @@ const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, get
               <Text style={styles.parrafoContact}>Saved Contacts</Text>
             </View>
             <View>
-              <SafeAreaView style={styles.container}>
-                <FlatList
-                  data={DATA}
-                  renderItem={renderItem}
-                  keyExtractor={item => item.id}
-                />
-              </SafeAreaView>
+             <ContactsList contacts={contacts}/>
             </View>
           </View>
         </View>
-      </View>
+          <View style={styles.contenedorHave}>
+              <Button
+                title="Do a transfer"
+                type="clear"
+                titleStyle={{ color: 'black', fontSize: 18 }}
+                containerStyle={{ marginVertical: 40, borderRadius: 10, backgroundColor: 'white', width: '50%', alignSelf: 'center' }}
+                onPress={() => navigation.navigate('InputTransfer')}
+              />
+          </View>  
+        </View>
       <FooterNew navigation={navigation} />
     </View>
+    </ImageBackground>
   )
 }
 
@@ -125,17 +108,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '84%',
   },
-  contenedorUp: {
-    width: '100%',
-    height: '10%',
-    flexDirection: 'row',
-  },
   contenedorHave: {
     width: '100%',
-    height: '100%',
+    height: '80%',
     marginTop: 4,
     borderRadius: 10,
-    backgroundColor: '#E8E8E8'
   },
   contenedorNo: {
     width: '48%',
@@ -197,9 +174,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
 
   },
-  iconFriend: {
-    alignSelf: 'flex-start'
-  }
+  background: {
+    flex: 1,
+    width: '100%',
+  },
 
 })
 

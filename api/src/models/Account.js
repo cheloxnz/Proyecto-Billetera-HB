@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 var seedrandom = require('seedrandom');
 
 module.exports = sequelize => {
-    const Account = sequelize.define('account', {
+    const Account = sequelize.define('account', { 
         Naccount: {
             type: DataTypes.BIGINT,
             isUnique: true,

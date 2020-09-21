@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     contenedorTarjeta: {
         width: '100%',
         height: '38%',
-        backgroundColor: 'white'
     },
     tarjeta: {
         width: '55%',
@@ -84,7 +83,8 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         elevation: 1,
         marginLeft: 85,
-        marginTop: 20
+        marginTop: 20,
+        backgroundColor: '#d9d9d9'
     },
     contenedorHenryBank: {
         fontSize: 20,
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
         marginRight: 70,
         fontWeight: '700',
         textAlign: 'center',
+        color: 'white'
     },
     contenedorDes: {
         width: '100%',
@@ -114,7 +115,8 @@ const styles = StyleSheet.create({
         width: '70%',
         fontSize: 18,
         marginTop: 10,
-        marginHorizontal: 10
+        marginHorizontal: 10,
+        color:'white'
     },
     switchC: {
         marginVertical: -22

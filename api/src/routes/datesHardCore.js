@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { User , Contact} = require("../db");
+const { User , Contact, Account} = require("../db");
 
 server.post("/", async (req, res) => {
  
@@ -35,6 +35,7 @@ server.post("/", async (req, res) => {
   	user.addFriend(Usuario1);
    	user.addFriend(Usuario2);
    	user.addFriend(Usuario3);
+    user.setAccount()
 
    	res.send("Your dates has been harcoded")
    	}

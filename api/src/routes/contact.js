@@ -6,6 +6,7 @@ const { User } = require("../db");
 
 
 server.get("/user/:id", (req, res) => {
+  console.log('entreeeeeeeeeeeee')
     User.findOne({
       where: {
         id: req.params.id
