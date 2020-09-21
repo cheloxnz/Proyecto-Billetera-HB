@@ -2,9 +2,8 @@ const server = require('express').Router();
 const { Account, User, Transactions } = require('../db.js');
  
 server.post("/:CVU", (req, res) => {
-    console.log("estoy entrando al back", req.body)
-    var { CVU, amount } = req.body
-    if (amount < 50)res.send('Minimal amount is $50')
+    var { cvu, amount } = req.body
+    if (amount < 50) res.send('Minimal amount is $50')
     var from = Account.findOne({
         where: {
             CVU: req.params.CVU,
@@ -43,7 +42,7 @@ server.post("/:CVU", (req, res) => {
 //||||      Recarga.       ||||
 //-----------------------------
 
-server.post('/load', (req,res) => {
+server.post('/load', (req, res) => {
     const rapipago = {
         sucursal: '100872'
 
@@ -64,13 +63,13 @@ server.get('/user/:CVU', (req, res) => {
     Account.findAll({
         where: {
             CVU: req.params.CVU  // EL QUE RECIBE LA TRANSFERENCIA
-        }, include:{
+        }, include: {
             association: 'emisor',
             attributes: ['Naccount', 'userId'] // EL QUE HIZO LA TRANSFERENCIA
         }
     })
-    .then(trans => res.send(trans))
-    .catch(err => res.send(err))
+        .then(trans => res.send(trans))
+        .catch(err => res.send(err))
 })
 
 module.exports = server;
