@@ -3,7 +3,7 @@ const { Account, User, Transactions } = require('../db.js');
 
 server.post("/:CVU", (req, res) => {
     var { cvu, amount } = req.body
-    if (amount < 50)res.send('Minimal amount is $50')
+    if (amount < 50) res.send('Minimal amount is $50')
     var from = Account.findOne({
         where: {
             CVU: req.params.CVU,
@@ -18,10 +18,10 @@ server.post("/:CVU", (req, res) => {
         .then(user => {
             let from = user[0]
             let to = user[1]
-            if (!from || !to) res.send("Cuenta no existente.")
-            if (from.state == 'inactive' || to.state == 'inactive') res.send('Cuenta deshabilitada')
-            if (from.userId == to.userId) res.send("Transacción invalida.")
-            if (from.balance() < amount) res.send("Saldo insuficiente.")
+            if (!from || !to) return res.send("Cuenta no existente.")
+            if (from.state == 'inactive' || to.state == 'inactive') return res.send('Cuenta deshabilitada')
+            if (from.userId == to.userId) return res.send("Transacción invalida.")
+            if (from.balance() < amount) return res.send("Saldo insuficiente.")
             var balanceFrom = from.balance();
             var balanceTo = to.balance();
             from.update({
@@ -42,7 +42,7 @@ server.post("/:CVU", (req, res) => {
 //||||      Recarga.       ||||
 //-----------------------------
 
-server.post('/load', (req,res) => {
+server.post('/load', (req, res) => {
     const rapipago = {
         sucursal: '100872'
 
@@ -63,13 +63,13 @@ server.get('/user/:CVU', (req, res) => {
     Account.findAll({
         where: {
             CVU: req.params.CVU  // EL QUE RECIBE LA TRANSFERENCIA
-        }, include:{
+        }, include: {
             association: 'emisor',
             attributes: ['Naccount', 'userId'] // EL QUE HIZO LA TRANSFERENCIA
         }
     })
-    .then(trans => res.send(trans))
-    .catch(err => res.send(err))
+        .then(trans => res.send(trans))
+        .catch(err => res.send(err))
 })
 
 module.exports = server;
