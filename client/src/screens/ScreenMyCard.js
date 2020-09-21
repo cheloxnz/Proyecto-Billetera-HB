@@ -1,54 +1,54 @@
 import React from "react";
 import { connect } from "react-redux";
-import { View, Text, StyleSheet,ImageBackground, Button } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Button } from 'react-native';
 import NavBar from '../components/NavBar';
 import Switch from '../components/Switch';
 import ListP from '../components/ListInfo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import FooterNew from '../components/FooterNew';
 
-const MyCard = ({navigation}) => {
+const MyCard = ({ navigation }) => {
     return (
-        <View style={styles.contenedorCard}>    
-                                         
-            <NavBar navigation={navigation}/>
-        
+        <View style={styles.contenedorCard}>
+
+            <NavBar navigation={navigation} />
+
             <ImageBackground
-            source={require('../assets/consolidated_dot.png')}
-            style={styles.background}
+                source={require('../assets/consolidated_dot.png')}
+                style={styles.background}
             >
                 <View style={styles.contenedorSegundo}>
-                        <View style={styles.contenedorTarjeta}>
-                            <View style={styles.tarjeta}>
-                                <Text style={styles.contenedorHenryBank}>
-                                    Henry Bank
+                    <View style={styles.contenedorTarjeta}>
+                        <View style={styles.tarjeta}>
+                            <Text style={styles.contenedorHenryBank}>
+                                Henry Bank
                                 </Text>
-                                <Text style={styles.cardTar}>
-                                <FontAwesome name={'cc-visa'} size={30} style={{color: 'black'}} />
-                                </Text>
-                            </View>
-                            <Text style={styles.infoCard}>
-                                Your card ended in:
+                            <Text style={styles.cardTar}>
+                                <FontAwesome name={'cc-visa'} size={30} style={{ color: 'black' }} />
                             </Text>
-                            <View style={styles.contenedorDes}>
-                                <Text style={styles.parrafoDes}>
-                                    Temporarily disable the account
+                        </View>
+                        <Text style={styles.infoCard}>
+                            Your card ended in:
+                            </Text>
+                        <View style={styles.contenedorDes}>
+                            <Text style={styles.parrafoDes}>
+                                Temporarily disable the account
                                 </Text>
-                                <View style={styles.switchC}>
-                                    <Switch/>
-                                </View>
+                            <View style={styles.switchC}>
+                                <Switch />
                             </View>
                         </View>
-                        <View style={styles.contenedorInform}>
-                                <ListP/>
-                        </View>
-                       
-                </View>    
-            </ImageBackground> 
-            
-            {/* FOOTER VA EN TODOS LOS SCREEN  */}   
-            <FooterNew navigation={navigation}/>
-    </View>
+                    </View>
+                    <View style={styles.contenedorInform}>
+                        <ListP />
+                    </View>
+
+                </View>
+            </ImageBackground>
+
+            {/* FOOTER VA EN TODOS LOS SCREEN  */}
+            <FooterNew navigation={navigation} />
+        </View>
     )
 }
 
@@ -56,15 +56,15 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
         width: '100%',
-      },
+    },
     contenedorCard: {
         width: "100%",
         height: "100%",
-     
+
     },
     contenedorSegundo: {
         width: '100%',
-        height: '88%',
+        height: '88%'
     },
     contenedorTarjeta: {
         width: '100%',
@@ -109,22 +109,26 @@ const styles = StyleSheet.create({
     },
     contenedorDes: {
         width: '100%',
-        
+
     },
     parrafoDes: {
         width: '70%',
         fontSize: 18,
-        marginTop: 10,
-        marginHorizontal: 10,
-        color:'white'
+        marginTop: 30,
+        textAlign: 'center',
+        color: 'white'
     },
     switchC: {
-        marginVertical: -22
+        width: '8%',
+        marginVertical: -10,
+        borderRadius: 10,
+        backgroundColor: 'white'
     },
     contenedorInform: {
         width: '100%',
         height: '50%',
+        alignItems: 'center'
     }
 })
 
-export default connect(null) (MyCard);
+export default connect(null)(MyCard);
