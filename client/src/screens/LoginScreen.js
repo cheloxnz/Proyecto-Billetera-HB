@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
@@ -31,7 +31,7 @@ const LoginScreen = ({ navigation, loginUser, onlineUser }) => {
   if (onlineUser?.role == 'Client') navigation.navigate('PositionConsolidated')
   else if (onlineUser?.city) navigation.navigate('RegisterFourty')
   else if (onlineUser?.dni) navigation.navigate('RegisterThird')
-  else if (onlineUser?.role === 'User')navigation.navigate('ActiveEmail')
+  else if (onlineUser?.role === 'User') navigation.navigate('ActiveEmail')
 
   return (
     <Background>
@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation, loginUser, onlineUser }) => {
         textContentType="emailAddress"
         keyboardType="email-address"
       />
-  
+
       <TextInput
         label="Password"
         returnKeyType="done"
@@ -98,14 +98,15 @@ const styles = StyleSheet.create({
   },
   label: {
     color: 'white',
+    backgroundColor: 'black'
   },
   link: {
     fontWeight: 'bold',
     color: 'black',
   },
-  asd:{
+  asd: {
     backgroundColor: 'red',
-   
+
   }
 });
 
