@@ -49,7 +49,7 @@ export function loginUser(email, password) {
 export function getAllUsers() {
   return function (dispatch) {
     return axios
-      .get("http://localhost:3005/users")
+      .get("http://localhost:3005/users/all")
       .then((result) => result.data)
       .then((data) => {
         dispatch({

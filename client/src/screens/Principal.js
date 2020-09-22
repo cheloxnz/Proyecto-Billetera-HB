@@ -2,22 +2,21 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { getAccount, getTransfers } from '../actions';
-// import TransferScrollView from '../components/TransferScrollView';
+import { getAccount, getTransfers ,getAllUsers} from '../actions';
 import { Divider } from 'react-native-paper';
 
 
-const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, allTransfers}) => {
+const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, allTransfers, getAllUsers,users}) => {
 
 
     useEffect(() => {
-        getAccount(onlineUser.id)
+				getAccount(onlineUser.id)
+				getAllUsers()
     }, [onlineUser])
     
     useEffect(() => {
-        if(account){getTransfers(account.CVU)}
+				if(account){getTransfers(account.CVU)}
 		}, [account])
-
 		var flag = false
 		if (allTransfers.emisor) flag = true
     return (
@@ -47,8 +46,8 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
 										{flag?
 										<ScrollView style={styles.contentHijoDos}>
                       {allTransfers.emisor.map((t) => <View style={styles.contentMov}>
-                         <Text style={styles.servicio}>{}</Text>
-                         <Text style={styles.gastos}>- $500</Text>
+                         <Text style={styles.servicio}>{users.map((u) =>{if(u.id === t.userId) return u.name})}</Text>
+												 <Text style={styles.ingresos}>{t.transaction.Quantity}</Text>
                          <Divider />
                        </View>
                       )}
@@ -170,11 +169,11 @@ const styles = StyleSheet.create({
     servicio: {
         fontSize: 18,
     },
-    gastos: {
-        color: 'red'
-    },
     ingresos: {
         color: 'green'
+    },
+    egresos: {
+        color: 'red'
     },
 
 })
@@ -183,14 +182,16 @@ const mapStateToProps = state => {
     return {
         account: state.account,
         onlineUser: state.onlineUser,
-        allTransfers: state.allTransfers,
+				allTransfers: state.allTransfers,
+				users: state.users
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         getAccount: (id) => dispatch(getAccount(id) ),
-        getTransfers: (cvu) => dispatch(getTransfers(cvu)),
+				getTransfers: (cvu) => dispatch(getTransfers(cvu)),
+				getAllUsers: () => dispatch(getAllUsers()),
     }
 }
 
