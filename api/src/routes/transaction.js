@@ -1,6 +1,6 @@
 const server = require('express').Router();
 const { Account, User, Transactions } = require('../db.js');
- 
+
 server.post("/:CVU", (req, res) => {
     var { cvu, amount } = req.body
     if (amount < 50) res.send('Minimal amount is $50')
@@ -11,7 +11,7 @@ server.post("/:CVU", (req, res) => {
     })
     var to = Account.findOne({
         where: {
-            CVU: CVU,
+            CVU: cvu,
         }
     })
     Promise.all([from, to])
@@ -28,7 +28,7 @@ server.post("/:CVU", (req, res) => {
                 balance: balanceFrom - amount,
             })
             to.update({
-                balance: balanceTo + parseInt(amount)
+                balance: balanceTo + amount
             })
             to.addEmisor(from, {
                 through: { Quantity: amount, Type: "transfer" }
