@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { getAccount, getTransfers ,getAllUsers} from '../actions';
+import { getAccount, getTransfers, getAllUsers } from '../actions';
 import { Divider } from 'react-native-paper';
 
 
-const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, allTransfers, getAllUsers,users}) => {
+const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, allTransfers, getAllUsers, users }) => {
 
     useEffect(() => {
-				getAccount(onlineUser.id)
-				getAllUsers()
+        getAccount(onlineUser.id)
+        getAllUsers()
     }, [onlineUser])
-    
+
     useEffect(() => {
-				if(account){getTransfers(account.CVU)}
-		}, [account])
-		var flag = false
-		if (allTransfers.emisor) flag = true
+        if (account) { getTransfers(account.CVU) }
+    }, [account])
+    var flag = false
+    if (allTransfers.emisor) flag = true
     return (
         <View style={styles.contenedorPadre}>
 
@@ -41,19 +41,22 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
 
                     <Text style={styles.mov}>Movements</Text>
                     <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
-										
-										{flag?
-										<ScrollView style={styles.contentHijoDos}>
-                      {allTransfers.emisor.map((t) => <View style={styles.contentMov}>
-                         <Text style={styles.servicio}>{users.map((u) =>{if(u.id === t.userId) return u.name})}</Text>
-												 <Text style={styles.ingresos}>{t.transaction.Quantity}</Text>
-                         <Divider />
-                       </View>
-                      )}
-                   </ScrollView>:<View></View> }
+
+                    {flag ?
+                        <ScrollView style={styles.contentHijoDos}>
+                            {allTransfers.emisor.map((t) => <View style={styles.contentMov}>
+                                <Text style={styles.servicio}>{users.map((u) => { if (u.id === t.userId) return u.name })}</Text>
+                                <Text style={styles.ingresos}>{t.transaction.Quantity}</Text>
+                                <Divider />
                             </View>
+                            )}
+                        </ScrollView> : <View></View>}
+                </View>
+            </View>
+        </View>
     )
 }
+
 const styles = StyleSheet.create({
 
     contenedorPadre: {
@@ -181,16 +184,16 @@ const mapStateToProps = state => {
     return {
         account: state.account,
         onlineUser: state.onlineUser,
-				allTransfers: state.allTransfers,
-				users: state.users
+        allTransfers: state.allTransfers,
+        users: state.users
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAccount: (id) => dispatch(getAccount(id) ),
-				getTransfers: (cvu) => dispatch(getTransfers(cvu)),
-				getAllUsers: () => dispatch(getAllUsers()),
+        getAccount: (id) => dispatch(getAccount(id)),
+        getTransfers: (cvu) => dispatch(getTransfers(cvu)),
+        getAllUsers: () => dispatch(getAllUsers()),
     }
 }
 
