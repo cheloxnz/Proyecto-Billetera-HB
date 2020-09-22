@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { getAccount, getTransfers, getAllUsers } from '../actions';
+import { getAccount, getTransfers, getAllUsers, getBalance } from '../actions';
 import { Divider } from 'react-native-paper';
 
 
-const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, allTransfers, getAllUsers, users }) => {
+const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, allTransfers, getAllUsers, users, getBalance }) => {
 
     useEffect(() => {
         getAccount(onlineUser.id)
+        getBalance(onlineUser.id)
         getAllUsers()
     }, [onlineUser])
 
@@ -27,7 +28,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
                     <View style={styles.contentInfo}>
                         <Text>N° CTA: {account?.Naccount}</Text>
                         <Text style={styles.saldo}>{onlineUser.name + " " + onlineUser.surname}</Text>
-                        <Text style={styles.saldo}>$ {account?.balance}</Text>
+    <Text style={styles.saldo}>$ {}</Text>
                         <Text style={styles.parrafoSaldo}>My Balance</Text>
                     </View>
                 </View>
@@ -46,8 +47,10 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
             {flag ?
                 <ScrollView style={styles.contentHijoDos}>
                     {allTransfers.emisor.map((t) => <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>{users.map((u) => { if (u.id === t.userId) return u.name })}</Text>
-                        <Text style={styles.ingresos}>{t.transaction.Quantity}</Text>
+                        <Text style={styles.servicio}>
+                             From: {users.map((u) => { if (u.id === t.userId) return (" " + u.name + " " + u.surname)})}
+                        </Text>
+                        <Text style={styles.ingresos}> + $ {t.transaction.Quantity}</Text>
                         <Divider />
                     </View>
                     )}
@@ -171,6 +174,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     ingresos: {
+        fontSize: 18,
         color: 'green'
     },
     egresos: {
@@ -184,7 +188,8 @@ const mapStateToProps = state => {
         account: state.account,
         onlineUser: state.onlineUser,
         allTransfers: state.allTransfers,
-        users: state.users
+        users: state.users,
+        balance: state.balance
     }
 }
 
@@ -193,6 +198,7 @@ const mapDispatchToProps = dispatch => {
         getAccount: (id) => dispatch(getAccount(id)),
         getTransfers: (cvu) => dispatch(getTransfers(cvu)),
         getAllUsers: () => dispatch(getAllUsers()),
+        getBalance: (id) => dispatch(getBalance(id))
     }
 }
 

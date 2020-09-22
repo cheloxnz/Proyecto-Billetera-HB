@@ -10,9 +10,16 @@ module.exports = sequelize => {
             type: DataTypes.ENUM,
             values: ['transfer', 'load']
         },
+        
         code: {
             type: DataTypes.BIGINT,
-            isUnique: true
+            isUnique: true,
+        },
+        emisor: {
+            type: DataTypes.BIGINT
+        },
+        receptor: {
+            type: DataTypes.BIGINT
         }
     })
 }

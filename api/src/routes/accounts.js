@@ -87,4 +87,23 @@ server.put('/:CVU', (req, res) => {  //Por parametro llega el CVU
         .catch(err => res.send(err))
 })
 
+
+//-------------------------------------
+//                GET BALANCE           |
+//-------------------------------------
+
+server.get("/balance/:id", (req, res) => {
+    Account.findOne({
+        where: {
+            userId: req.params.id
+        }
+    }).then(data => {
+        let balance = data.balance()
+        console.log("balanceee",balance)
+        res.json(balance).status(200)
+    }).catch(err => {
+        res.send(err)
+    })
+})
+
 module.exports = server;

@@ -51,7 +51,7 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 							name='CVU'
 							value={state.CVU}
 							onChange={e => handleOnChange(e)}
-							editable={false}
+							editable={true}
 						/>
 					</View>
 					<View style={styles.inputAmount}>

@@ -11,6 +11,7 @@ import {
   CREATE_ACCOUNT,
   DO_TRANSFER,
   GET_TRANSFERS,
+  GET_BALANCE
 } from "../actions";
 
 const initialState = {
@@ -20,7 +21,8 @@ const initialState = {
   contacts: {},
   account: {},
   transfer: {},
-  allTransfers: {}
+  allTransfers: {},
+  balance: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -61,6 +63,7 @@ const reducer = (state = initialState, action) => {
       return state;
 
     case CREATE_ACCOUNT:
+      console.log('concha rtemil puta cahjetea')
       return {
         ...state,
         account: action.account
@@ -84,6 +87,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         allTransfers: action.payload
+      }
+    case GET_BALANCE:
+      return {
+        ...state,
+        balance: action.payload
       }
     default:
       return state;

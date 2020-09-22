@@ -33,7 +33,7 @@ Account.belongsTo(User)
 
 User.belongsToMany(User, {through: 'contacts', as:'friends'})
 
-Account.belongsToMany(Account, {through: Transaction, as: 'emisor'})
+
 
 
 
