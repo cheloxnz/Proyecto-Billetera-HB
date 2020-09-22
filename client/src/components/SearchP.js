@@ -7,16 +7,16 @@ const SearchPayment = () => {
 
   const onChangeSearch = query => setSearchQuery(query);
 
-    return (
-      <SearchBar
-        onChangeText={onChangeSearch}
-        value={searchQuery}
-        inputStyle={{backgroundColor: 'white'}}
-        containerStyle={{backgroundColor: 'white', borderRadius: 8}}
-        ForwardRef={'#g5g5g5'}
-        placeholder={'Search Company...'}
-      />
-    );
-  }
+  return (
+    <SearchBar
+      onChangeText={onChangeSearch}
+      value={searchQuery}
+      inputStyle={{ backgroundColor: 'white' }}
+      containerStyle={{ backgroundColor: 'white', borderRadius: 8 }}
+      ForwardRef={'#g5g5g5'}
+      placeholder={'Search Company...'}
+    />
+  );
+}
 
 export default SearchPayment;
