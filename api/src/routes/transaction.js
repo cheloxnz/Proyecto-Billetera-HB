@@ -2,6 +2,7 @@ const server = require('express').Router();
 const { Account, User, Transactions } = require('../db.js');
 
 server.post("/:CVU", (req, res) => {
+    console.log('estoy entrando al post de trans')
     var { cvu, amount } = req.body
     if (amount < 50) res.send('Minimal amount is $50')
     var from = Account.findOne({
@@ -60,7 +61,7 @@ server.post('/load', (req, res) => {
 //---------------------------- SI ES 'ACCOUNTNACCOUNT' MOSTRAR (+ $500)
 
 server.get('/user/:CVU', (req, res) => {
-    Account.findAll({
+    Account.findOne({
         where: {
             CVU: req.params.CVU  // EL QUE RECIBE LA TRANSFERENCIA
         }, include: {
