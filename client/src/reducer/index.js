@@ -63,6 +63,7 @@ const reducer = (state = initialState, action) => {
       return state;
 
     case CREATE_ACCOUNT:
+      console.log('concha rtemil puta cahjetea')
       return {
         ...state,
         account: action.account

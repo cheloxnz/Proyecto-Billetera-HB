@@ -6,10 +6,10 @@ import Background from "../components/Background";
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
 import { validatePIN } from "../core/utils";
-import { setPinUser, activeUser, createAcount, createAccount } from "../actions/"
+import { setPinUser, activeUser, createAccount } from "../actions/"
 
 
-const RegisterFourty = ({ navigation, setPinUser, onlineUser, activeUser, createAcount }) => {
+const RegisterFourty = ({ navigation, setPinUser, onlineUser, activeUser, createAccount }) => {
   const [input, setInput] = React.useState({ value: "", error: "" })
   
   const handleConfirm = () => {
@@ -21,6 +21,7 @@ const RegisterFourty = ({ navigation, setPinUser, onlineUser, activeUser, create
 
     setPinUser(onlineUser.id, input.value)    
     activeUser(onlineUser.id);
+    console.log('concha cajeta')
     createAccount(onlineUser.id);
     navigation.navigate("PositionConsolidated")
   };
@@ -78,7 +79,7 @@ const mapDispatchToProps = dispatch => {
   return {
     setPinUser: (idUser, pin) => dispatch(setPinUser(idUser, pin)),
     activeUser : (idUser) => dispatch(activeUser(idUser)),
-    createAcount: (idUser) => dispatch(createAccount(idUser))
+    createAccount: (idUser) => dispatch(createAccount(idUser))
   }
 };
 
