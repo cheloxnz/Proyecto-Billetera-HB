@@ -34,10 +34,10 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
                 </View>
                 <View style={styles.contentBotones}>
                     <View style={styles.contentRecargar}>
-                        <Button title='Load' onPress={() => navigation.navigate('InputTransfer')} style={styles.botonRecargar} />
+                        <Button title='Load' onPress={() => navigation.navigate('Load')} style={styles.botonRecargar} />
                     </View>
                     <View style={styles.contentEnviar}>
-                        <Button title='Send' onPress={() => navigation.navigate("ScreenTransfers")} style={styles.botonEnviar} />
+                        <Button title='Send' onPress={() => navigation.navigate("Transfers")} style={styles.botonEnviar} />
                     </View>
                 </View>
             </View>
