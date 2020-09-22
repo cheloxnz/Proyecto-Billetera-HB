@@ -2,15 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { getAccount } from '../actions';
+import { getAccount, getTransfers ,getAllUsers} from '../actions';
 import { Divider } from 'react-native-paper';
 
 
-const Principal = ({ navigation, getAccount, account, onlineUser }) => {
+const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, allTransfers, getAllUsers,users}) => {
 
     useEffect(() => {
-        getAccount(onlineUser.id)
+				getAccount(onlineUser.id)
+				getAllUsers()
     }, [onlineUser])
+    
+    useEffect(() => {
+				if(account){getTransfers(account.CVU)}
+		}, [account])
+		var flag = false
+		if (allTransfers.emisor) flag = true
     return (
         <View style={styles.contenedorPadre}>
 
@@ -31,88 +38,20 @@ const Principal = ({ navigation, getAccount, account, onlineUser }) => {
                     <View style={styles.contentEnviar}>
                         <Button title='Send' onPress={() => navigation.navigate("ScreenTransfers")} style={styles.botonEnviar} />
                     </View>
-                </View>
-            </View>
-            <Text style={styles.mov}>Movements</Text>
-            <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
 
-            <ScrollView style={styles.contentHijoDos}>
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>Netflix</Text>
-                    <Text style={styles.gastos}>- $500</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>Fulano de Tal</Text>
-                    <Text style={styles.ingresos}>+ $1800</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>Pago fácil</Text>
-                    <Text style={styles.gastos}>- $600</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>YPF</Text>
-                    <Text style={styles.gastos}>- $2500</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>McDonald</Text>
-                    <Text style={styles.gastos}>- $750</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>Netflix</Text>
-                    <Text style={styles.gastos}>- $500</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>Fulano de Tal</Text>
-                    <Text style={styles.ingresos}>+ $1800</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>Pago fácil</Text>
-                    <Text style={styles.gastos}>- $600</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>YPF</Text>
-                    <Text style={styles.gastos}>- $2500</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>McDonald</Text>
-                    <Text style={styles.gastos}>- $750</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>Netflix</Text>
-                    <Text style={styles.gastos}>- $500</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>Fulano de Tal</Text>
-                    <Text style={styles.ingresos}>+ $1800</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>Pago fácil</Text>
-                    <Text style={styles.gastos}>- $600</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>YPF</Text>
-                    <Text style={styles.gastos}>- $2500</Text>
-                </View>
-                <Divider />
-                <View style={styles.contentMov}>
-                    <Text style={styles.servicio}>McDonald</Text>
-                    <Text style={styles.gastos}>- $750</Text>
-                </View>
-            </ScrollView>
-        </View>
+                    <Text style={styles.mov}>Movements</Text>
+                    <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
+										
+										{flag?
+										<ScrollView style={styles.contentHijoDos}>
+                      {allTransfers.emisor.map((t) => <View style={styles.contentMov}>
+                         <Text style={styles.servicio}>{users.map((u) =>{if(u.id === t.userId) return u.name})}</Text>
+												 <Text style={styles.ingresos}>{t.transaction.Quantity}</Text>
+                         <Divider />
+                       </View>
+                      )}
+                   </ScrollView>:<View></View> }
+                            </View>
     )
 }
 const styles = StyleSheet.create({
@@ -229,11 +168,11 @@ const styles = StyleSheet.create({
     servicio: {
         fontSize: 18,
     },
-    gastos: {
-        color: 'red'
-    },
     ingresos: {
         color: 'green'
+    },
+    egresos: {
+        color: 'red'
     },
 
 })
@@ -241,13 +180,17 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         account: state.account,
-        onlineUser: state.onlineUser
+        onlineUser: state.onlineUser,
+				allTransfers: state.allTransfers,
+				users: state.users
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAccount: (id) => dispatch(getAccount(id))
+        getAccount: (id) => dispatch(getAccount(id) ),
+				getTransfers: (cvu) => dispatch(getTransfers(cvu)),
+				getAllUsers: () => dispatch(getAllUsers()),
     }
 }
 
