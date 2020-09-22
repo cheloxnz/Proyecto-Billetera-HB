@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { getAccount, getTransfers } from '../actions';
+// import TransferScrollView from '../components/TransferScrollView';
 import { Divider } from 'react-native-paper';
 
 
@@ -11,9 +12,14 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
 
     useEffect(() => {
         getAccount(onlineUser.id)
-
     }, [onlineUser])
-    account? getTransfers(account.CVU): null
+    
+    useEffect(() => {
+        if(account){getTransfers(account.CVU)}
+		}, [account])
+
+		var flag = false
+		if (allTransfers.emisor) flag = true
     return (
                 <View style={styles.contenedorPadre}>
         
@@ -37,84 +43,17 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
                     </View>
                     <Text style={styles.mov}>Movements</Text>
                     <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
-        
-                    <ScrollView style={styles.contentHijoDos}>
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>Netflix</Text>
-                            <Text style={styles.gastos}>- $500</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>Fulano de Tal</Text>
-                            <Text style={styles.ingresos}>+ $1800</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>Pago fácil</Text>
-                            <Text style={styles.gastos}>- $600</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>YPF</Text>
-                            <Text style={styles.gastos}>- $2500</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>McDonald</Text>
-                            <Text style={styles.gastos}>- $750</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>Netflix</Text>
-                            <Text style={styles.gastos}>- $500</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>Fulano de Tal</Text>
-                            <Text style={styles.ingresos}>+ $1800</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>Pago fácil</Text>
-                            <Text style={styles.gastos}>- $600</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>YPF</Text>
-                            <Text style={styles.gastos}>- $2500</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>McDonald</Text>
-                            <Text style={styles.gastos}>- $750</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>Netflix</Text>
-                            <Text style={styles.gastos}>- $500</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>Fulano de Tal</Text>
-                            <Text style={styles.ingresos}>+ $1800</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>Pago fácil</Text>
-                            <Text style={styles.gastos}>- $600</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>YPF</Text>
-                            <Text style={styles.gastos}>- $2500</Text>
-                        </View>
-                        <Divider />
-                        <View style={styles.contentMov}>
-                            <Text style={styles.servicio}>McDonald</Text>
-                            <Text style={styles.gastos}>- $750</Text>
-                        </View>
-                    </ScrollView>
-                </View>
+										
+										{flag?
+										<ScrollView style={styles.contentHijoDos}>
+                      {allTransfers.emisor.map((t) => <View style={styles.contentMov}>
+                         <Text style={styles.servicio}>{}</Text>
+                         <Text style={styles.gastos}>- $500</Text>
+                         <Divider />
+                       </View>
+                      )}
+                   </ScrollView>:<View></View> }
+                            </View>
     )
 }
 const styles = StyleSheet.create({
