@@ -38,21 +38,20 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
                     <View style={styles.contentEnviar}>
                         <Button title='Send' onPress={() => navigation.navigate("ScreenTransfers")} style={styles.botonEnviar} />
                     </View>
-
-                    <Text style={styles.mov}>Movements</Text>
-                    <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
-
-                    {flag ?
-                        <ScrollView style={styles.contentHijoDos}>
-                            {allTransfers.emisor.map((t) => <View style={styles.contentMov}>
-                                <Text style={styles.servicio}>{users.map((u) => { if (u.id === t.userId) return u.name })}</Text>
-                                <Text style={styles.ingresos}>{t.transaction.Quantity}</Text>
-                                <Divider />
-                            </View>
-                            )}
-                        </ScrollView> : <View></View>}
                 </View>
             </View>
+            <Text style={styles.mov}>Movements</Text>
+            <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
+
+            {flag ?
+                <ScrollView style={styles.contentHijoDos}>
+                    {allTransfers.emisor.map((t) => <View style={styles.contentMov}>
+                        <Text style={styles.servicio}>{users.map((u) => { if (u.id === t.userId) return u.name })}</Text>
+                        <Text style={styles.ingresos}>{t.transaction.Quantity}</Text>
+                        <Divider />
+                    </View>
+                    )}
+                </ScrollView> : <View></View>}
         </View>
     )
 }
