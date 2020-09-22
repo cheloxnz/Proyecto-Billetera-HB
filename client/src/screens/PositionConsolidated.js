@@ -123,7 +123,7 @@ function App() {
           }} />
         <Drawer.Screen name="BanelcoKeys" component={ForgotPasswordScreen}
           options={{
-            title: 'Banelco Keys',
+            title: 'Forgot Password',
             drawerIcon: ({ focused, size }) => (
               <FontAwesome
                 name='key'
