@@ -1,61 +1,61 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Constants from 'expo-constants';
 import SearchB from '../components/SearchB';
 import ContactsList from '../components/ContactsList';
-import { ImageBackground, SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Alert, ScrollView } from 'react-native';
-import { getAllContacts, getAllUsers } from '../actions'
+import { ImageBackground, View, StyleSheet, Text, StatusBar } from 'react-native';
+import { getAllContacts } from '../actions';
 
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
 
 
 
-const ScreenTransfers = ({ navigation, getAllContacts, contacts, onlineUser, getAllUsers }) => {
+const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, onlineUser }) => {
 
 
   useEffect(() => {
-  getAllContacts(onlineUser.id)
-  },[onlineUser])
-  console.log(getAllContacts)
+    getAllContacts(onlineUser.id)
+  }, [onlineUser])
 
   return (
-    <ImageBackground 
+    <ImageBackground
       source={require('../assets/consolidated_dot.png')}
       style={styles.background}>
-    <View style={styles.content}>
-      <NavBar navigation={navigation} />
+      <View style={styles.content}>
+        <NavBar navigation={navigation} />
 
-      <View style={styles.contenedorPadre}>
-        <View style={styles.contenedorCentral}>
-          
-          <View style={styles.contenedorSearch}>
-            <Text style={styles.parrafoSearch}>If you have Henry Bank, search for it by username</Text>
-            <SearchB />
-          </View>
-          <View>
-            <View>
-              <Text style={styles.parrafoContact}>Saved Contacts</Text>
+        <View style={styles.contenedorPadre}>
+          <View style={styles.contenedorCentral}>
+
+            <View style={styles.contenedorSearch}>
+              <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {account?.CVU}</Text>
+              {console.log(account)}
+              <Text style={styles.parrafoSearch}>If you have Henry Bank, search for it by username</Text>
+              <SearchB />
             </View>
             <View>
-             <ContactsList contacts={contacts}/>
+              <View>
+                <Text style={styles.parrafoContact}>Saved Contacts</Text>
+              </View>
+              <View>
+                <ContactsList contacts={contacts} />
+              </View>
             </View>
           </View>
-        </View>
           <View style={styles.contenedorHave}>
-              <Button
-                title="Do a transfer"
-                type="clear"
-                titleStyle={{ color: 'black', fontSize: 18 }}
-                containerStyle={{ marginVertical: 40, borderRadius: 10, backgroundColor: 'white', width: '50%', alignSelf: 'center' }}
-                onPress={() => navigation.navigate('InputTransfer')}
-              />
-          </View>  
+            <Button
+              title="Do a transfer"
+              type="clear"
+              titleStyle={{ color: 'black', fontSize: 18 }}
+              containerStyle={{ marginVertical: 40, borderRadius: 10, backgroundColor: 'white', width: '50%', alignSelf: 'center' }}
+              onPress={() => navigation.navigate('InputTransfer')}
+            />
+          </View>
         </View>
-      <FooterNew navigation={navigation} />
-    </View>
+        <FooterNew navigation={navigation} />
+      </View>
     </ImageBackground>
   )
 }
@@ -134,10 +134,12 @@ const styles = StyleSheet.create({
   },
   parrafoContact: {
     fontSize: 20,
+    color: 'white',
     marginLeft: 20,
     marginBottom: 10
   },
   parrafoSearch: {
+    color: 'white',
     fontSize: 16,
     marginVertical: 10,
     marginHorizontal: 20
