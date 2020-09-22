@@ -12,7 +12,8 @@ export const CREATE_ACCOUNT = 'CREATE_ACCOUNT'
 export const GET_ALL_CONTACTS = 'GET_ALL_CONTACTS';
 export const GET_ACCOUNT = 'GET_ACCOUNT';
 export const DO_TRANSFER = 'DO_TRANSFER';
-export const GET_TRANSFERS = 'GET_TRANSFERS'; 
+export const GET_TRANSFERS = 'GET_TRANSFERS';
+export const GET_BALANCE = 'GET_BALANCE';
 
 
 
@@ -178,6 +179,20 @@ export function getTransfers(CVU) {
     .then((data) => {
       dispatch({
         type: GET_TRANSFERS,
+        payload: data
+      })
+    })
+  }
+}
+
+export function getBalance(id) {
+  return function (dispatch) {
+    return axios
+    .get(`http://localhost:3005/accounts/balance/${id}`)
+    .then((result) => result.data)
+    .then((data) => {
+      dispatch({
+        type: GET_BALANCE,
         payload: data
       })
     })
