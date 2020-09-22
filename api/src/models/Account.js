@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 var seedrandom = require('seedrandom');
 
 module.exports = sequelize => {
-    const Account = sequelize.define('account', { 
+    const Account = sequelize.define('account', {
         Naccount: {
             type: DataTypes.BIGINT,
             isUnique: true,
@@ -17,9 +17,9 @@ module.exports = sequelize => {
         balance: {
             type: DataTypes.FLOAT,
             defaultValue: 500,
-            get() {
-                return () => this.getDataValue('balance');
-            },
+            // get() {
+            //     return () => this.getDataValue('balance');
+            // },
         },
         state: {
             type: DataTypes.ENUM,

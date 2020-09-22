@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -7,7 +7,6 @@ import { Divider } from 'react-native-paper';
 
 
 const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, allTransfers, getAllUsers,users}) => {
-
 
     useEffect(() => {
 				getAccount(onlineUser.id)
@@ -20,26 +19,26 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
 		var flag = false
 		if (allTransfers.emisor) flag = true
     return (
-                <View style={styles.contenedorPadre}>
-        
-                    {/* ------- CONTENT ------- */}
-                    <View style={styles.contentPadre}>
-                        <View style={styles.contentHijo}>
-                            <View style={styles.contentInfo}>
-                                <Text style={styles.saldo}>{}</Text>
-                                <Text style={styles.saldo}>{onlineUser.name + " " + onlineUser.surname}</Text>
-                                <Text style={styles.parrafoSaldo}>{}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.contentBotones}>
-                            <View style={styles.contentRecargar}>
-                                <Button title='Load' onPress={() => navigation.navigate('InputTransfer')} style={styles.botonRecargar} />
-                            </View>
-                            <View style={styles.contentEnviar}>
-                                <Button title='Send' onPress={() => navigation.navigate("ScreenTransfers")} style={styles.botonEnviar} />
-                            </View>
-                        </View>
+        <View style={styles.contenedorPadre}>
+
+            {/* ------- CONTENT ------- */}
+            <View style={styles.contentPadre}>
+                <View style={styles.contentHijo}>
+                    <View style={styles.contentInfo}>
+                        <Text>N° CTA: {account?.Naccount}</Text>
+                        <Text style={styles.saldo}>{onlineUser.name + " " + onlineUser.surname}</Text>
+                        <Text style={styles.saldo}>$ {account?.balance}</Text>
+                        <Text style={styles.parrafoSaldo}>My Balance</Text>
                     </View>
+                </View>
+                <View style={styles.contentBotones}>
+                    <View style={styles.contentRecargar}>
+                        <Button title='Load' onPress={() => navigation.navigate('InputTransfer')} style={styles.botonRecargar} />
+                    </View>
+                    <View style={styles.contentEnviar}>
+                        <Button title='Send' onPress={() => navigation.navigate("ScreenTransfers")} style={styles.botonEnviar} />
+                    </View>
+
                     <Text style={styles.mov}>Movements</Text>
                     <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
 										
@@ -137,7 +136,7 @@ const styles = StyleSheet.create({
         marginVertical: 25
     },
     saldo: {
-        fontSize: 45
+        fontSize: 38
     },
     parrafoSaldo: {
         fontSize: 20
