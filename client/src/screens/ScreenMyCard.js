@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { View, Text, StyleSheet, ImageBackground, Button } from 'react-native';
-import NavBar from '../components/NavBar';
 import Switch from '../components/Switch';
 import ListP from '../components/ListInfo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
 
 const MyCard = ({ navigation }) => {

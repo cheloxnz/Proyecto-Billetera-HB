@@ -15,6 +15,7 @@ import ScreenPayments from './ScreenPayments';
 import BuyaSell from './BuyaSell';
 import InputTransfer from './InputTransfer';
 import HomeScreen from './HomeScreen';
+import ScreenLoad from './ScreenLoad';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Drawer = createDrawerNavigator();
@@ -138,6 +139,17 @@ function App() {
             drawerIcon: ({ focused, size }) => (
               <FontAwesome
                 name='random'
+                size={20}
+                color={focused ? 'black' : '#ccc'}
+              />
+            ),
+          }} />
+        <Drawer.Screen name="Load" component={ScreenLoad}
+          options={{
+            title: 'Load',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='plus'
                 size={20}
                 color={focused ? 'black' : '#ccc'}
               />

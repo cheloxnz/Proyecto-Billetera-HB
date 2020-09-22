@@ -10,5 +10,6 @@ export { default as PositionConsolidated } from "./PositionConsolidated";
 export { default as ScreenTransfers } from './ScreenTransfers';
 export { default as BuyaSell } from './BuyaSell';
 export { default as InputTransfer } from './InputTransfer';
+export { default as ScreenLoad } from './ScreenLoad';
 
 

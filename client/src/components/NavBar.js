@@ -1,30 +1,30 @@
 import React from "react";
 import { connect } from "react-redux";
-import {View, Text, TextInput, StyleSheet, TouchableOpacity, Button} from "react-native";
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Button } from "react-native";
 
 import LogoMenu from "../components/LogoMenu";
 import Notification from "../components/Notification";
 import LogoPostCons from '../components/LogoPostCons';
 
-const Navbar = ({navigation}) => {
+const Navbar = ({ navigation }) => {
 
 
     return (
-                <View style={styles.header}>
-                        <View style={styles.menuContent}>
-                            <TouchableOpacity onPress={() => navigation.openDrawer()}>
-                                <LogoMenu />
-                            </TouchableOpacity>
-                        </View>
+        <View style={styles.header}>
+            <View style={styles.menuContent}>
+                <TouchableOpacity onPress={() => navigation.openDrawer()}>
+                    <LogoMenu />
+                </TouchableOpacity>
+            </View>
 
-                        <View style={styles.icon} >
-                            <LogoPostCons/>
-                        </View>
+            <View style={styles.icon} >
+                <LogoPostCons />
+            </View>
 
-                        <View style={styles.bellContent}>
-                            <Notification />
-                        </View>
-                </View>
+            <View style={styles.bellContent}>
+                <Notification />
+            </View>
+        </View>
 
     )
 };
@@ -39,8 +39,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 3,
         borderBottomColor: "black",
         borderStyle: 'solid',
-        borderBottomLeftRadius: 7,
-        borderBottomRightRadius: 7,
     },
     menuContent: {
         width: "44.35%",
