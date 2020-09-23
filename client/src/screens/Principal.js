@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { getAccount, getTransfers, getAllUsers, getBalance } from '../actions';
+import { getAccount, getTransfersEmisor,getTransfersReceptor, getAllUsers, getBalance } from '../actions';
 import { Divider } from 'react-native-paper';
 
 
-const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, allTransfers, getAllUsers, users, getBalance , balance}) => {
+const Principal = ({ navigation, getAccount, account, onlineUser, getTransfersEmisor, transfersEmisor
+                                        , transfersReceptor, users, getBalance , balance, getTransfersReceptor}) => {
 
     useEffect(() => {
         getAccount(onlineUser.id)
@@ -14,10 +15,10 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
     }, [onlineUser])
 
     useEffect(() => {
-        if (account) { getTransfers(account.CVU) }
-		}, [account])
-    var flag = false
-    if (allTransfers.emisor) flag = true
+        if (account) { getTransfersReceptor(account.Naccount), getTransfersEmisor(account.Naccount) }
+        }, [account])
+
+
     return (
         <View style={styles.contenedorPadre}>
 
@@ -27,8 +28,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
                     <View style={styles.contentInfo}>
                         <Text>N° CTA: {account?.Naccount}</Text>
                         <Text style={styles.saldo}>{onlineUser.name + " " + onlineUser.surname}</Text>
-    										<Text style={styles.saldo}>$ {}</Text>
-												<Text style={styles.parrafoSaldo}>My Balance {balance?.balance} </Text>
+                        <Text style={styles.parrafoSaldo}>My Balance $ {balance?.balance} </Text>
                     </View>
                 </View>
                 <View style={styles.contentBotones}>
@@ -43,7 +43,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
             <Text style={styles.mov}>Movements</Text>
             <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
 
-            {flag ?
+            {/* {
                 <ScrollView style={styles.contentHijoDos}>
                     {allTransfers.emisor.map((t) => <View style={styles.contentMov}>
                         <Text style={styles.servicio}>
@@ -53,7 +53,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfers, 
                         <Divider />
                     </View>
                     )}
-                </ScrollView> : <View></View>}
+                </ScrollView>} */}
         </View>
     )
 }
@@ -186,16 +186,19 @@ const mapStateToProps = state => {
     return {
         account: state.account,
         onlineUser: state.onlineUser,
-        allTransfers: state.allTransfers,
+                transfersReceptor: state.transfersReceptor,
+                transfersEmisor: state.transfersEmisor,
         users: state.users,
-        balance: state.balance
+                balance: state.balance,
+                
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         getAccount: (id) => dispatch(getAccount(id)),
-        getTransfers: (cvu) => dispatch(getTransfers(cvu)),
+                getTransfersEmisor: (Naccount) => dispatch(getTransfersEmisor(Naccount)),
+                getTransfersReceptor: (Naccount) => dispatch(getTransfersReceptor(Naccount)),
         getAllUsers: () => dispatch(getAllUsers()),
         getBalance: (id) => dispatch(getBalance(id))
     }

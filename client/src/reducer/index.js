@@ -10,8 +10,9 @@ import {
   GET_ACCOUNT,
   CREATE_ACCOUNT,
   DO_TRANSFER,
-  GET_TRANSFERS,
-  GET_BALANCE
+  GET_TRANSFERS_EMISOR,
+  GET_TRANSFERS_RECEPTOR,
+  GET_BALANCE,
 } from "../actions";
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
   contacts: {},
   account: {},
   transfer: {},
-  allTransfers: {},
+  transfersEmisor: {},
+  transfersReceptor: {},
   balance: {}
 };
 
@@ -83,10 +85,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         transfer: action.payload
     }
-    case GET_TRANSFERS:
+    case GET_TRANSFERS_RECEPTOR:
       return {
         ...state,
-        allTransfers: action.payload
+        transfersReceptor: action.payload
+      }
+    case GET_TRANSFERS_EMISOR:
+      return {
+        ...state,
+        transfersEmisor: action.payload
       }
     case GET_BALANCE:
       return {

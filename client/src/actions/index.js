@@ -12,7 +12,8 @@ export const CREATE_ACCOUNT = 'CREATE_ACCOUNT'
 export const GET_ALL_CONTACTS = 'GET_ALL_CONTACTS';
 export const GET_ACCOUNT = 'GET_ACCOUNT';
 export const DO_TRANSFER = 'DO_TRANSFER';
-export const GET_TRANSFERS = 'GET_TRANSFERS';
+export const GET_TRANSFERS_EMISOR = 'GET_TRANSFERS_EMISOR';
+export const GET_TRANSFERS_RECEPTOR = 'GET_TRANSFERS_RECEPTOR';
 export const GET_BALANCE = 'GET_BALANCE';
 
 
@@ -171,14 +172,28 @@ export function doTransfer(CVUFrom, cvu, amount) {
 }
 
 
-export function getTransfers(CVU) {
+export function getTransfersEmisor(Naccount) {
   return function(dispatch) {
     return axios
-    .get(`http://localhost:3005/transfers/emisor/${CVU}`)
+    .get(`http://localhost:3005/transfers/emisor/${Naccount}`)
     .then((result) => result.data)
     .then((data) => {
       dispatch({
-        type: GET_TRANSFERS,
+        type: GET_TRANSFERS_EMISOR,
+        payload: data
+      })
+    })
+  }
+}
+
+export function getTransfersReceptor(Naccount) {
+  return function(dispatch) {
+    return axios
+    .get(`http://localhost:3005/transfers/receptor/${Naccount}`)
+    .then((result) => result.data)
+    .then((data) => {
+      dispatch({
+        type: GET_TRANSFERS_RECEPTOR,
         payload: data
       })
     })
