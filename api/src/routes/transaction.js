@@ -82,6 +82,7 @@ server.post('/user/load', (req, res) => {
 //---------------------------- SI ES 'ACCOUNTNACCOUNT' MOSTRAR (+ $500)
 
 server.get('/emisor/:CVU', (req, res) => {
+    console.log("entre al emisor ")
     Transaction.findAll({
         where: {
             emisor: req.params.CVU  // EL QUE RECIBE LA TRANSFERENCIA

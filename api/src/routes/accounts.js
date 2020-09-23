@@ -99,8 +99,9 @@ server.get("/balance/:id", (req, res) => {
         }
     }).then(data => {
         let balance = data.balance()
-        console.log("balanceee",balance)
-        res.json(balance).status(200)
+        let obj = {balance: balance}
+        console.log("balanceee",obj)
+        res.send(obj).status(200)
     }).catch(err => {
         res.send(err)
     })
