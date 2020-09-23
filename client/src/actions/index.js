@@ -12,10 +12,8 @@ export const CREATE_ACCOUNT = 'CREATE_ACCOUNT'
 export const GET_ALL_CONTACTS = 'GET_ALL_CONTACTS';
 export const GET_ACCOUNT = 'GET_ACCOUNT';
 export const DO_TRANSFER = 'DO_TRANSFER';
-export const GET_TRANSFERS_EMISOR = 'GET_TRANSFERS_EMISOR';
-export const GET_TRANSFERS_RECEPTOR = 'GET_TRANSFERS_RECEPTOR';
 export const GET_BALANCE = 'GET_BALANCE';
-
+export const GET_TRANSFERS_ALL = "GET_TRANSFERS_ALL";
 
 
 export function registerUser(email, password) {
@@ -63,17 +61,17 @@ export function getAllUsers() {
 }
 
 export function updateUserData(body, id) {
-  console.log( body + '       ' + id)
+  console.log(body + '       ' + id)
   return function (dispatch) {
     return axios
-    .put(`http://localhost:3005/users/${id}`, body)
-    .then(result => result.data)
-    .then((data) => {
-      dispatch({
-        type: UPDATE_USER,
-        payload: data
+      .put(`http://localhost:3005/users/${id}`, body)
+      .then(result => result.data)
+      .then((data) => {
+        dispatch({
+          type: UPDATE_USER,
+          payload: data
+        })
       })
-    })
   }
 }
 
@@ -95,14 +93,14 @@ export function activeUser(id) {
 export function createAccount(id) {
   return function (dispatch) {
     return axios
-    .post(`http://localhost:3005/accounts/${id}`)
-    .then( result => result.data )
-    .then( account => {
-      dispatch({
-        type: CREATE_ACCOUNT,
-        payload: account
+      .post(`http://localhost:3005/accounts/${id}`)
+      .then(result => result.data)
+      .then(account => {
+        dispatch({
+          type: CREATE_ACCOUNT,
+          payload: account
+        })
       })
-    })
   }
 }
 
@@ -130,86 +128,72 @@ export function setPinUser(idUser, pin) {
 export function getAllContacts(id) {
   return function (dispatch) {
     return axios
-    .get(`http://localhost:3005/contacts/user/${id}`)
-    .then((result) => result.data.friends)
-    .then((friends) => {
-      dispatch({
-        type: GET_ALL_CONTACTS,
-        payload: friends
+      .get(`http://localhost:3005/contacts/user/${id}`)
+      .then((result) => result.data.friends)
+      .then((friends) => {
+        dispatch({
+          type: GET_ALL_CONTACTS,
+          payload: friends
+        })
       })
-    })
   }
 }
 
 export function getAccount(id) {
   return function (dispatch) {
     return axios
-    .get(`http://localhost:3005/accounts/${id}`)
-    .then((result) => result.data)
-    .then((data) => {
-      dispatch({
-        type: GET_ACCOUNT,
-        payload: data
+      .get(`http://localhost:3005/accounts/${id}`)
+      .then((result) => result.data)
+      .then((data) => {
+        dispatch({
+          type: GET_ACCOUNT,
+          payload: data
+        })
       })
-    })
   }
 }
 
 
 export function doTransfer(CVUFrom, cvu, amount) {
-  console.log(CVUFrom,cvu, amount, "los parametros")
+  console.log(CVUFrom, cvu, amount, "los parametros")
   return function (dispatch) {
     return axios
-    .post(`http://localhost:3005/transfers/${CVUFrom}`, {cvu, amount})
-    .then((result) => result.data)
-    .then((data) => {
-      dispatch({
-        type: DO_TRANSFER,
-        payload: data
+      .post(`http://localhost:3005/transfers/${CVUFrom}`, { cvu, amount })
+      .then((result) => result.data)
+      .then((data) => {
+        dispatch({
+          type: DO_TRANSFER,
+          payload: data
+        })
       })
-    })
   }
 }
 
 
-export function getTransfersEmisor(Naccount) {
-  return function(dispatch) {
+export function getTransfersAll(Naccount) {
+  return function (dispatch) {
     return axios
-    .get(`http://localhost:3005/transfers/emisor/${Naccount}`)
-    .then((result) => result.data)
-    .then((data) => {
-      dispatch({
-        type: GET_TRANSFERS_EMISOR,
-        payload: data
+      .get(`http://localhost:3005/transfers/all/${Naccount}`)
+      .then((result) => result.data)
+      .then((data) => {
+        dispatch({
+          type: GET_TRANSFERS_ALL,
+          payload: data
+        })
       })
-    })
-  }
-}
-
-export function getTransfersReceptor(Naccount) {
-  return function(dispatch) {
-    return axios
-    .get(`http://localhost:3005/transfers/receptor/${Naccount}`)
-    .then((result) => result.data)
-    .then((data) => {
-      dispatch({
-        type: GET_TRANSFERS_RECEPTOR,
-        payload: data
-      })
-    })
   }
 }
 
 export function getBalance(id) {
   return function (dispatch) {
     return axios
-    .get(`http://localhost:3005/accounts/balance/${id}`)
-    .then((result) => result.data)
-    .then((data) => {
-      dispatch({
-        type: GET_BALANCE,
-        payload: data
+      .get(`http://localhost:3005/accounts/balance/${id}`)
+      .then((result) => result.data)
+      .then((data) => {
+        dispatch({
+          type: GET_BALANCE,
+          payload: data
+        })
       })
-    })
   }
 }

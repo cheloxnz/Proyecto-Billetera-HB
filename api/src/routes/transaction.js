@@ -66,11 +66,11 @@ server.post('/user/load', (req, res) => {
             balance: balan + amount2
         })
         Transaction.create({
-             Quantity: amount2,
-             Type: 'load',
-             code: code,
-             emisor: 11111111, //cambiar despues
-             receptor: user.account.Naccount
+            Quantity: amount2,
+            Type: 'load',
+            code: code,
+            emisor: 11111111, //cambiar despues
+            receptor: user.account.Naccount
         })
         res.send('Recarga exitosa')
     })
@@ -104,21 +104,30 @@ server.post('/user/load', (req, res) => {
 
 server.get('/all/:acc', (req, res) => {
     console.log('entro al all ')
-    transE = Transaction.findAll({
+    const transE = Transaction.findAll({
         where: {
             receptor: req.params.acc  // EL QUE ENVIA LA TRANSFERENCIA
         }
     });
-    transR = Transaction.findAll({
+    const transR = Transaction.findAll({
         where: {
             emisor: req.params.acc  // EL QUE RECIBE LA TRANSFERENCIA
         }
     });
-    Promise.all([transE,transR])
-        .then(trans => res.send(trans))
+    Promise.all([transE, transR])
+
+        .then(trans => { let obj = sumaTrans(trans); res.send(obj) })
         .catch(err => console.log(err))
 })
-
+const sumaTrans = (arr) => {
+    console.log('entro al acaa! ')
+    let sum = 0;
+    for (let i = 0; i = 1 < arr.length; i += 1) {
+        if (Array.isArray(arr[i])) sum += sumaTrans(arr[i])
+        else sum += arr[i]
+    }
+    return sum;
+}
 
 
 module.exports = server;

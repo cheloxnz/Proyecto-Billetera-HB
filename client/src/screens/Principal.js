@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { getAccount, getTransfersEmisor,getTransfersReceptor, getAllUsers, getBalance } from '../actions';
+import { getAccount, getTransfersAll, getAllUsers, getBalance } from '../actions';
 import { Divider } from 'react-native-paper';
 
 
-const Principal = ({ navigation, getAccount, account, onlineUser, getTransfersEmisor, transfersEmisor
-                                        , transfersReceptor, users, getBalance , balance, getTransfersReceptor}) => {
+const Principal = ({ navigation, getAccount, account, onlineUser,
+    transfersAll, users, getBalance, balance, getTransfersAll }) => {
 
     useEffect(() => {
         getAccount(onlineUser.id)
@@ -15,8 +15,13 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfersEm
     }, [onlineUser])
 
     useEffect(() => {
-        if (account) { getTransfersReceptor(account.Naccount), getTransfersEmisor(account.Naccount) }
-        }, [account])
+        if (account) { getTransfersAll(account.Naccount) }
+    }, [account])
+
+    console.log(transfersAll);
+
+    var flag = false;
+    if (transfersAll) flag = true;
 
 
     return (
@@ -43,17 +48,17 @@ const Principal = ({ navigation, getAccount, account, onlineUser, getTransfersEm
             <Text style={styles.mov}>Movements</Text>
             <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
 
-            {/* {
+            {
                 <ScrollView style={styles.contentHijoDos}>
-                    {allTransfers.emisor.map((t) => <View style={styles.contentMov}>
+                    {/* {/* {transfersAll?.transferAll.map((t) => <View style={styles.contentMov}>
                         <Text style={styles.servicio}>
-                             From: {users.map((u) => { if (u.id === t.userId) return (" " + u.name + " " + u.surname)})}
+                            From: {users.map((u) => { if (u.id === t.userId) return (" " + u.name + " " + u.surname) })}
                         </Text>
                         <Text style={styles.ingresos}> + $ {t.transaction.Quantity}</Text>
                         <Divider />
-                    </View>
-                    )}
-                </ScrollView>} */}
+                    </View> 
+                    )} */}
+                </ScrollView>}
         </View>
     )
 }
@@ -186,19 +191,17 @@ const mapStateToProps = state => {
     return {
         account: state.account,
         onlineUser: state.onlineUser,
-                transfersReceptor: state.transfersReceptor,
-                transfersEmisor: state.transfersEmisor,
+        transfersAll: state.transfersAll,
         users: state.users,
-                balance: state.balance,
-                
+        balance: state.balance,
+
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         getAccount: (id) => dispatch(getAccount(id)),
-                getTransfersEmisor: (Naccount) => dispatch(getTransfersEmisor(Naccount)),
-                getTransfersReceptor: (Naccount) => dispatch(getTransfersReceptor(Naccount)),
+        getTransfersAll: (Naccount) => dispatch(getTransfersAll(Naccount)),
         getAllUsers: () => dispatch(getAllUsers()),
         getBalance: (id) => dispatch(getBalance(id))
     }
