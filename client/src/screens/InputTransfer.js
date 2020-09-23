@@ -13,7 +13,6 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 	const [state, setState] = useState('')
 	const [transf, setTransf] = useState('')
 	const [balance2, setBalance] = useState(account.balance)
-	const [contact, setContact] = useState('')
 
 	useEffect(() => {
 		if (transfer?.text) setTransf(transfer.text)
@@ -23,20 +22,27 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 
 
 	const handleOnChange = (e) => {
+		if (friendCVU != 0) {
+			setState({
+			...state,
+			CVU: friendCVU,
+			amount: e.target.value
+		})
+	} else {
 		setState({
 			...state,
 			[e.target.name]: e.target.value
-		})
+		})}
 	}
+
 	const handleTransfer = () => {
-		if (account) doTransfer(account.CVU, state.CVU, state.amount)
+		if (account) doTransfer(account.dataValues.CVU, state.CVU, state.amount)
 		//hacer alerta
 	}
+
 	var namesList = []
 	contacts ? namesList = contacts.map((c) => c.name) : namesList = []
-	console.log(account)
-	console.log(transfer)
-	console.log(balance2)
+
 
 	return (
 		<Background>
@@ -53,7 +59,7 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 							inputStyle={{ color: 'yellow' }}
 							style={styles.textInput}
 							name='CVU'
-							value={friendCVU != 0 ? friendCVU : state.CVU ? state.CVU : ''}
+							value={friendCVU != 0 ? friendCVU : state.CVU ? state.CVU : '' }
 							onChange={e => handleOnChange(e)}
 							editable={friendCVU != 0 ? false : state.CVU ? true : true}
 						/>
