@@ -14,6 +14,7 @@ export const GET_ACCOUNT = 'GET_ACCOUNT';
 export const DO_TRANSFER = 'DO_TRANSFER';
 export const GET_TRANSFERS = 'GET_TRANSFERS';
 export const GET_BALANCE = 'GET_BALANCE';
+export const FRIEND_CVU = 'FRIEND_CVU'
 
 
 
@@ -195,6 +196,15 @@ export function getBalance(id) {
         type: GET_BALANCE,
         payload: data
       })
+    })
+  }
+}
+
+export function friendCVU(cvu) {
+  return function (dispatch) {
+    dispatch({
+      type: FRIEND_CVU,
+      payload: cvu
     })
   }
 }

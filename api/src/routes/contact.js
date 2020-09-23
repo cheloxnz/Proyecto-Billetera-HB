@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { User } = require("../db");
+const { User, Account } = require("../db");
 //--------------------------------------
 //     Traer amigos de un user         |
 //--------------------------------------
@@ -13,12 +13,15 @@ server.get("/user/:id", (req, res) => {
       },
       include: {
         association: 'friends',
-        attributes: ['id', 'name', 'surname', 'dni']
-    }
+        attributes: ['id', 'name', 'surname', 'dni'],
+        include: {
+          model: Account,
+          attributes: ['CVU']
+        }
+       }
   })
     .then((user) => {
-      console.log(user)
-      res.send(user.dataValues)
+      res.send(user)
     })
     .catch((err) => console.log(err))
   })

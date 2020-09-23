@@ -2,23 +2,30 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import Constants from 'expo-constants';
-import SearchB from '../components/SearchB';
 import ContactsList from '../components/ContactsList';
 import { ImageBackground, View, StyleSheet, Text, StatusBar } from 'react-native';
-import { getAllContacts } from '../actions';
-
+import { friendCVU, getAllContacts } from '../actions';
+import { SearchBar } from 'react-native-elements';
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
 
 
 
-const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, onlineUser }) => {
+const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, onlineUser, friendCVU }) => {
+  const [data, setData] = React.useState([])
+  const [input, setInput] = React.useState('')
 
-
-  useEffect(() => {
-    getAllContacts(onlineUser.id)
+  useEffect( () => {
+     getAllContacts(onlineUser.id)
   }, [onlineUser])
 
+  const handleContacts = text => {
+    setInput(text)
+    setData(contacts.filter((contact) => {
+      return contact.name.toLowerCase().indexOf(text.toLowerCase()) !== -1 || contact.surname.toLowerCase().indexOf(text.toLowerCase()) !== -1
+    }))
+  }
+  console.log(account)
   return (
     <ImageBackground
       source={require('../assets/consolidated_dot.png')}
@@ -31,16 +38,22 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
 
             <View style={styles.contenedorSearch}>
               <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {account?.CVU}</Text>
-              {console.log(account)}
               <Text style={styles.parrafoSearch}>If you have Henry Bank, search for it by username</Text>
-              <SearchB />
+              <SearchBar
+                onChangeText={text => { handleContacts(text) }}
+                value={input}
+                inputStyle={{ backgroundColor: 'white' }}
+                containerStyle={{ backgroundColor: 'black', borderWidth: 1, borderRadius: 8 }}
+                ForwardRef={'#g5g5g5'}
+                placeholder={'Type Here...'}
+              />
             </View>
             <View>
               <View>
-                <Text style={styles.parrafoContact}>Saved Contacts</Text>
+                <Text style={styles.parrafoContact}>Contacts</Text>
               </View>
               <View>
-                <ContactsList contacts={contacts} />
+                {data.length >= 1 ? data.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) : contacts?.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) }
               </View>
             </View>
           </View>
@@ -50,7 +63,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
               type="clear"
               titleStyle={{ color: 'black', fontSize: 18 }}
               containerStyle={{ marginVertical: 40, borderRadius: 10, backgroundColor: 'white', width: '50%', alignSelf: 'center' }}
-              onPress={() => navigation.navigate('InputTransfer')}
+              onPress={() => { navigation.navigate('InputTransfer'), friendCVU(0) }}
             />
           </View>
         </View>
@@ -187,7 +200,8 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = dispatch => {
   return {
     getAllContacts: (id) => dispatch(getAllContacts(id)),
-    getAllUsers: () => dispatch(getAllUsers())
+    getAllUsers: () => dispatch(getAllUsers()),
+    friendCVU: (cvu) => dispatch(friendCVU(cvu))
   }
 }
 
@@ -195,6 +209,7 @@ const mapStateToProps = state => {
   return {
     onlineUser: state.onlineUser,
     contacts: state.contacts,
+    account: state.account
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ScreenTransfers);

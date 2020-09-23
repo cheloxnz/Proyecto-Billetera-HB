@@ -3,6 +3,7 @@ import React from 'react';
 import { SearchBar } from 'react-native-elements';
 
 export default class SearchB extends React.Component {
+ 
   state = {
     search: '',
   };
@@ -13,7 +14,7 @@ export default class SearchB extends React.Component {
 
   render() {
     const { search } = this.state;
-
+     console.log('ejecuto')
     return (
       <SearchBar
         onChangeText={this.updateSearch}
