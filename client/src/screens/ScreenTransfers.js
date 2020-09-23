@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import Constants from 'expo-constants';
 import ContactsList from '../components/ContactsList';
-import { ImageBackground, View, StyleSheet, Text, StatusBar } from 'react-native';
+import { ImageBackground, View, StyleSheet, Text, StatusBar, Alert } from 'react-native';
 import { friendCVU, getAllContacts } from '../actions';
 import { SearchBar } from 'react-native-elements';
 import NavBar from '../components/NavBar';
@@ -11,7 +11,7 @@ import FooterNew from '../components/FooterNew';
 
 
 
-const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, onlineUser, friendCVU }) => {
+const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, onlineUser, friendCVU,}) => {
   const [data, setData] = React.useState([])
   const [input, setInput] = React.useState('')
 
@@ -25,6 +25,26 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
       return contact.name.toLowerCase().indexOf(text.toLowerCase()) !== -1 || contact.surname.toLowerCase().indexOf(text.toLowerCase()) !== -1
     }))
   }
+
+  const onButtonPress = () => {
+    Alert.prompt(
+      "Enter password",
+      "Enter your password to claim your $1.5B in lottery winnings",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "OK",
+          onPress: password => console.log("OK Pressed, password: " + password)
+        }
+      ],
+      "secure-text"
+    );
+  };
+
   console.log(account)
   return (
     <ImageBackground
@@ -37,7 +57,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
           <View style={styles.contenedorCentral}>
 
             <View style={styles.contenedorSearch}>
-              <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {account?.CVU}</Text>
+              <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {account?.dataValues?.CVU}</Text>
               <Text style={styles.parrafoSearch}>If you have Henry Bank, search for it by username</Text>
               <SearchBar
                 onChangeText={text => { handleContacts(text) }}
@@ -56,7 +76,16 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
                 {data.length >= 1 ? data.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) : contacts?.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) }
               </View>
             </View>
+          <View>
+            <Button
+              title="Add a friend"
+              type="clear"
+              titleStyle={{ color: 'white', fontSize: 18 }}
+              containerStyle={{ marginVertical: 20, borderRadius: 10, backgroundColor: '#00296B', width: '30%', alignSelf: 'center'}}
+              onPress={() => onButtonPress}
+            />
           </View>
+          </View>         
           <View style={styles.contenedorHave}>
             <Button
               title="Do a transfer"
@@ -201,7 +230,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getAllContacts: (id) => dispatch(getAllContacts(id)),
     getAllUsers: () => dispatch(getAllUsers()),
-    friendCVU: (cvu) => dispatch(friendCVU(cvu))
+    friendCVU: (cvu) => dispatch(friendCVU(cvu)),
   }
 }
 

@@ -12,7 +12,7 @@ import {
   DO_TRANSFER,
   GET_TRANSFERS,
   GET_BALANCE,
-  FRIEND_CVU
+  FRIEND_CVU,
 } from "../actions";
 
 const initialState = {

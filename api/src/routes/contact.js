@@ -31,7 +31,8 @@ server.get("/user/:id", (req, res) => {
   //--------------------------------------
   
   server.post("/user/:id/add", (req, res) => {
-    const id = req.body.id
+    const username = req.body.username
+    console.log(req.body)
     let user1 = User.findOne({
       where: {
         id: req.params.id 
@@ -39,7 +40,7 @@ server.get("/user/:id", (req, res) => {
     })
     let user2 = User.findOne({
       where: {
-        id: id
+        username: username
       }
     })
     Promise.all([user1, user2])
@@ -48,7 +49,7 @@ server.get("/user/:id", (req, res) => {
       let us2 = user[1]
       us1.addFriend(us2)
       us2.addFriend(us1)
-      res.send('Añadido con exito')
+      res.send('Contacto anadido con exito')
     })
     .catch(err => console.log(err))
   })
