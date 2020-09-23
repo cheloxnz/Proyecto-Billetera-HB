@@ -9,7 +9,7 @@ import { Button } from 'react-native-paper';
 import { doTransfer } from '../actions/index'
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts }) => {
+const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts, friendCVU }) => {
 	const [state, setState] = useState('')
 	const [transf, setTransf] = useState('')
 	const [balance2, setBalance] = useState(account.balance)
@@ -21,11 +21,8 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 		if (transfer?.balance) setBalance(transfer.balance)
 	}, [transfer])
 
-	console.log(contacts)
-	console.log(contact)
 
 	const handleOnChange = (e) => {
-		console.log(state)
 		setState({
 			...state,
 			[e.target.name]: e.target.value
@@ -37,7 +34,9 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 	}
 	var namesList = []
 	contacts ? namesList = contacts.map((c) => c.name) : namesList = []
-	console.log(namesList)
+	console.log(account)
+	console.log(transfer)
+	console.log(balance2)
 
 	return (
 		<Background>
@@ -50,12 +49,13 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 					<View style={styles.inputCvu}>
 						<Text style={styles.cont}>CVU</Text>
 						<TextInput
+							keyboardType='number-pad'
 							inputStyle={{ color: 'yellow' }}
 							style={styles.textInput}
 							name='CVU'
-							value={state.CVU}
+							value={friendCVU != 0 ? friendCVU : state.CVU ? state.CVU : ''}
 							onChange={e => handleOnChange(e)}
-							editable={true}
+							editable={friendCVU != 0 ? false : state.CVU ? true : true}
 						/>
 					</View>
 					<View style={styles.inputAmount}>
@@ -147,6 +147,7 @@ const mapStateToProps = state => {
 		account: state.account,
 		transfer: state.transfer,
 		contacts: state.contacts,
+		friendCVU: state.friendCVU
 	}
 }
 
