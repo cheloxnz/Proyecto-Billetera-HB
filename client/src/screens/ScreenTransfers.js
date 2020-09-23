@@ -18,7 +18,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
   useEffect(() => {
     getAllContacts(onlineUser.id)
   }, [onlineUser])
-
+console.log(typeof(contacts))
   return (
     <ImageBackground
       source={require('../assets/consolidated_dot.png')}
@@ -31,7 +31,6 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
 
             <View style={styles.contenedorSearch}>
               <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {account?.CVU}</Text>
-              {console.log(account)}
               <Text style={styles.parrafoSearch}>If you have Henry Bank, search for it by username</Text>
               <SearchB />
             </View>
@@ -40,7 +39,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
                 <Text style={styles.parrafoContact}>Saved Contacts</Text>
               </View>
               <View>
-                <ContactsList contacts={contacts} />
+                {contacts ? contacts?.map(contacts => <ContactsList contacts={contacts} navigation={navigation} /> ) : null}
               </View>
             </View>
           </View>

@@ -18,7 +18,7 @@ const initialState = {
   users: [],
   onlineUser: {},
   userRegister: {},
-  contacts: {},
+  contacts: [],
   account: {},
   transfer: {},
   allTransfers: {},

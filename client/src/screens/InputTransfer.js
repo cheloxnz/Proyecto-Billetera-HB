@@ -13,6 +13,7 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 	const [state, setState] = useState('')
 	const [transf, setTransf] = useState('')
 	const [balance2, setBalance] = useState(account.balance)
+	const [contact, setContact] = useState('')
 
 	useEffect(() => {
 		if (transfer?.text) setTransf(transfer.text)
@@ -20,6 +21,8 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 		if (transfer?.balance) setBalance(transfer.balance)
 	}, [transfer])
 
+	console.log(contacts)
+	console.log(contact)
 
 	const handleOnChange = (e) => {
 		console.log(state)
@@ -34,6 +37,7 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 	}
 	var namesList = []
 	contacts ? namesList = contacts.map((c) => c.name) : namesList = []
+	console.log(namesList)
 
 	return (
 		<Background>
@@ -64,17 +68,6 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 							onChange={e => handleOnChange(e)} />
 					</View>
 					<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > account.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
-					<View style={styles.contenedorDrop}>
-						<Text style={styles.cont}>SELECT CONTACT: </Text>
-						<DropDownPicker
-							zIndex={100000}
-							searchable={true}
-							searchablePlaceholder="Search your contact: "
-							items={namesList}
-							placeholder='Contacts'
-							onChangeItem={item => setState(item)}
-						/>
-					</View>
 				</View>
 				<Button icon="cash-usd" color="#FFFFFF" mode="contained" style={styles.boton} onPress={() => handleTransfer()}> Transfer NOW!</Button>
 			</View>
