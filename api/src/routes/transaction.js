@@ -40,7 +40,12 @@ server.post("/:CVU", (req, res) => {
                 emisor: from.Naccount,
                 code: codes
             })
-            res.send("Transacción exitosa")
+            var result = from.balance()
+            var body = {
+                balance: result,
+                text: 'Transaccion exitosa!'
+            }
+            res.send(body)
         })
         .catch(err => console.log(err))
 })

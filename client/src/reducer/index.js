@@ -11,20 +11,24 @@ import {
   CREATE_ACCOUNT,
   DO_TRANSFER,
   GET_TRANSFERS_ALL,
+  GET_ALL_ACCOUNTS,
   GET_BALANCE,
-  GET_ALL_ACCOUNTS
+  FRIEND_CVU,
+  ADD_FRIEND,
 } from "../actions";
 
 const initialState = {
   users: [],
   onlineUser: {},
   userRegister: {},
-  contacts: {},
+  contacts: [],
   account: {},
   transfer: {},
   transfersAll: {},
   balance: {},
   accounts: {},
+  balance: {},
+  friendCVU: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -95,11 +99,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         balance: action.payload
       }
-
     case GET_ALL_ACCOUNTS:
       return {
         ...state,
         accounts: action.payload
+      }
+    case FRIEND_CVU:
+      return {
+        ...state,
+        friendCVU: action.payload
+      }
+    case ADD_FRIEND:
+      return {
+        ...state,
+        contacts: action.payload
       }
     default:
       return state;

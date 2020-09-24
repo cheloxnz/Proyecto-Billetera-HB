@@ -23,6 +23,8 @@ server.get("/:id", (req, res) => {
             userId: req.params.id
         }
     }).then(data => {
+        var balance = data.balance()
+        data = {...data, balance}
         res.send(data).status(200)
     }).catch(err => {
         res.send(err)

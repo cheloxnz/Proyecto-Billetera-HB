@@ -15,6 +15,9 @@ export const DO_TRANSFER = 'DO_TRANSFER';
 export const GET_BALANCE = 'GET_BALANCE';
 export const GET_TRANSFERS_ALL = "GET_TRANSFERS_ALL";
 export const GET_ALL_ACCOUNTS = "GET_ALL_ACCOUNTS";
+export const FRIEND_CVU = 'FRIEND_CVU';
+export const ADD_FRIEND = 'ADD_FRIEND';
+
 
 
 export function registerUser(email, password) {
@@ -198,6 +201,7 @@ export function getBalance(id) {
       })
   }
 }
+
 export function getAllAccounts() {
   return function (dispatch) {
     return axios
@@ -211,3 +215,24 @@ export function getAllAccounts() {
       })
   }
 }
+
+export function friendCVU(cvu) {
+  return function (dispatch) {
+    dispatch({
+      type: FRIEND_CVU,
+      payload: cvu
+    })
+  }
+}
+
+export function addFriend(username) {
+  return function (dispatch) {
+    return axios
+      .get(`http://localhost:3005/contacts/addFriend=${username}`, { withCredentials: true })
+      .then(res => {
+        dispatch({ type: ADD_FRIEND, product: res.data });
+      })
+      .catch(err => console.log(err));
+  };
+}
+
