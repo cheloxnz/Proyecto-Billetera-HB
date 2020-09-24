@@ -13,6 +13,7 @@ import {
   GET_TRANSFERS,
   GET_BALANCE,
   FRIEND_CVU,
+  ADD_FRIEND
 } from "../actions";
 
 const initialState = {
@@ -84,7 +85,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         transfer: action.payload
-    }
+      }
     case GET_TRANSFERS:
       return {
         ...state,
@@ -95,10 +96,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         balance: action.payload
       }
-      case FRIEND_CVU: 
+    case FRIEND_CVU:
       return {
         ...state,
         friendCVU: action.payload
+      }
+    case ADD_FRIEND:
+      return {
+        ...state,
+        contacts: action.payload
       }
     default:
       return state;

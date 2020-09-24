@@ -11,12 +11,12 @@ import FooterNew from '../components/FooterNew';
 
 
 
-const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, onlineUser, friendCVU,}) => {
+const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, onlineUser, friendCVU, }) => {
   const [data, setData] = React.useState([])
   const [input, setInput] = React.useState('')
 
-  useEffect( () => {
-     getAllContacts(onlineUser.id)
+  useEffect(() => {
+    getAllContacts(onlineUser.id)
   }, [onlineUser])
 
   const handleContacts = text => {
@@ -26,24 +26,6 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
     }))
   }
 
-  const onButtonPress = () => {
-    Alert.prompt(
-      "Enter password",
-      "Enter your password to claim your $1.5B in lottery winnings",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        {
-          text: "OK",
-          onPress: password => console.log("OK Pressed, password: " + password)
-        }
-      ],
-      "secure-text"
-    );
-  };
 
   console.log(account)
   return (
@@ -73,19 +55,19 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
                 <Text style={styles.parrafoContact}>Contacts</Text>
               </View>
               <View>
-                {data.length >= 1 ? data.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) : contacts?.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) }
+                {data.length >= 1 ? data.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) : contacts?.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />)}
               </View>
             </View>
-          <View>
-            <Button
-              title="Add a friend"
-              type="clear"
-              titleStyle={{ color: 'white', fontSize: 18 }}
-              containerStyle={{ marginVertical: 20, borderRadius: 10, backgroundColor: '#00296B', width: '30%', alignSelf: 'center'}}
-              onPress={() => onButtonPress}
-            />
+            <View>
+              <Button
+                title="Add a friend"
+                type="clear"
+                titleStyle={{ color: 'white', fontSize: 18 }}
+                containerStyle={{ marginVertical: 20, borderRadius: 10, backgroundColor: '#00296B', width: '30%', alignSelf: 'center' }}
+                onPress={() => navigation.navigate('Add Friend')}
+              />
+            </View>
           </View>
-          </View>         
           <View style={styles.contenedorHave}>
             <Button
               title="Do a transfer"
