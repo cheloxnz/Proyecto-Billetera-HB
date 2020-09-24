@@ -14,6 +14,7 @@ export const GET_ACCOUNT = 'GET_ACCOUNT';
 export const DO_TRANSFER = 'DO_TRANSFER';
 export const GET_BALANCE = 'GET_BALANCE';
 export const GET_TRANSFERS_ALL = "GET_TRANSFERS_ALL";
+export const GET_ALL_ACCOUNTS = "GET_ALL_ACCOUNTS";
 
 
 export function registerUser(email, password) {
@@ -192,6 +193,19 @@ export function getBalance(id) {
       .then((data) => {
         dispatch({
           type: GET_BALANCE,
+          payload: data
+        })
+      })
+  }
+}
+export function getAllAccounts() {
+  return function (dispatch) {
+    return axios
+      .get(`http://localhost:3005/accounts/`)
+      .then((result) => result.data)
+      .then((data) => {
+        dispatch({
+          type: GET_ALL_ACCOUNTS,
           payload: data
         })
       })

@@ -2,14 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { getAccount, getTransfersAll, getAllUsers, getBalance } from '../actions';
+import { getAccount, getTransfersAll, getAllUsers, getBalance, getAllAccounts } from '../actions';
 import { Divider } from 'react-native-paper';
 
 
 const Principal = ({ navigation, getAccount, account, onlineUser,
-    transfersAll, users, getBalance, balance, getTransfersAll }) => {
+    transfersAll, users, getBalance, balance, getTransfersAll, getAllUsers, getAllAccounts, accounts }) => {
+
+
+
 
     useEffect(() => {
+        getAllAccounts()
+        getAllUsers()
         getAccount(onlineUser.id)
         getBalance(onlineUser.id)
     }, [onlineUser])
@@ -21,8 +26,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
     console.log(transfersAll);
 
     var flag = false;
-    if (transfersAll) flag = true;
-
+    if (transfersAll.length > 1) flag = true;
 
     return (
         <View style={styles.contenedorPadre}>
@@ -50,14 +54,19 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
 
             {
                 <ScrollView style={styles.contentHijoDos}>
-                    {/* {/* {transfersAll?.transferAll.map((t) => <View style={styles.contentMov}>
+                    {flag ? transfersAll.map((t) => <View style={styles.contentMov}>
                         <Text style={styles.servicio}>
-                            From: {users.map((u) => { if (u.id === t.userId) return (" " + u.name + " " + u.surname) })}
+                            {accounts?.map((a) => { if (a.Naccount == t.emisor) { users.map((u) => { if (a.userId == u.id) return u.name }) } })}
                         </Text>
-                        <Text style={styles.ingresos}> + $ {t.transaction.Quantity}</Text>
+                        {account?.Naccount == t.receptor ?
+                            <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> + $ {t.Quantity}</Text>
+
+                        }
+
+
                         <Divider />
-                    </View> 
-                    )} */}
+                    </View>
+                    ) : null}
                 </ScrollView>}
         </View>
     )
@@ -182,6 +191,7 @@ const styles = StyleSheet.create({
         color: 'green'
     },
     egresos: {
+        fontSize: 18,
         color: 'red'
     },
 
@@ -194,6 +204,7 @@ const mapStateToProps = state => {
         transfersAll: state.transfersAll,
         users: state.users,
         balance: state.balance,
+        accounts: state.accounts
 
     }
 }
@@ -203,7 +214,8 @@ const mapDispatchToProps = dispatch => {
         getAccount: (id) => dispatch(getAccount(id)),
         getTransfersAll: (Naccount) => dispatch(getTransfersAll(Naccount)),
         getAllUsers: () => dispatch(getAllUsers()),
-        getBalance: (id) => dispatch(getBalance(id))
+        getBalance: (id) => dispatch(getBalance(id)),
+        getAllAccounts: () => dispatch(getAllAccounts()),
     }
 }
 

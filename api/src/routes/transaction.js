@@ -116,18 +116,11 @@ server.get('/all/:acc', (req, res) => {
     });
     Promise.all([transE, transR])
 
-        .then(trans => { let obj = sumaTrans(trans); res.send(obj) })
+        .then(trans => res.send(flatten(trans)))
         .catch(err => console.log(err))
 })
-const sumaTrans = (arr) => {
-    console.log('entro al acaa! ')
-    let sum = 0;
-    for (let i = 0; i = 1 < arr.length; i += 1) {
-        if (Array.isArray(arr[i])) sum += sumaTrans(arr[i])
-        else sum += arr[i]
-    }
-    return sum;
-}
+const flatten = arr => arr.reduce((acc, el) => acc.concat(el), [])
+
 
 
 module.exports = server;

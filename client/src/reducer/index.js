@@ -12,6 +12,7 @@ import {
   DO_TRANSFER,
   GET_TRANSFERS_ALL,
   GET_BALANCE,
+  GET_ALL_ACCOUNTS
 } from "../actions";
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
   account: {},
   transfer: {},
   transfersAll: {},
-  balance: {}
+  balance: {},
+  accounts: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -92,6 +94,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         balance: action.payload
+      }
+
+    case GET_ALL_ACCOUNTS:
+      return {
+        ...state,
+        accounts: action.payload
       }
     default:
       return state;
