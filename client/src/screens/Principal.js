@@ -56,10 +56,20 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                 <ScrollView style={styles.contentHijoDos}>
                     {flag ? transfersAll.map((t) => <View style={styles.contentMov}>
                         <Text style={styles.servicio}>
-                            {accounts?.map((a) => { if (a.Naccount == t.emisor) { users.map((u) => { if (a.userId == u.id) return u.name }) } })}
+
+
+
+
+                        {account?.Naccount == t.receptor?accounts?.map((a) => { if (a.Naccount == t.emisor) {return users.map((u) => { if (a.userId == u.id){return u.name + " " + u.surname} }) } }):
+                            accounts?.map((a) => { if (a.Naccount == t.receptor) {return users.map((u) => { if (a.userId == u.id){return u.name + " " + u.surname} }) } })}
+                        
+                        
+                        
+
+
                         </Text>
                         {account?.Naccount == t.receptor ?
-                            <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> + $ {t.Quantity}</Text>
+                            <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> - $ {t.Quantity}</Text>
 
                         }
 

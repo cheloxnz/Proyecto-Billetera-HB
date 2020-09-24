@@ -116,11 +116,10 @@ server.get('/all/:acc', (req, res) => {
     });
     Promise.all([transE, transR])
 
-        .then(trans => res.send(flatten(trans)))
+        .then(trans => res.send(flatten(trans).reverse()))
         .catch(err => console.log(err))
 })
 const flatten = arr => arr.reduce((acc, el) => acc.concat(el), [])
-
 
 
 module.exports = server;
