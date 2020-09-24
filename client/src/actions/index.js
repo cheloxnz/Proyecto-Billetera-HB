@@ -209,15 +209,3 @@ export function friendCVU(cvu) {
     })
   }
 }
-
-export function addFriend(username) {
-  return function (dispatch) {
-    return axios
-      .get(`http://localhost:3005/contacts/addFriend=${username}`, { withCredentials: true })
-      .then(res => {
-        dispatch({ type: ADD_FRIEND, product: res.data });
-      })
-      .catch(err => console.log(err));
-  };
-}
-

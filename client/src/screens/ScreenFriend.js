@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, ImageBackground, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
 import Constants from 'expo-constants';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { SearchBar } from 'react-native-elements';
+import Axios from 'axios';
+import ListFriend from '../components/ListFriend';
 
 
 const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUser }) => {
@@ -15,11 +17,18 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
 
     const handleContacts = text => {
         setInput(text)
-        setData(contacts.filter((contact) => {
-            return contact.name.toLowerCase().indexOf(text.toLowerCase()) !== -1 || contact.surname.toLowerCase().indexOf(text.toLowerCase()) !== -1
-        }))
+        Axios.get(`http://localhost:3005/contacts/addFriend?username=${text}`)
+            .then(user => setData(user?.data))
+            .catch(err => console.log(err));
     }
+    console.log(data)
 
+    useEffect(() => {
+        console.log('EJECUTANDO P')
+    }, [])
+
+    console.log(input)
+    console.log(data)
 
     return (
         <ImageBackground
@@ -28,27 +37,9 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
             <View style={styles.contenedorAgregar}>
                 <NavBar navigation={navigation} />
                 <View style={styles.contenedorSecAgregar}>
-                    <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', marginTop: 30 }}>
+                    <Text style={{ backgroundColor: 'yellow', color: 'black', fontSize: 20, textAlign: 'center', marginTop: 30, paddingTop: 10, paddingBottom: 10 }}>
                         Here you can add friends through username
                     </Text>
-                    <View style={{ borderBottomColor: 'yellow', borderBottomWidth: 1 }}>
-                        <View style={{ width: '100%', flexDirection: 'row', marginHorizontal: 50 }}>
-                            <View style={{ width: '40%', marginVertical: 30, marginRight: 10 }}>
-                                <Button
-                                    title='By Username'
-                                    color='#00296B'
-                                    accessibilityLabel="Add user by CVU"
-                                />
-                            </View>
-                            <View style={{ width: '40%', marginVertical: 30 }}>
-                                <Button
-                                    title='Account Henry Bank'
-                                    color='#00296B'
-                                    accessibilityLabel="Add user by account HB"
-                                />
-                            </View>
-                        </View>
-                    </View>
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
                         <View style={{ width: '40%', marginTop: 26, borderBottomColor: 'yellow', borderBottomWidth: 3, paddingTop: 20, paddingBottom: 20 }}>
                             <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', paddingTop: 6 }}>
@@ -74,6 +65,9 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
                         <View>
                             <Text style={styles.parrafoContact}>List Contacts</Text>
                         </View>
+                        <ScrollView>
+                            {data.length >= 1 ? data.map(contacts => <ListFriend contacts={contacts} />) : null}
+                        </ScrollView>
                     </View>
 
                 </View>
@@ -87,7 +81,6 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
         </ImageBackground>
     )
 }
-
 const styles = StyleSheet.create({
     background: {
         flex: 1,
