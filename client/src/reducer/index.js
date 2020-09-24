@@ -15,7 +15,7 @@ import {
   GET_BALANCE,
   FRIEND_CVU,
   ADD_FRIEND,
-  DELETE_FRIEND
+  DELETE_FRIEND,
 } from "../actions";
 
 const initialState = {

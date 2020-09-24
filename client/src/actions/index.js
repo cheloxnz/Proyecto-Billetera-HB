@@ -17,7 +17,8 @@ export const GET_TRANSFERS_ALL = "GET_TRANSFERS_ALL";
 export const GET_ALL_ACCOUNTS = "GET_ALL_ACCOUNTS";
 export const FRIEND_CVU = 'FRIEND_CVU';
 export const ADD_FRIEND = 'ADD_FRIEND';
-export const DELETE_FRIEND = 'DELETE_FRIEND'
+export const DELETE_FRIEND = 'DELETE_FRIEND';
+
 
 
 
@@ -238,3 +239,19 @@ export function deleteFriend (userId, id) {
     })
   }
 } 
+
+
+export function addFriend(id, username) {
+  return function (dispatch) {
+    axios
+    .post(`http://localhost:3005/contacts/user/${id}/add`, { username })
+      .then((result) => result.data)
+      .then((data) => {
+        dispatch({
+          type: ADD_FRIEND,
+          payload: data,
+        });
+      })
+      .catch(err => console.log(err))
+  };
+}
