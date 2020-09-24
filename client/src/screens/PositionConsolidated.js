@@ -16,6 +16,7 @@ import BuyaSell from './BuyaSell';
 import InputTransfer from './InputTransfer';
 import HomeScreen from './HomeScreen';
 import ScreenLoad from './ScreenLoad';
+import ScreenFriend from './ScreenFriend';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Drawer = createDrawerNavigator();
@@ -128,6 +129,17 @@ function App() {
             drawerIcon: ({ focused, size }) => (
               <FontAwesome
                 name='key'
+                size={20}
+                color={focused ? 'black' : '#ccc'}
+              />
+            ),
+          }} />
+        <Drawer.Screen name="Add Friend" component={ScreenFriend}
+          options={{
+            title: 'Add Friend',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='plus'
                 size={20}
                 color={focused ? 'black' : '#ccc'}
               />

@@ -13,7 +13,8 @@ import {
   PositionConsolidated,
   BuyaSell,
   InputTransfer,
-  ScreenLoad
+  ScreenLoad,
+  ScreenFriend
 } from './screens';
 
 const Router = createStackNavigator(
@@ -29,7 +30,8 @@ const Router = createStackNavigator(
     PositionConsolidated,
     BuyaSell,
     InputTransfer,
-    ScreenLoad
+    ScreenLoad,
+    ScreenFriend
   },
   {
     initialRouteName: 'HomeScreen',
