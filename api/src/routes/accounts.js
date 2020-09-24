@@ -24,7 +24,7 @@ server.get("/:id", (req, res) => {
         }
     }).then(data => {
         var balance = data.balance()
-        data = {...data, balance}
+        data = {...data.dataValues, balance}
         res.send(data).status(200)
     }).catch(err => {
         res.send(err)
