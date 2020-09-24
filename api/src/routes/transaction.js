@@ -71,11 +71,11 @@ server.post('/user/load', (req, res) => {
             balance: balan + amount2
         })
         Transaction.create({
-             Quantity: amount2,
-             Type: 'load',
-             code: code,
-             emisor: 11111111, //cambiar despues
-             receptor: user.account.Naccount
+            Quantity: amount2,
+            Type: 'load',
+            code: code,
+            emisor: 11111111, //cambiar despues
+            receptor: user.account.Naccount
         })
         res.send('Recarga exitosa')
     })
@@ -86,24 +86,45 @@ server.post('/user/load', (req, res) => {
 //   GET TRANSACCIONES       | EN EL FRONT RENDERIZAR, SI ES EMISORNACCOUNT, MOSTRAR COMO (- $500)
 //---------------------------- SI ES 'ACCOUNTNACCOUNT' MOSTRAR (+ $500)
 
-server.get('/emisor/:CVU', (req, res) => {
-    Transaction.findAll({
-        where: {
-            emisor: req.params.CVU  // EL QUE RECIBE LA TRANSFERENCIA
-        }
-    })
-        .then(trans => res.send(trans))
-        .catch(err => console.log(err))
-})
+// server.get('/emisor/:CVU', (req, res) => {
+//     console.log("entre al emisor ")
+//     Transaction.findAll({
+//         where: {
+//             emisor: req.params.CVU  // EL QUE RECIBE LA TRANSFERENCIA
+//         }
+//     })
+//         .then(trans => res.send(trans))
+//         .catch(err => console.log(err))
+// })
 
-server.get('/receptor/:CVU', (req, res) => {
-    Transaction.findAll({
+// server.get('/receptor/:CVU', (req, res) => {
+//     Transaction.findAll({
+//         where: {
+//             receptor: req.params.CVU  // EL QUE RECIBE LA TRANSFERENCIA
+//         }
+//     })
+//         .then(trans => res.send(trans))
+//         .catch(err => console.log(err))
+// })
+
+server.get('/all/:acc', (req, res) => {
+    console.log('entro al all ')
+    const transE = Transaction.findAll({
         where: {
-            receptor: req.params.CVU  // EL QUE RECIBE LA TRANSFERENCIA
+            receptor: req.params.acc  // EL QUE ENVIA LA TRANSFERENCIA
         }
-    })
-        .then(trans => res.send(trans))
+    });
+    const transR = Transaction.findAll({
+        where: {
+            emisor: req.params.acc  // EL QUE RECIBE LA TRANSFERENCIA
+        }
+    });
+    Promise.all([transE, transR])
+
+        .then(trans => res.send(flatten(trans).reverse()))
         .catch(err => console.log(err))
 })
+const flatten = arr => arr.reduce((acc, el) => acc.concat(el), [])
+
 
 module.exports = server;

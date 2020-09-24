@@ -12,8 +12,9 @@ export const CREATE_ACCOUNT = 'CREATE_ACCOUNT'
 export const GET_ALL_CONTACTS = 'GET_ALL_CONTACTS';
 export const GET_ACCOUNT = 'GET_ACCOUNT';
 export const DO_TRANSFER = 'DO_TRANSFER';
-export const GET_TRANSFERS = 'GET_TRANSFERS';
 export const GET_BALANCE = 'GET_BALANCE';
+export const GET_TRANSFERS_ALL = "GET_TRANSFERS_ALL";
+export const GET_ALL_ACCOUNTS = "GET_ALL_ACCOUNTS";
 export const FRIEND_CVU = 'FRIEND_CVU';
 export const ADD_FRIEND = 'ADD_FRIEND';
 
@@ -173,14 +174,14 @@ export function doTransfer(CVUFrom, cvu, amount) {
 }
 
 
-export function getTransfers(CVU) {
+export function getTransfersAll(Naccount) {
   return function (dispatch) {
     return axios
-      .get(`http://localhost:3005/transfers/emisor/${CVU}`)
+      .get(`http://localhost:3005/transfers/all/${Naccount}`)
       .then((result) => result.data)
       .then((data) => {
         dispatch({
-          type: GET_TRANSFERS,
+          type: GET_TRANSFERS_ALL,
           payload: data
         })
       })
@@ -195,6 +196,20 @@ export function getBalance(id) {
       .then((data) => {
         dispatch({
           type: GET_BALANCE,
+          payload: data
+        })
+      })
+  }
+}
+
+export function getAllAccounts() {
+  return function (dispatch) {
+    return axios
+      .get(`http://localhost:3005/accounts/`)
+      .then((result) => result.data)
+      .then((data) => {
+        dispatch({
+          type: GET_ALL_ACCOUNTS,
           payload: data
         })
       })
