@@ -65,13 +65,13 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
                         <View>
                             <Text style={styles.parrafoContact}>List Contacts</Text>
                         </View>
-                        <ScrollView>
-                            {data.length >= 1 ? data.map(contacts => <ListFriend contacts={contacts} />) : null}
-                        </ScrollView>
                     </View>
+                    <ScrollView>
+                        {data.length >= 1 ? data.map(contacts => <ListFriend contacts={contacts} />) : null}
+                    </ScrollView>
 
                 </View>
-                <TouchableOpacity style={{ width: '100%', marginBottom: 40, alignItems: 'center' }}>
+                <TouchableOpacity style={{ width: '100%', marginBottom: 40, marginTop: 20, alignItems: 'center' }}>
                     <Text style={{ width: '80%', textAlign: 'center', color: 'white', fontSize: 20, backgroundColor: '#00296B', padding: 8 }}>
                         Verify
                     </Text>

@@ -1,8 +1,10 @@
 import React from 'react';
-import { Text, ScrollView, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button } from 'react-native';
 import { List, Divider } from 'react-native-paper';
 import { connect } from 'react-redux';
-import { getAllContacts, getAllUsers, friendCVU } from '../actions'
+import { getAllContacts, getAllUsers, friendCVU } from '../actions';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 
 const ListFriend = ({ contacts, getAllContacts, getAllUsers, navigation, friendCVU }) => {
     console.log(contacts)
@@ -14,10 +16,11 @@ const ListFriend = ({ contacts, getAllContacts, getAllUsers, navigation, friendC
                         left={() =>
                             <Text style={{ fontSize: 20, color: 'black' }}> {contacts?.username} </Text>}
                     />
-                    {/* <Text style={{backgroundColor: 'yellow',color: 'black', width: '20%', textAlign: 'center', marginVertical: 10, padding: 5, borderBottomLeftRadius: 7, borderTopLeftRadius: 7}}
-             onPress={() => {navigation.navigate('InputTransfer'), friendCVU(contacts?.account?.CVU)}}>
-              Send
-            </Text> */}
+                    <Text style={{ backgroundColor: 'black', color: 'black', width: '20%', textAlign: 'center', marginRight: 6, marginVertical: 10, padding: 3, borderBottomLeftRadius: 7, borderTopLeftRadius: 7 }}
+                    //  onPress={() => }
+                    >
+                        <FontAwesome name='plus' size={18} color={'yellow'} />
+                    </Text>
                 </View>
                 <Divider />
             </View>
