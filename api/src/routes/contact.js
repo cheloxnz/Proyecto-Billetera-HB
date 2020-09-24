@@ -5,10 +5,10 @@ const { Op } = require('sequelize');
 
 
 server.get('/addFriend', (req, res) => {
-  const username = req.body.username;
+  const username = req.query.username;
   User.findAll({
     where: {
-      [Op.or]: [{ username: { [Op.like]: `%${valor}%` } }]
+      [Op.or]: [{ username: { [Op.like]: `%${username}%` } }]
     },
   }).then(user => {
     res.send(user);
@@ -73,8 +73,8 @@ server.post("/user/:id/add", (req, res) => {
 //       Eliminar amigo                |
 //--------------------------------------
 
-server.delete("/user/:id/delete", (req, res) => {
-  const id = req.body.id
+server.delete("/user/:id/delete/:id2", (req, res) => {
+  console.log(req.body)
   let user1 = User.findOne({
     where: {
       id: req.params.id
@@ -82,7 +82,7 @@ server.delete("/user/:id/delete", (req, res) => {
   })
   let user2 = User.findOne({
     where: {
-      id: id
+      id: req.params.id2
     }
   })
   Promise.all([user1, user2])
@@ -91,7 +91,7 @@ server.delete("/user/:id/delete", (req, res) => {
       let us2 = user[1]
       us1.removeFriend(us2)
       us2.removeFriend(us1)
-      res.send('Eliminado con exito')
+      res.send(us2)
     })
     .catch(err => console.log(err))
 })

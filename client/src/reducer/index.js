@@ -15,6 +15,7 @@ import {
   GET_BALANCE,
   FRIEND_CVU,
   ADD_FRIEND,
+  DELETE_FRIEND
 } from "../actions";
 
 const initialState = {
@@ -114,6 +115,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         contacts: action.payload
       }
+    case DELETE_FRIEND: 
+    return {
+      ...state,
+     contacts: state.contacts.filter(c => c.id != action.payload.id) //seguir con esto jaja
+    }
     default:
       return state;
   }
