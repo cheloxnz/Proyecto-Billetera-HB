@@ -57,15 +57,8 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                     {flag ? transfersAll.map((t) => <View style={styles.contentMov}>
                         <Text style={styles.servicio}>
 
-
-
-
-                        {account?.Naccount == t.receptor?accounts?.map((a) => { if (a.Naccount == t.emisor) {return users.map((u) => { if (a.userId == u.id){return u.name + " " + u.surname} }) } }):
+                        {account?.Naccount == t.receptor?accounts?.map((a) => { if (a.Naccount == t.emisor) {console.log(a.Naccount, t.emisor, "facu toy cagao de hambre  ");return users.map((u) => { if (a.userId == u.id){return u.name + " " + u.surname} }) } }):
                             accounts?.map((a) => { if (a.Naccount == t.receptor) {return users.map((u) => { if (a.userId == u.id){return u.name + " " + u.surname} }) } })}
-                        
-                        
-                        
-
 
                         </Text>
                         {account?.Naccount == t.receptor ?
