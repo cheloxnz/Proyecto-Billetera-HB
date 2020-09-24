@@ -75,7 +75,7 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 					</View>
 					<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > account.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
 				</View>
-				<Button icon="cash-usd" color="#FFFFFF" mode="contained" style={styles.boton} onPress={() => handleTransfer()}> Transfer NOW!</Button>
+				<Button icon="cash-usd" color="#FFFFFF" mode="contained" style={styles.boton} onPress={() => {handleTransfer(), setState('')}}> Transfer NOW!</Button>
 			</View>
 		</Background>
 	)
