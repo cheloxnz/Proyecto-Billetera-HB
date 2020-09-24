@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet, Button, TextInput } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { Input } from 'react-native-elements';
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
 import Constants from 'expo-constants';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 const ScreenFriend = ({ navigation }) => {
@@ -16,12 +18,7 @@ const ScreenFriend = ({ navigation }) => {
                     <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', marginTop: 30 }}>
                         Here you can add friends through username
                     </Text>
-                    <View style={{ borderBottomColor: 'white', borderBottomWidth: 1 }}>
-                        <Text style={{ color: 'white', fontSize: 18, textAlign: 'left', marginTop: 20, marginLeft: 20 }}>
-                            New recipient
-                        </Text>
-                    </View>
-                    <View style={{ borderBottomColor: 'white', borderBottomWidth: 3 }}>
+                    <View style={{ borderBottomColor: 'yellow', borderBottomWidth: 1 }}>
                         <View style={{ width: '100%', flexDirection: 'row', marginHorizontal: 50 }}>
                             <View style={{ width: '40%', marginVertical: 30, marginRight: 10 }}>
                                 <Button
@@ -39,17 +36,28 @@ const ScreenFriend = ({ navigation }) => {
                             </View>
                         </View>
                     </View>
-                    <View style={{ width: '100%', flexDirection: 'row' }}>
-                        <View style={{ width: '40%', marginVertical: 20, marginHorizontal: 40 }}>
-                            <Text style={{ color: 'white' }}>
-                                CVU {'=>'}
+                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
+                        <View style={{ width: '40%', marginTop: 12, borderBottomColor: 'yellow', borderBottomWidth: 3, paddingTop: 20, paddingBottom: 20 }}>
+                            <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', paddingTop: 6 }}>
+                                Username  <FontAwesome name='angle-double-right' size={26} color={'white'} />
                             </Text>
                         </View>
-                        <TextInput
-                            textContentType='Enter CVU'
-                        />
+                        <View style={{ width: '60%', marginTop: 12, borderBottomColor: 'yellow', borderBottomWidth: 3, paddingTop: 20, paddingBottom: 20 }}>
+                            <Input
+                                inputStyle={{ backgroundColor: 'white', width: 150 }}
+                                placeholder='Enter username'
+                            />
+                        </View>
                     </View>
+                    <Text style={{ color: '#F2F2F2', fontSize: 18, textAlign: 'center', marginTop: 20 }}>
+                        Enter the 22 digits of the CVU without spaces or hyphens
+                    </Text>
                 </View>
+                <TouchableOpacity style={{ width: '100%', marginBottom: 40, alignItems: 'center' }}>
+                    <Text style={{ width: '80%', textAlign: 'center', color: 'white', fontSize: 20, backgroundColor: '#00296B', padding: 8 }}>
+                        Verify
+                    </Text>
+                </TouchableOpacity>
                 <FooterNew navigation={navigation} />
             </View>
         </ImageBackground>
