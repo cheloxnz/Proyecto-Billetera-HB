@@ -5,10 +5,10 @@ const { Op } = require('sequelize');
 
 
 server.get('/addFriend', (req, res) => {
-  const username = req.body.username;
+  const username = req.query.username;
   User.findAll({
     where: {
-      [Op.or]: [{ username: { [Op.like]: `%${valor}%` } }]
+      [Op.or]: [{ username: { [Op.like]: `%${username}%` } }]
     },
   }).then(user => {
     res.send(user);
