@@ -21,6 +21,7 @@ export const DELETE_FRIEND = 'DELETE_FRIEND'
 
 
 
+
 export function registerUser(email, password) {
   return function (dispatch) {
     return axios
@@ -225,16 +226,31 @@ export function friendCVU(cvu) {
     })
   }
 }
-export function deleteFriend (userId, id) {
+
+export function deleteFriend(userId, id) {
   return function (dispatch) {
     axios
-    .delete(`http://localhost:3005/contacts/user/${userId}/delete/${id}`)
-    .then(res => res.data)
-    .then(data => {
-      dispatch({
-        type: DELETE_FRIEND,
-        payload: data
+      .delete(`http://localhost:3005/contacts/user/${userId}/delete/${id}`)
+      .then(res => res.data)
+      .then(data => {
+        dispatch({
+          type: DELETE_FRIEND,
+          payload: data
+        })
       })
-    })
   }
-} 
+}
+
+export function addFriend(id, username) {
+  return function (dispatch) {
+    axios
+      .post(`http://localhost:3005/contacts/user/${id}/add`, { username })
+      .then(res => res.data)
+      .then(data => {
+        dispatch({
+          type: ADD_FRIEND,
+          payload: data
+        })
+      })
+  }
+}

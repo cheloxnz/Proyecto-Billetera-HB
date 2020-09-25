@@ -113,7 +113,7 @@ const reducer = (state = initialState, action) => {
     case ADD_FRIEND:
       return {
         ...state,
-        contacts: action.payload
+        contacts: [...state.contacts, action.payload]
       }
     case DELETE_FRIEND: 
     return {

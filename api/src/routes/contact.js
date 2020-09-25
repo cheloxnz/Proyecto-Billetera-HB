@@ -64,7 +64,7 @@ server.post("/user/:id/add", (req, res) => {
       let us2 = user[1]
       us1.addFriend(us2)
       us2.addFriend(us1)
-      res.send('Contacto anadido con exito')
+      res.send(us2)
     })
     .catch(err => console.log(err))
 })
