@@ -14,7 +14,8 @@ import {
   BuyaSell,
   InputTransfer,
   ScreenLoad,
-  ScreenFriend
+  ScreenFriend,
+  ScreenConfirmAmount
 } from './screens';
 
 const Router = createStackNavigator(
@@ -31,7 +32,8 @@ const Router = createStackNavigator(
     BuyaSell,
     InputTransfer,
     ScreenLoad,
-    ScreenFriend
+    ScreenFriend,
+    ScreenConfirmAmount
   },
   {
     initialRouteName: 'HomeScreen',

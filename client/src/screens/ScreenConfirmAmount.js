@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { View, StyleSheet, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
-import Input from '../components/TextInput';
+import CodeQR from '../components/CodeQR';
 
 
-const ScreenLoad = ({ navigation }) => {
+const ScreenConfirm = ({ navigation }) => {
 
 
     return (
@@ -18,22 +18,24 @@ const ScreenLoad = ({ navigation }) => {
                 style={styles.background}
             >
                 <View style={styles.contenedorLoad}>
-                    <View style={{ width: '70%', height: '25%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 10 }}>
-                        <Text style={{ color: 'white', fontSize: 16, marginTop: 14, fontWeight: '700' }}>
-                            Amount to load
+                    <View style={{ width: '70%', height: '70%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 10, textAlign: 'center' }}>
+                        <Text style={{ color: 'white', fontSize: 14, marginTop: 20, fontWeight: '700' }}>
+                            With the following code you can load money to your account, showing it at any RapiPago or PagoFacil branch.
+                            Remember that the code is always the same.
                         </Text>
-                        <View style={{ width: '100%', marginTop: 20 }}>
-                            <Input
-                                style={styles.inputAmount}
-                                label='Enter the amount'
-                                placeholder='Amount'
-                            />
+                        <View style={{ width: '100%', height: '20%', marginTop: 20, backgroundColor: 'white' }}>
+                            <Text style={{ color: 'black', fontSize: 30, textAlign: 'center', marginVertical: 25 }}>
+                                4848952163987152987
+                            </Text>
                         </View>
-
+                        <Text style={{ color: 'white', fontSize: 14, marginTop: 20, textAlign: 'center' }}>
+                            Or scan the following QR code with your cell phone.
+                        </Text>
+                        <CodeQR />
                     </View>
                     <TouchableOpacity style={{ width: '70%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 6, marginTop: 20 }}>
-                        <Text style={{ color: 'white', padding: 20, fontSize: 20 }} onPress={() => navigation.navigate("Confirm")}>
-                            Next
+                        <Text style={{ color: 'white', padding: 20, fontSize: 20 }}>
+                            Confirm Transaction
                         </Text>
                     </TouchableOpacity>
 
@@ -64,4 +66,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ScreenLoad;
+export default ScreenConfirm;
