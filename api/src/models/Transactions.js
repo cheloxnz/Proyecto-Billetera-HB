@@ -20,6 +20,9 @@ module.exports = sequelize => {
         },
         receptor: {
             type: DataTypes.BIGINT
+        },
+        nombreReceptor: {
+            type: DataTypes.STRING
         }
     })
 }

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Grid, BarChart } from 'react-native-svg-charts'
+import { Grid, BarChart, YAxis } from 'react-native-svg-charts'
 import { LinearGradient, Stop, Defs } from 'react-native-svg'
 import { ImageBackground, View, StyleSheet, Text, StatusBar, Alert } from 'react-native';
 import { connect } from 'react-redux'
+import * as scale from 'd3-scale'
 import Constants from 'expo-constants';
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
@@ -10,16 +11,19 @@ import FooterNew from '../components/FooterNew';
 
 
 const Chart = ({ navigation, transfersAll, account }) => {
-    const [fechas, setFechas] = useState(0)
+
     const [val, setVal] = useState(0)
 
     var valores = []
-    transfersAll.map(t => {
+    var fechas = []
+    transfersAll?.map(t => {
         if (t.emisor == account.Naccount) {
             valores.push(-t.Quantity)
+            fechas.push(t.createdAt)
         }
         if (t.receptor == account.Naccount) {
             valores.push(t.Quantity)
+            fechas.push(t.createdAt)
         }
     })
     var deReversa = valores.reverse()
@@ -33,6 +37,14 @@ const Chart = ({ navigation, transfersAll, account }) => {
             style={styles.background}>
             <View style={styles.content}>
                 <NavBar navigation={navigation} />
+                <YAxis
+                    data={data}
+                    yAccessor={({ index }) => index}
+                    scale={scale.scaleBand}
+                    contentInset={{ top: 10, bottom: 10 }}
+                    spacing={0.2}
+                    formatLabel={(_, index) => data[ index ].label}
+                />
                 <BarChart
                     style={{ height: 200, backgroundColor: 'white', margin: 15, borderRadius: 7, padding: 5 }}
                     data={data}
