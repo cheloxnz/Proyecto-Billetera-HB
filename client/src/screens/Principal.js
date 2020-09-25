@@ -27,7 +27,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
     console.log(transfersAll);
 
     var flag = false;
-    //if (transfersAll.length > 1) flag = true;
+    if (transfersAll.length > 1) flag = true;
 
     return (
         <View style={styles.contenedorPadre}>
@@ -57,15 +57,15 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                 <ScrollView style={styles.contentHijoDos}>
                     {flag ? transfersAll.map((t) => <View style={styles.contentMov}>
                         <Text style={styles.servicio}>
-                            {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
+
+                            {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { console.log(a.Naccount, t.emisor, "facu toy cagao de hambre  "); return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
                                 accounts?.map((a) => { if (a.Naccount == t.receptor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } })}
+
                         </Text>
                         {account?.Naccount == t.receptor ?
-                            <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> + $ {t.Quantity}</Text>
-
+                            <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> - $ {t.Quantity}</Text>
 
                         }
-
 
 
                         <Divider />

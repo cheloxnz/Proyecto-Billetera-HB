@@ -10,19 +10,26 @@ import {
   GET_ACCOUNT,
   CREATE_ACCOUNT,
   DO_TRANSFER,
-  GET_TRANSFERS,
-  GET_BALANCE
+  GET_TRANSFERS_ALL,
+  GET_ALL_ACCOUNTS,
+  GET_BALANCE,
+  FRIEND_CVU,
+  ADD_FRIEND,
+  DELETE_FRIEND
 } from "../actions";
 
 const initialState = {
   users: [],
   onlineUser: {},
   userRegister: {},
-  contacts: {},
+  contacts: [],
   account: {},
   transfer: {},
-  allTransfers: {},
-  balance: {}
+  transfersAll: {},
+  balance: {},
+  accounts: {},
+  balance: {},
+  friendCVU: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -82,17 +89,37 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         transfer: action.payload
-    }
-    case GET_TRANSFERS:
+      }
+    case GET_TRANSFERS_ALL:
       return {
         ...state,
-        allTransfers: action.payload
+        transfersAll: action.payload
       }
     case GET_BALANCE:
       return {
         ...state,
         balance: action.payload
       }
+    case GET_ALL_ACCOUNTS:
+      return {
+        ...state,
+        accounts: action.payload
+      }
+    case FRIEND_CVU:
+      return {
+        ...state,
+        friendCVU: action.payload
+      }
+    case ADD_FRIEND:
+      return {
+        ...state,
+        contacts: [...state.contacts, action.payload]
+      }
+    case DELETE_FRIEND: 
+    return {
+      ...state,
+     contacts: state.contacts.filter(c => c.id != action.payload.id) //seguir con esto jaja
+    }
     default:
       return state;
   }

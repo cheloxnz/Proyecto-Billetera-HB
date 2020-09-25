@@ -9,7 +9,7 @@ import { Button } from 'react-native-paper';
 import { doTransfer } from '../actions/index'
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts }) => {
+const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts, friendCVU }) => {
 	const [state, setState] = useState('')
 	const [transf, setTransf] = useState('')
 	const [balance2, setBalance] = useState(account.balance)
@@ -22,18 +22,27 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 
 
 	const handleOnChange = (e) => {
-		console.log(state)
+		if (friendCVU != 0) {
+			setState({
+			...state,
+			CVU: friendCVU,
+			amount: e.target.value
+		})
+	} else {
 		setState({
 			...state,
 			[e.target.name]: e.target.value
-		})
+		})}
 	}
+
 	const handleTransfer = () => {
-		if (account) doTransfer(account.CVU, state.CVU, state.amount)
+		if (account) doTransfer(account.dataValues.CVU, state.CVU, state.amount)
 		//hacer alerta
 	}
+
 	var namesList = []
 	contacts ? namesList = contacts.map((c) => c.name) : namesList = []
+
 
 	return (
 		<Background>
@@ -46,12 +55,13 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 					<View style={styles.inputCvu}>
 						<Text style={styles.cont}>CVU</Text>
 						<TextInput
+							keyboardType='number-pad'
 							inputStyle={{ color: 'yellow' }}
 							style={styles.textInput}
 							name='CVU'
-							value={state.CVU}
+							value={friendCVU != 0 ? friendCVU : state.CVU ? state.CVU : '' }
 							onChange={e => handleOnChange(e)}
-							editable={true}
+							editable={friendCVU != 0 ? false : state.CVU ? true : true}
 						/>
 					</View>
 					<View style={styles.inputAmount}>
@@ -64,19 +74,8 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 							onChange={e => handleOnChange(e)} />
 					</View>
 					<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > account.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
-					<View style={styles.contenedorDrop}>
-						<Text style={styles.cont}>SELECT CONTACT: </Text>
-						<DropDownPicker
-							zIndex={100000}
-							searchable={true}
-							searchablePlaceholder="Search your contact: "
-							items={namesList}
-							placeholder='Contacts'
-							onChangeItem={item => setState(item)}
-						/>
-					</View>
 				</View>
-				<Button icon="cash-usd" color="#FFFFFF" mode="contained" style={styles.boton} onPress={() => handleTransfer()}> Transfer NOW!</Button>
+				<Button icon="cash-usd" color="#FFFFFF" mode="contained" style={styles.boton} onPress={() => {handleTransfer(), setState('')}}> Transfer NOW!</Button>
 			</View>
 		</Background>
 	)
@@ -154,6 +153,7 @@ const mapStateToProps = state => {
 		account: state.account,
 		transfer: state.transfer,
 		contacts: state.contacts,
+		friendCVU: state.friendCVU
 	}
 }
 

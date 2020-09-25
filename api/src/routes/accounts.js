@@ -23,6 +23,8 @@ server.get("/:id", (req, res) => {
             userId: req.params.id
         }
     }).then(data => {
+        var balance = data.balance()
+        data = {...data.dataValues, balance}
         res.send(data).status(200)
     }).catch(err => {
         res.send(err)
@@ -99,8 +101,8 @@ server.get("/balance/:id", (req, res) => {
         }
     }).then(data => {
         let balance = data.balance()
-        console.log("balanceee",balance)
-        res.json(balance).status(200)
+        let obj = {balance: balance}
+        res.send(obj).status(200)
     }).catch(err => {
         res.send(err)
     })
