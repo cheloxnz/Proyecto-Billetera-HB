@@ -36,7 +36,7 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 	}
 
 	const handleTransfer = () => {
-		if (account) doTransfer(account.dataValues.CVU, state.CVU, state.amount)
+		if (account) doTransfer(account.CVU, state.CVU, state.amount)
 		//hacer alerta
 	}
 

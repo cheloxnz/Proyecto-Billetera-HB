@@ -19,6 +19,7 @@ import ScreenLoad from './ScreenLoad';
 import ScreenFriend from './ScreenFriend';
 import ScreenConfirmAmount from './ScreenConfirmAmount';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Estadisticas from './Estadisticas';
 
 const Drawer = createDrawerNavigator();
 
@@ -207,6 +208,17 @@ function App() {
             drawerIcon: ({ focused, size }) => (
               <FontAwesome
                 name='bitcoin'
+                size={20}
+                color={focused ? 'black' : '#ccc'}
+              />
+            ),
+          }} />
+           <Drawer.Screen name="Estadisticas" component={Estadisticas}
+          options={{
+            title: 'My stadistitsic',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='chart'
                 size={20}
                 color={focused ? 'black' : '#ccc'}
               />
