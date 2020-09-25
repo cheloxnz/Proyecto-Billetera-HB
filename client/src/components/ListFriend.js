@@ -2,19 +2,12 @@ import React from 'react';
 import { Text, View, StyleSheet, Button, TouchableHighlight } from 'react-native';
 import { List, Divider } from 'react-native-paper';
 import { connect } from 'react-redux';
-import { getAllContacts, getAllUsers, friendCVU } from '../actions';
+import { getAllContacts, getAllUsers, friendCVU, addFriend } from '../actions';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Axios from 'axios';
 
 
-const ListFriend = ({ contacts, onlineUser }) => {
 
-    const addFriend = (username) => {
-        console.log('ME PRESIONO')
-        Axios
-            .post(`http://localhost:3005/contacts/user/${onlineUser.id}/add`, { username })
-            .then(res => alert('amigo agregado'))
-    }
+const ListFriend = ({ contacts, onlineUser, addFriend }) => {
 
     console.log(contacts)
     return (
@@ -26,7 +19,7 @@ const ListFriend = ({ contacts, onlineUser }) => {
                             left={() =>
                                 <Text style={{ fontSize: 20, color: 'black' }}> {contacts?.username} </Text>}
                         />
-                        <TouchableHighlight style={{ backgroundColor: 'black', color: 'black', width: '20%', textAlign: 'center', marginRight: 6, marginVertical: 10, padding: 3, borderBottomLeftRadius: 7, borderTopLeftRadius: 7 }} onPress={() => addFriend(contacts.username)}>
+                        <TouchableHighlight style={{ backgroundColor: 'black', color: 'black', width: '20%', textAlign: 'center', marginRight: 6, marginVertical: 10, padding: 3, borderBottomLeftRadius: 7, borderTopLeftRadius: 7 }} onPress={() => addFriend(onlineUser.id, contacts.username)}>
                         <Text >
                             <FontAwesome name='plus' size={18} color={'yellow'} />
                         </Text>
@@ -52,7 +45,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getAllContacts: (id) => dispatch(getAllContacts(id)),
         getAllUsers: () => dispatch(getAllUsers()),
-        friendCVU: (cvu) => dispatch(friendCVU(cvu))
+        friendCVU: (cvu) => dispatch(friendCVU(cvu)),
+        addFriend: (id, username) => dispatch(addFriend(id, username))
     }
 }
 

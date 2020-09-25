@@ -27,7 +27,6 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
   }
 
 
-  console.log(account)
   return (
     <ImageBackground
       source={require('../assets/consolidated_dot.png')}

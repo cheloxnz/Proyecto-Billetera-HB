@@ -21,14 +21,6 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
             .then(user => setData(user?.data))
             .catch(err => console.log(err));
     }
-    console.log(data)
-
-    useEffect(() => {
-        console.log('EJECUTANDO P')
-    }, [])
-
-    console.log(input)
-    console.log(data)
 
     return (
         <ImageBackground
