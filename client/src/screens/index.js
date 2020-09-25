@@ -12,4 +12,5 @@ export { default as BuyaSell } from './BuyaSell';
 export { default as InputTransfer } from './InputTransfer';
 export { default as ScreenLoad } from './ScreenLoad';
 export { default as ScreenFriend } from './ScreenFriend';
+export { default as ScreenConfirmAmount } from './ScreenConfirmAmount';
 

@@ -4,16 +4,16 @@ import { TextInput as Input } from 'react-native-paper';
 import { theme } from '../core/theme';
 import { green } from 'color-name';
 
-const TextInput = ({ errorText ,...props }) => (
+const TextInput = ({ errorText, ...props }) => (
   <View style={styles.container}>
     <Input
       style={styles.input}
-      selectionColor='#FBC02D'
-      underlineColor="transparent"
-      mode="flat"
-      theme={{ colors: {primary:'#FBC02D'}}}
+      // selectionColor='#FBC02D'
+      // underlineColor="transparent"
+      mode="focused"
+      theme={{ colors: { primary: '#FBC02D' } }}
       {...props}
-      />
+    />
     {errorText ? <Text style={styles.error}>{errorText}</Text> : null}
   </View>
 );
@@ -21,7 +21,7 @@ const TextInput = ({ errorText ,...props }) => (
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginVertical: 12, 
+    marginVertical: 12,
   },
   input: {
     backgroundColor: theme.colors.surface,
