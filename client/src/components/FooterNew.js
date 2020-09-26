@@ -49,6 +49,9 @@ const styles = StyleSheet.create({
         borderTopWidth: 2,
         flexDirection: 'row',
         justifyContent: 'space-around',
+        borderTopWidth: 3,
+        borderTopColor: "black",
+        borderStyle: 'solid',
     },
     icons: {
         height: '100%',
