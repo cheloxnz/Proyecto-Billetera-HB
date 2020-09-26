@@ -18,6 +18,7 @@ import HomeScreen from './HomeScreen';
 import ScreenLoad from './ScreenLoad';
 import ScreenFriend from './ScreenFriend';
 import ScreenConfirmAmount from './ScreenConfirmAmount';
+import ScreenDates from './ScreenDates';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Drawer = createDrawerNavigator();
@@ -112,7 +113,17 @@ function App() {
               />
             ),
           }} />
-
+        <Drawer.Screen name="My Dates" component={ScreenDates}
+          options={{
+            title: 'My Dates',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='user-circle'
+                size={20}
+                color={focused ? 'black' : '#ccc'}
+              />
+            ),
+          }} />
         <Drawer.Screen name="InputTransfer" component={InputTransfer}
           options={{
             title: 'Transactions',

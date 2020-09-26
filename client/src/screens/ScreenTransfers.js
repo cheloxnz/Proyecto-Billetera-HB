@@ -89,6 +89,10 @@ const styles = StyleSheet.create({
     height: "100%",
     paddingTop: Constants.statusBarHeight,
   },
+  background: {
+    flex: 1,
+    width: '100%',
+  },
   contenedorPadre: {
     width: '100%',
     height: '100%',
@@ -198,10 +202,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 10,
 
-  },
-  background: {
-    flex: 1,
-    width: '100%',
   },
 
 })
