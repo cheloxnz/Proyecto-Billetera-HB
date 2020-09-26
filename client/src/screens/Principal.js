@@ -4,6 +4,7 @@ import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { getAccount, getTransfersAll, getAllUsers, getBalance, getAllAccounts } from '../actions';
 import { Divider } from 'react-native-paper';
+import UserAvatar from 'react-native-user-avatar';
 //import { LineChart, XAxis, Grid } from 'react-native-svg-charts'
 
 
@@ -42,12 +43,12 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                     </View>
                 </View>
                 <View style={styles.contentBotones}>
-                    <View style={styles.contentRecargar}>
+                    {/* <View style={styles.contentRecargar}>
                         <Button title='Load' onPress={() => navigation.navigate('Load')} style={styles.botonRecargar} />
                     </View>
                     <View style={styles.contentEnviar}>
                         <Button title='Send' onPress={() => navigation.navigate("Transfers")} style={styles.botonEnviar} />
-                    </View>
+                    </View> */}
                 </View>
             </View>
             <Text style={styles.mov}>Movements</Text>
@@ -56,6 +57,9 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                 {
                     <ScrollView style={styles.contentHijoDos}>
                         {flag ? transfersAll.map((t) => <View style={styles.contentMov}>
+
+                            <UserAvatar size={30} bgColors={['#ccc', '#fafafa', '#ccaabb']} name="Matias Córdoba" />
+
                             <Text style={styles.servicio}>
 
                                 {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { console.log(a.Naccount, t.emisor, "facu toy cagao de hambre  "); return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
@@ -137,7 +141,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         borderRadius: 10,
         backgroundColor: 'lightgray',
-        opacity: 0.9,
+        opacity: 0.8,
     },
     mov: {
         textAlign: 'center',
