@@ -19,7 +19,7 @@ const ScreenLoad = ({ navigation }) => {
             >
                 <View style={styles.contenedorLoad}>
                     <View style={{ width: '70%', height: '25%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 10 }}>
-                        <Text style={{ color: 'white', fontSize: 16, marginTop: 14, fontWeight: '700' }}>
+                        <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>
                             Amount to load
                         </Text>
                         <View style={{ width: '100%', marginTop: 20 }}>
@@ -32,7 +32,7 @@ const ScreenLoad = ({ navigation }) => {
 
                     </View>
                     <TouchableOpacity style={{ width: '70%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 6, marginTop: 20 }}>
-                        <Text style={{ color: 'white', padding: 20, fontSize: 20 }} onPress={() => navigation.navigate("Confirm")}>
+                        <Text style={{ fontWeight: '700', color: 'white', padding: 20, fontSize: 20 }} onPress={() => navigation.navigate("Confirm")}>
                             Next
                         </Text>
                     </TouchableOpacity>

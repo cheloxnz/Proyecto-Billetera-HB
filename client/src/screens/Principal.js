@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Button, StyleSheet, Text, View, ScrollView, YellowBox } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { getAccount, getTransfersAll, getAllUsers, getBalance, getAllAccounts } from '../actions';
 import { Divider } from 'react-native-paper';
+import UserAvatar from 'react-native-user-avatar';
 //import { LineChart, XAxis, Grid } from 'react-native-svg-charts'
 
 
@@ -20,14 +21,18 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
         getBalance(onlineUser.id)
     }, [onlineUser])
 
+
     useEffect(() => {
         if (account) { getTransfersAll(account.Naccount) }
     }, [account])
-
-    console.log(transfersAll);
+    
+   useEffect(() => {
+       if(account) { getTransfersAll( account.Naccount )}
+       getBalance(onlineUser.id)
+   },[transfersAll.length])
 
     var flag = false;
-    if (transfersAll.length > 1) flag = true;
+    if (transfersAll.length > 0) flag = true;
 
     return (
         <View style={styles.contenedorPadre}>
@@ -36,42 +41,46 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
             <View style={styles.contentPadre}>
                 <View style={styles.contentHijo}>
                     <View style={styles.contentInfo}>
-                        <Text>N° CTA: {account?.Naccount}</Text>
+                        <Text style={styles.cta}>N° CTA: {account?.Naccount}</Text>
                         <Text style={styles.saldo}>{onlineUser.name + " " + onlineUser.surname}</Text>
                         <Text style={styles.parrafoSaldo}>My Balance $ {balance?.balance} </Text>
                     </View>
                 </View>
                 <View style={styles.contentBotones}>
-                    <View style={styles.contentRecargar}>
+                    {/* <View style={styles.contentRecargar}>
                         <Button title='Load' onPress={() => navigation.navigate('Load')} style={styles.botonRecargar} />
                     </View>
                     <View style={styles.contentEnviar}>
                         <Button title='Send' onPress={() => navigation.navigate("Transfers")} style={styles.botonEnviar} />
-                    </View>
+                    </View> */}
                 </View>
             </View>
-            <Text style={styles.mov}>Movements</Text>
+            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center', marginBottom: 20 }}>Movements</Text>
             <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
+            <View style={styles.containerTrans}>
+                {
+                    <ScrollView style={styles.contentHijoDos}>
+                        {flag ? transfersAll.map((t) => <View style={styles.contentMov}>
 
-            {
-                <ScrollView style={styles.contentHijoDos}>
-                    {flag ? transfersAll.map((t) => <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>
+                            <UserAvatar size={30} bgColors={['#ccc', '#fafafa', '#ccaabb']} name="Matias Córdoba" />
 
-                            {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { console.log(a.Naccount, t.emisor, "facu toy cagao de hambre  "); return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
-                                accounts?.map((a) => { if (a.Naccount == t.receptor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } })}
+                            <Text style={styles.servicio}>
 
-                        </Text>
-                        {account?.Naccount == t.receptor ?
-                            <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> - $ {t.Quantity}</Text>
+                                {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { console.log(a.Naccount, t.emisor, "facu toy cagao de hambre  "); return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
+                                    accounts?.map((a) => { if (a.Naccount == t.receptor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } })}
 
-                        }
+                            </Text>
+                            {account?.Naccount == t.receptor ?
+                                <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> - $ {t.Quantity}</Text>
+
+                            }
 
 
-                        <Divider />
-                    </View>
-                    ) : null}
-                </ScrollView>}
+                            <Divider />
+                        </View>
+                        ) : null}
+                    </ScrollView>}
+            </View>
         </View>
     )
 }
@@ -131,12 +140,12 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     contentHijo: {
-        width: '90%',
-        height: '70%',
+        width: '100%',
+        height: '60%',
         marginVertical: 10,
-        marginHorizontal: 20,
         borderRadius: 10,
-        backgroundColor: 'white',
+        backgroundColor: 'lightgray',
+        opacity: 0.9,
     },
     mov: {
         textAlign: 'center',
@@ -144,24 +153,37 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     contentHijoDos: {
-        width: '70%',
-        height: '30%',
-        marginTop: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        backgroundColor: 'white',
-        marginHorizontal: 80
+        marginBottom: "20",
+        width: '100%',
+        height: '50%',
+        marginVertical: 10,
+        borderRadius: 10,
+        backgroundColor: 'lightgray',
+        opacity: 0.9,
+
     },
     contentInfo: {
+        flex: 1,
         height: '30%',
         alignItems: 'center',
         marginVertical: 25
     },
     saldo: {
-        fontSize: 38
+        borderRadius: 10,
+        marginTop: 20,
+        fontWeight: '700',
+        backgroundColor: "yellow",
+        fontSize: 38,
+        opacity: 0.6,
     },
     parrafoSaldo: {
-        fontSize: 20
+        borderRadius: 10,
+        marginTop: 20,
+        color: "yellow",
+        fontWeight: '700',
+        backgroundColor: "black",
+        fontSize: 20,
+        opacity: 0.6,
     },
     contentBotones: {
         width: '100%',
@@ -188,16 +210,32 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     servicio: {
-        fontSize: 18,
+
+        fontSize: 20
     },
     ingresos: {
-        fontSize: 18,
+        fontSize: 20,
         color: 'green'
+
     },
     egresos: {
-        fontSize: 18,
+        fontSize: 20,
         color: 'red'
     },
+    containerTrans: {
+        marginBottom: "30",
+        opacity: 0.9,
+        borderRadius: 10,
+        backgroundColor: 'lightgray',
+        alignItems: "center",
+        marginTop: 20,
+        width: '100%',
+        flex: 1
+    },
+    cta: {
+        fontSize: 15,
+        fontWeight: '700'
+    }
 
 })
 
