@@ -92,7 +92,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         transfer: action.payload,
-        transfersAll: [action.payload.transfer ,...state.transfersAll],
+        transfersAll: [action.payload.transfer, ...state.transfersAll],
         balance: state.balance.balance - action.payload.transfer.Quantity
       }
     case GET_TRANSFERS_ALL:
@@ -133,6 +133,7 @@ const reducer = (state = initialState, action) => {
     case DO_LOAD:
       return {
         ...state,
+        transfersAll: [action.payload, ...state.transfersAll]
       }
     default:
       return state;

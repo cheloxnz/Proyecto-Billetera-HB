@@ -25,11 +25,11 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
     useEffect(() => {
         if (account) { getTransfersAll(account.Naccount) }
     }, [account])
-    
-   useEffect(() => {
-       if(account) { getTransfersAll( account.Naccount )}
-       getBalance(onlineUser.id)
-   },[transfersAll.length])
+
+    useEffect(() => {
+        if (account) { getTransfersAll(account.Naccount) }
+        getBalance(onlineUser.id)
+    }, [transfersAll.length])
 
     var flag = false;
     if (transfersAll.length > 0) flag = true;
@@ -60,28 +60,53 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
             <View style={styles.containerTrans}>
                 {
                     <ScrollView style={styles.contentHijoDos}>
-                        {flag ? transfersAll.map((t) => <View style={styles.contentMov}>
+                        {flag ? transfersAll.map((t) => {
+                            if (t.Type !== "load") {
+                                return (
+                                    < View style={styles.contentMov} >
 
-                            <UserAvatar size={30} bgColors={['#ccc', '#fafafa', '#ccaabb']} name="Matias Córdoba" />
+                                        <UserAvatar size={30} bgColors={['#ccc', '#fafafa', '#ccaabb']} name="Matias Córdoba" />
 
-                            <Text style={styles.servicio}>
+                                        <Text style={styles.servicio}>
 
-                                {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { console.log(a.Naccount, t.emisor, "facu toy cagao de hambre  "); return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
-                                    accounts?.map((a) => { if (a.Naccount == t.receptor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } })}
+                                            {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { console.log(a.Naccount, t.emisor, "facu toy cagao de hambre  "); return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
+                                                accounts?.map((a) => { if (a.Naccount == t.receptor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } })}
 
-                            </Text>
-                            {account?.Naccount == t.receptor ?
-                                <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> - $ {t.Quantity}</Text>
+                                        </Text>
+                                        {
+                                            account?.Naccount == t.receptor ?
+                                                <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> - $ {t.Quantity}</Text>
 
+                                        }
+
+
+                                        <Divider />
+                                    </View>
+                                )
+                            } else {
+                                return (
+                                    < View style={styles.contentMov} >
+
+                                        <UserAvatar size={30} bgColors={['#ccc', '#fafafa', '#ccaabb']} name="Matias Córdoba" />
+                                        <Text style={styles.servicio}>
+                                            {"LOAD"}
+                                        </Text>
+                                        {
+                                            account?.Naccount == t.receptor ?
+                                                <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> - $ {t.Quantity}</Text>
+
+                                        }
+
+
+                                        <Divider />
+                                    </View>
+                                )
                             }
+                        }) : null}
 
-
-                            <Divider />
-                        </View>
-                        ) : null}
                     </ScrollView>}
             </View>
-        </View>
+        </View >
     )
 }
 
