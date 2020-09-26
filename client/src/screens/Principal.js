@@ -6,11 +6,8 @@ import { getAccount, getTransfersAll, getAllUsers, getBalance, getAllAccounts } 
 import { Divider } from 'react-native-paper';
 
 
-const Principal = ({ navigation, getAccount, account, onlineUser,
-    transfersAll, users, getBalance, balance, getTransfersAll, getAllUsers, getAllAccounts, accounts }) => {
-
-
-
+const Principal = ({ navigation, getAccount, account, onlineUser,transfersAll,
+     users, getBalance, balance, getTransfersAll, getAllUsers, getAllAccounts, accounts }) => {
 
     useEffect(() => {
         getAllAccounts()
@@ -19,14 +16,18 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
         getBalance(onlineUser.id)
     }, [onlineUser])
 
+
     useEffect(() => {
         if (account) { getTransfersAll(account.Naccount) }
     }, [account])
-
-    console.log(transfersAll);
+    
+   useEffect(() => {
+       if(account) { getTransfersAll( account.Naccount )}
+       getBalance(onlineUser.id)
+   },[transfersAll.length])
 
     var flag = false;
-    if (transfersAll.length > 1) flag = true;
+    if (transfersAll.length > 0) flag = true;
 
     return (
         <View style={styles.contenedorPadre}>
