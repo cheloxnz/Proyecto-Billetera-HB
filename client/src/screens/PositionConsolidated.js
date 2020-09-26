@@ -223,6 +223,17 @@ function App() {
               />
             ),
           }} />
+        <Drawer.Screen name='LogOut' component={HomeScreen}
+          options={{
+            title: 'Log Out',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='times'
+                size={20}
+                color={focused ? 'black' : '#ccc'}
+              />
+            ),
+          }} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
