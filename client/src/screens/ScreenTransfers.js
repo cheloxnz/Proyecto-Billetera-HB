@@ -89,6 +89,10 @@ const styles = StyleSheet.create({
     height: "100%",
     paddingTop: Constants.statusBarHeight,
   },
+  background: {
+    flex: 1,
+    width: '100%',
+  },
   contenedorPadre: {
     width: '100%',
     height: '100%',
@@ -163,6 +167,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginLeft: 20,
     marginTop: 20,
+    marginBottom: 20
   },
   parrafoSearch: {
     color: 'white',
@@ -201,10 +206,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 10,
 
-  },
-  background: {
-    flex: 1,
-    width: '100%',
   },
 
 })

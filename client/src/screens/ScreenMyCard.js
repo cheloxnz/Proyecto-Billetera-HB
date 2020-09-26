@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { View, Text, StyleSheet, ImageBackground, Button } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
 import Switch from '../components/Switch';
 import ListP from '../components/ListInfo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -19,13 +19,11 @@ const MyCard = ({ navigation }) => {
             >
                 <View style={styles.contenedorSegundo}>
                     <View style={styles.contenedorTarjeta}>
-                        <View style={styles.tarjeta}>
-                            <Text style={styles.contenedorHenryBank}>
-                                Henry Bank
-                                </Text>
-                            <Text style={styles.cardTar}>
-                                <FontAwesome name={'cc-visa'} size={30} style={{ color: 'black' }} />
-                            </Text>
+                        <View style={{ width: '100%', height: '60%', alignItems: 'center', marginTop: 20, marginBottom: 20 }}>
+                            <Image
+                                style={{ width: '50%', height: '100%', resizeMode: 'center' }}
+                                source={require('../assets/card.png')}
+                            />
                         </View>
                         <Text style={styles.infoCard}>
                             Your card ended in:
@@ -33,7 +31,7 @@ const MyCard = ({ navigation }) => {
                         <View style={styles.contenedorDes}>
                             <Text style={styles.parrafoDes}>
                                 Temporarily disable the account
-                                </Text>
+                            </Text>
                             <View style={styles.switchC}>
                                 <Switch />
                             </View>
@@ -70,37 +68,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '38%',
     },
-    tarjeta: {
-        width: '55%',
-        height: '45%',
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: '#dddd',
-        borderBottomWidth: 0,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-        elevation: 1,
-        marginLeft: 85,
-        marginTop: 20,
-        backgroundColor: '#d9d9d9'
-    },
-    contenedorHenryBank: {
-        fontSize: 20,
-        color: 'black',
-        fontWeight: '700',
-        marginTop: 6,
-        marginLeft: 10
-    },
-    cardTar: {
-        width: '100%',
-        height: '70%',
-        marginVertical: 40,
-        marginHorizontal: 140
-    },
     infoCard: {
-        fontSize: 28,
+        fontSize: 20,
         marginTop: 10,
         marginRight: 70,
         fontWeight: '700',
@@ -109,24 +78,34 @@ const styles = StyleSheet.create({
     },
     contenedorDes: {
         width: '100%',
-
+        height: '40%',
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
+        marginTop: 10,
+        marginBottom: 10,
+        backgroundColor: 'yellow'
     },
     parrafoDes: {
         width: '70%',
         fontSize: 18,
         marginTop: 30,
+        alignItems: 'flex-start',
         textAlign: 'center',
-        color: 'white'
+        color: 'black',
+        fontWeight: '700'
     },
     switchC: {
         width: '8%',
-        marginVertical: -10,
+        height: '20%',
+        alignItems: 'flex-start',
+        marginTop: 34,
+        backgroundColor: 'black',
         borderRadius: 10,
-        backgroundColor: 'white'
     },
     contenedorInform: {
         width: '100%',
         height: '50%',
+        marginTop: 90,
         alignItems: 'center'
     }
 })

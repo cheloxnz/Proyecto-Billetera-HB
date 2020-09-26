@@ -6,10 +6,11 @@ import { theme } from '../core/theme';
 import BackButton from '../components/BackButton';
 import TextInput from '../components/TextInput';
 import { Button } from 'react-native-paper';
-import { doTransfer } from '../actions/index'
+import { doTransfer, getAccount, getBalance } from '../actions/index'
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts, friendCVU }) => {
+const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts, friendCVU , transfersAll,
+getBalance, balance}) => {
 	const [state, setState] = useState('')
 	const [transf, setTransf] = useState('')
 	const [balance2, setBalance] = useState(account.balance)
@@ -19,7 +20,9 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 		else setTransf(transfer)
 		if (transfer?.balance) setBalance(transfer.balance)
 	}, [transfer])
-
+	useEffect(() => {
+		getBalance(onlineUser.id)
+},[transfersAll.length])
 
 	const handleOnChange = (e) => {
 		if (friendCVU != 0) {
@@ -35,8 +38,10 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 		})}
 	}
 
-	const handleTransfer = () => {
-		if (account) doTransfer(account.dataValues.CVU, state.CVU, state.amount)
+	const handleTransfer = (navigation) => {
+		if (account) doTransfer(account.CVU, state.CVU, state.amount)
+		setState('')
+		navigation.navigate('Principal')
 		//hacer alerta
 	}
 
@@ -51,7 +56,7 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 				<Text style={styles.top}>TRANSFER</Text>
 				<Text style={styles.from}>FROM: {onlineUser.name ? onlineUser.name.toUpperCase() + ' ' + onlineUser.surname.toUpperCase() : ''}</Text>
 				<View style={{ marginVertical: 40 }} >
-					<Text style={styles.balance}>MY BALANCE: ${balance2}</Text>
+					<Text style={styles.balance}>MY BALANCE: ${balance?.balance}</Text>
 					<View style={styles.inputCvu}>
 						<Text style={styles.cont}>CVU</Text>
 						<TextInput
@@ -73,9 +78,9 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 							value={state.amount}
 							onChange={e => handleOnChange(e)} />
 					</View>
-					<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > account.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
+					<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > balance.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
 				</View>
-				<Button icon="cash-usd" color="#FFFFFF" mode="contained" style={styles.boton} onPress={() => {handleTransfer(), setState('')}}> Transfer NOW!</Button>
+				<Button icon="cash-usd" color="#FFFFFF" mode="contained" style={styles.boton} onPress={() => {handleTransfer(navigation)}}> Transfer NOW!</Button>
 			</View>
 		</Background>
 	)
@@ -153,7 +158,9 @@ const mapStateToProps = state => {
 		account: state.account,
 		transfer: state.transfer,
 		contacts: state.contacts,
-		friendCVU: state.friendCVU
+		friendCVU: state.friendCVU,
+		transfersAll: state.transfersAll,
+		balance: state.balance
 	}
 }
 
@@ -161,6 +168,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		doTransfer: (cvuFrom, cvuTo, amount) => dispatch(doTransfer(cvuFrom, cvuTo, amount)),
 		getAllContacts: (id) => dispatch(getAllContacts(id)),
+		getBalance: (id) => dispatch(getBalance(id))
 	}
 }
 

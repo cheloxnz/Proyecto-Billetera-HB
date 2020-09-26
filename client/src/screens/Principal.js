@@ -21,14 +21,18 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
         getBalance(onlineUser.id)
     }, [onlineUser])
 
+
     useEffect(() => {
         if (account) { getTransfersAll(account.Naccount) }
     }, [account])
-
-    console.log(transfersAll);
+    
+   useEffect(() => {
+       if(account) { getTransfersAll( account.Naccount )}
+       getBalance(onlineUser.id)
+   },[transfersAll.length])
 
     var flag = false;
-    if (transfersAll.length > 1) flag = true;
+    if (transfersAll.length > 0) flag = true;
 
     return (
         <View style={styles.contenedorPadre}>
@@ -51,7 +55,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                     </View> */}
                 </View>
             </View>
-            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>Movements</Text>
+            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center', marginBottom: 20 }}>Movements</Text>
             <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
             <View style={styles.containerTrans}>
                 {
@@ -167,6 +171,7 @@ const styles = StyleSheet.create({
     saldo: {
         borderRadius: 10,
         marginTop: 20,
+        fontWeight: '700',
         backgroundColor: "yellow",
         fontSize: 38,
         opacity: 0.6,
@@ -175,6 +180,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginTop: 20,
         color: "yellow",
+        fontWeight: '700',
         backgroundColor: "black",
         fontSize: 20,
         opacity: 0.6,
@@ -222,11 +228,13 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: 'lightgray',
         alignItems: "center",
+        marginTop: 20,
         width: '100%',
         flex: 1
     },
     cta: {
-        fontSize: 15
+        fontSize: 15,
+        fontWeight: '700'
     }
 
 })

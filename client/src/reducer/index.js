@@ -27,7 +27,7 @@ const initialState = {
   contacts: [],
   account: {},
   transfer: {},
-  transfersAll: {},
+  transfersAll: [],
   balance: {},
   accounts: {},
   balance: {},
@@ -74,7 +74,6 @@ const reducer = (state = initialState, action) => {
       return state;
 
     case CREATE_ACCOUNT:
-      console.log('concha rtemil puta cahjetea')
       return {
         ...state,
         account: action.account
@@ -92,7 +91,9 @@ const reducer = (state = initialState, action) => {
     case DO_TRANSFER:
       return {
         ...state,
-        transfer: action.payload
+        transfer: action.payload,
+        transfersAll: [action.payload.transfer ,...state.transfersAll],
+        balance: state.balance.balance - action.payload.transfer.Quantity
       }
     case GET_TRANSFERS_ALL:
       return {
