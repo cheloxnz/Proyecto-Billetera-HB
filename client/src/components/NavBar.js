@@ -53,8 +53,9 @@ const styles = StyleSheet.create({
     },
     bellContent: {
         width: "44.35%",
-        alignItems: "center",
+        alignItems: "flex-end",
         marginTop: 6,
+        marginRight: 50
     },
 
 })
