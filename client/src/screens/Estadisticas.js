@@ -3,7 +3,7 @@ import { Grid, BarChart, YAxis } from 'react-native-svg-charts'
 import { LinearGradient, Stop, Defs } from 'react-native-svg'
 import { ImageBackground, View, StyleSheet, Text, StatusBar, Alert } from 'react-native';
 import { connect } from 'react-redux'
-import * as scale from 'd3-scale'
+import * as scale from 'd3-scale'                      
 import Constants from 'expo-constants';
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
