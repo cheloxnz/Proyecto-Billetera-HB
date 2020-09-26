@@ -5,8 +5,9 @@ import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
 import CodeQR from '../components/CodeQR';
 import qr from "../assets/qr.png"
+import { doLoad } from "../actions"
 
-const ScreenConfirm = ({ navigation }) => {
+const ScreenConfirm = ({ navigation, amount, onlineUser, doLoad }) => {
 
 
     return (
@@ -33,7 +34,7 @@ const ScreenConfirm = ({ navigation }) => {
                         </Text>
                         <Image style={{ height: 200, width: 200, backgroundColor: "white" }} source={require('../assets/qr.png')} />
                     </View>
-                    <TouchableOpacity style={{ width: '70%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 6, marginTop: 20 }}>
+                    <TouchableOpacity onPress={() => { doLoad(amount.amount, amount.sucursal, onlineUser.dni, codigo) }} style={{ width: '70%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 6, marginTop: 20 }}>
                         <Text style={{ color: 'white', padding: 20, fontSize: 20 }}>
                             Confirm Transaction
                         </Text>
@@ -66,4 +67,18 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ScreenConfirm;
+const mapStateToProps = state => {
+    return {
+        amount: state.amount,
+        onlineUser: state.onlineUser
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        doLoad: (amount, sucursal, dni, code) => dispatch(doLoad(amount, sucursal, dni, code))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScreenConfirm);

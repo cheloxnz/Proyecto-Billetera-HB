@@ -15,7 +15,9 @@ import {
   GET_BALANCE,
   FRIEND_CVU,
   ADD_FRIEND,
-  DELETE_FRIEND
+  DELETE_FRIEND,
+  AMOUNT_LOAD,
+  DO_LOAD,
 } from "../actions";
 
 const initialState = {
@@ -29,7 +31,9 @@ const initialState = {
   balance: {},
   accounts: {},
   balance: {},
-  friendCVU: []
+  friendCVU: [],
+  amount: {},
+
 };
 
 const reducer = (state = initialState, action) => {
@@ -115,14 +119,24 @@ const reducer = (state = initialState, action) => {
         ...state,
         contacts: [...state.contacts, action.payload]
       }
-    case DELETE_FRIEND: 
-    return {
-      ...state,
-     contacts: state.contacts.filter(c => c.id != action.payload.id) //seguir con esto jaja
-    }
+    case DELETE_FRIEND:
+      return {
+        ...state,
+        contacts: state.contacts.filter(c => c.id != action.payload.id) //seguir con esto jaja
+      }
+    case AMOUNT_LOAD:
+      return {
+        ...state,
+        amount: action.payload
+      }
+    case DO_LOAD:
+      return {
+        ...state,
+      }
     default:
       return state;
   }
+
 };
 
 export default reducer;

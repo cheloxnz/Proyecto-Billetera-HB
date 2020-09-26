@@ -17,8 +17,9 @@ export const GET_TRANSFERS_ALL = "GET_TRANSFERS_ALL";
 export const GET_ALL_ACCOUNTS = "GET_ALL_ACCOUNTS";
 export const FRIEND_CVU = 'FRIEND_CVU';
 export const ADD_FRIEND = 'ADD_FRIEND';
-export const DELETE_FRIEND = 'DELETE_FRIEND'
-
+export const DELETE_FRIEND = 'DELETE_FRIEND';
+export const AMOUNT_LOAD = "AMOUNT_LOAD";
+export const DO_LOAD = "DO_LOAD";
 
 
 
@@ -252,5 +253,29 @@ export function addFriend(id, username) {
           payload: data
         })
       })
+  }
+}
+export function amountLoad(amount, sucursal) {
+  var obj = { amount, sucursal }
+  return function (dispatch) {
+    dispatch({
+      type: AMOUNT_LOAD,
+      payload: obj,
+    })
+  }
+}
+export function doLoad(amount, sucursal, dni, code) {
+  var load = { amount, sucursal, dni, code }
+  return function (dispatch) {
+    axios
+      .post(`http://localhost:3005/transfers/user/load`, { load })
+      .then(res => res.data)
+      .then(data => {
+        dispatch({
+          type: DO_LOAD,
+          payload: data
+        })
+      })
+
   }
 }
