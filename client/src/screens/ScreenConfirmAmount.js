@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
-import { View, StyleSheet, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
 import CodeQR from '../components/CodeQR';
-
+import qr from "../assets/qr.png"
 
 const ScreenConfirm = ({ navigation }) => {
 
@@ -24,14 +24,14 @@ const ScreenConfirm = ({ navigation }) => {
                             Remember that the code is always the same.
                         </Text>
                         <View style={{ width: '100%', height: '20%', marginTop: 20, backgroundColor: 'white' }}>
-                            <Text style={{ color: 'black', fontSize: 30, textAlign: 'center', marginVertical: 25 }}>
-                                4848952163987152987
+                            <Text style={{ color: 'black', fontSize: 28, textAlign: 'center', marginVertical: 25 }}>
+                                4848952198
                             </Text>
                         </View>
-                        {/* <Text style={{ color: 'white', fontSize: 14, marginTop: 20, textAlign: 'center' }}>
+                        <Text style={{ color: 'white', fontSize: 14, marginTop: 20, textAlign: 'center' }}>
                             Or scan the following QR code with your cell phone.
-                        </Text> */}
-                        <CodeQR />
+                        </Text>
+                        <Image style={{ height: 200, width: 200, backgroundColor: "white" }} source={require('../assets/qr.png')} />
                     </View>
                     <TouchableOpacity style={{ width: '70%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 6, marginTop: 20 }}>
                         <Text style={{ color: 'white', padding: 20, fontSize: 20 }}>
