@@ -223,7 +223,7 @@ function App() {
               />
             ),
           }} />
-        <Drawer.Screen name='LogOut' component={HomeScreen}
+        <Drawer.Screen name='Log Out' component={HomeScreen}
           options={{
             title: 'Log Out',
             drawerIcon: ({ focused, size }) => (
