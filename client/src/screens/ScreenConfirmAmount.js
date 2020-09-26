@@ -28,9 +28,9 @@ const ScreenConfirm = ({ navigation }) => {
                                 4848952163987152987
                             </Text>
                         </View>
-                        <Text style={{ color: 'white', fontSize: 14, marginTop: 20, textAlign: 'center' }}>
+                        {/* <Text style={{ color: 'white', fontSize: 14, marginTop: 20, textAlign: 'center' }}>
                             Or scan the following QR code with your cell phone.
-                        </Text>
+                        </Text> */}
                         <CodeQR />
                     </View>
                     <TouchableOpacity style={{ width: '70%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 6, marginTop: 20 }}>

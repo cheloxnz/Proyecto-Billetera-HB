@@ -39,7 +39,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
 
             <View style={styles.contenedorSearch}>
               <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {account?.dataValues?.CVU}</Text>
-              <Text style={styles.parrafoSearch}>If you have Henry Bank, search for it by username</Text>
+              <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>If you have Henry Bank, search for it by username</Text>
               <SearchBar
                 onChangeText={text => { handleContacts(text) }}
                 value={input}
@@ -50,8 +50,8 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
               />
             </View>
             <View>
-              <View>
-                <Text style={styles.parrafoContact}>Contacts</Text>
+              <View style={{ alignItems: "center" }}>
+                <Text style={styles.parrafoContact}>Your contacts:</Text>
               </View>
               <View>
                 {data.length >= 1 ? data.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) : contacts?.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />)}
@@ -69,11 +69,11 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
           </View>
           <View style={styles.contenedorHave}>
             <Button
-              title="Do a transfer"
+              title="Do a tranfer"
               type="clear"
-              titleStyle={{ color: 'black', fontSize: 18 }}
-              containerStyle={{ marginVertical: 40, borderRadius: 10, backgroundColor: 'white', width: '50%', alignSelf: 'center' }}
-              onPress={() => { navigation.navigate('InputTransfer'), friendCVU(0) }}
+              titleStyle={{ color: 'white', fontSize: 18 }}
+              containerStyle={{ marginVertical: 20, borderRadius: 10, backgroundColor: '#00296B', width: '30%', alignSelf: 'center' }}
+              onPress={() => navigation.navigate('Add Friend')}
             />
           </View>
         </View>
@@ -157,10 +157,13 @@ const styles = StyleSheet.create({
   },
   contenedorSearch: {
     width: '100%',
-    height: '20%',
+    height: '40%',
+
   },
   parrafoContact: {
     fontSize: 20,
+    textAlign: 'center',
+    fontWeight: '700',
     color: 'white',
     marginLeft: 20,
     marginTop: 20,
@@ -224,3 +227,5 @@ const mapStateToProps = state => {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ScreenTransfers);
+
+
