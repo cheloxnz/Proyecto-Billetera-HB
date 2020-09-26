@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Button, StyleSheet, Text, View, ScrollView, YellowBox } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { getAccount, getTransfersAll, getAllUsers, getBalance, getAllAccounts } from '../actions';
 import { Divider } from 'react-native-paper';
@@ -37,7 +37,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
             <View style={styles.contentPadre}>
                 <View style={styles.contentHijo}>
                     <View style={styles.contentInfo}>
-                        <Text>N° CTA: {account?.Naccount}</Text>
+                        <Text style={styles.cta}>N° CTA: {account?.Naccount}</Text>
                         <Text style={styles.saldo}>{onlineUser.name + " " + onlineUser.surname}</Text>
                         <Text style={styles.parrafoSaldo}>My Balance $ {balance?.balance} </Text>
                     </View>
@@ -51,7 +51,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                     </View> */}
                 </View>
             </View>
-            <Text style={styles.mov}>Movements</Text>
+            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>Movements</Text>
             <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
             <View style={styles.containerTrans}>
                 {
@@ -137,11 +137,11 @@ const styles = StyleSheet.create({
     },
     contentHijo: {
         width: '100%',
-        height: '70%',
+        height: '60%',
         marginVertical: 10,
         borderRadius: 10,
         backgroundColor: 'lightgray',
-        opacity: 0.8,
+        opacity: 0.9,
     },
     mov: {
         textAlign: 'center',
@@ -149,8 +149,9 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     contentHijoDos: {
-
-        height: '70%',
+        marginBottom: "20",
+        width: '100%',
+        height: '50%',
         marginVertical: 10,
         borderRadius: 10,
         backgroundColor: 'lightgray',
@@ -158,15 +159,25 @@ const styles = StyleSheet.create({
 
     },
     contentInfo: {
+        flex: 1,
         height: '30%',
         alignItems: 'center',
         marginVertical: 25
     },
     saldo: {
-        fontSize: 38
+        borderRadius: 10,
+        marginTop: 20,
+        backgroundColor: "yellow",
+        fontSize: 38,
+        opacity: 0.6,
     },
     parrafoSaldo: {
-        fontSize: 20
+        borderRadius: 10,
+        marginTop: 20,
+        color: "yellow",
+        backgroundColor: "black",
+        fontSize: 20,
+        opacity: 0.6,
     },
     contentBotones: {
         width: '100%',
@@ -206,12 +217,16 @@ const styles = StyleSheet.create({
         color: 'red'
     },
     containerTrans: {
+        marginBottom: "30",
         opacity: 0.9,
         borderRadius: 10,
         backgroundColor: 'lightgray',
         alignItems: "center",
         width: '100%',
         flex: 1
+    },
+    cta: {
+        fontSize: 15
     }
 
 })
