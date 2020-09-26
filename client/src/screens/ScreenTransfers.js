@@ -163,7 +163,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     marginLeft: 20,
-    marginBottom: 10
+    marginTop: 20,
+    marginBottom: 20
   },
   parrafoSearch: {
     color: 'white',
