@@ -52,26 +52,27 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
             </View>
             <Text style={styles.mov}>Movements</Text>
             <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
+            <View style={styles.containerTrans}>
+                {
+                    <ScrollView style={styles.contentHijoDos}>
+                        {flag ? transfersAll.map((t) => <View style={styles.contentMov}>
+                            <Text style={styles.servicio}>
 
-            {
-                <ScrollView style={styles.contentHijoDos}>
-                    {flag ? transfersAll.map((t) => <View style={styles.contentMov}>
-                        <Text style={styles.servicio}>
+                                {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { console.log(a.Naccount, t.emisor, "facu toy cagao de hambre  "); return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
+                                    accounts?.map((a) => { if (a.Naccount == t.receptor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } })}
 
-                            {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { console.log(a.Naccount, t.emisor, "facu toy cagao de hambre  "); return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
-                                accounts?.map((a) => { if (a.Naccount == t.receptor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } })}
+                            </Text>
+                            {account?.Naccount == t.receptor ?
+                                <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> - $ {t.Quantity}</Text>
 
-                        </Text>
-                        {account?.Naccount == t.receptor ?
-                            <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> - $ {t.Quantity}</Text>
-
-                        }
+                            }
 
 
-                        <Divider />
-                    </View>
-                    ) : null}
-                </ScrollView>}
+                            <Divider />
+                        </View>
+                        ) : null}
+                    </ScrollView>}
+            </View>
         </View>
     )
 }
@@ -131,12 +132,12 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     contentHijo: {
-        width: '90%',
+        width: '100%',
         height: '70%',
         marginVertical: 10,
-        marginHorizontal: 20,
         borderRadius: 10,
-        backgroundColor: 'white',
+        backgroundColor: 'lightgray',
+        opacity: 0.9,
     },
     mov: {
         textAlign: 'center',
@@ -144,13 +145,13 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     contentHijoDos: {
-        width: '70%',
-        height: '30%',
-        marginTop: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        backgroundColor: 'white',
-        marginHorizontal: 80
+
+        height: '70%',
+        marginVertical: 10,
+        borderRadius: 10,
+        backgroundColor: 'lightgray',
+        opacity: 0.9,
+
     },
     contentInfo: {
         height: '30%',
@@ -188,16 +189,26 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     servicio: {
-        fontSize: 18,
+
+        fontSize: 20
     },
     ingresos: {
-        fontSize: 18,
+        fontSize: 20,
         color: 'green'
+
     },
     egresos: {
-        fontSize: 18,
+        fontSize: 20,
         color: 'red'
     },
+    containerTrans: {
+        opacity: 0.9,
+        borderRadius: 10,
+        backgroundColor: 'lightgray',
+        alignItems: "center",
+        width: '100%',
+        flex: 1
+    }
 
 })
 
