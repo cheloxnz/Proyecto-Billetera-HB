@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Button } from "react-native";
-import { Icon } from 'react-native-elements';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 
 const FooterNew = ({ navigation }) => {
@@ -10,27 +10,27 @@ const FooterNew = ({ navigation }) => {
         <View style={styles.footer}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}  >
                 <View style={styles.icons}>
-                    <Icon name='home' size={40} />
+                    <FontAwesome name={'home'} size={30} style={{ color: 'white' }} />
                     <Text style={styles.text}>Home</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Transfers')}>
                 <View style={styles.icons}>
-                    <Icon name='autorenew' size={40} />
+                    <FontAwesome name={'random'} size={30} style={{ color: 'white' }} />
                     <Text style={styles.text}>Transfers</Text>
                 </View>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.navigate('Card')} >
                 <View style={styles.icons}>
-                    <Icon name='payment' size={40} />
+                    <FontAwesome name={'credit-card'} size={30} style={{ color: 'white' }} />
                     <Text style={styles.text}>Card</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Payments')}>
                 <View style={styles.icons}>
-                    <Icon name='assessment' size={40} />
-                    <Text style={styles.text}>Pays</Text>
+                    <FontAwesome name={'dollar'} size={30} style={{ color: 'white' }} />
+                    <Text style={styles.text}>Payments</Text>
                 </View>
             </TouchableOpacity>
 
@@ -44,20 +44,25 @@ const styles = StyleSheet.create({
     footer: {
         width: "100%",
         height: '8%',
-        backgroundColor: '#F7FE2E',
+        backgroundColor: 'black',
         borderTopColor: 'yellow',
         borderTopWidth: 2,
         flexDirection: 'row',
         justifyContent: 'space-around',
+        borderTopWidth: 3,
+        borderTopColor: "black",
+        borderStyle: 'solid',
     },
     icons: {
         height: '100%',
         borderRadius: 10,
         alignItems: 'center',
+        color: 'white',
         justifyContent: 'center'
     },
     text: {
         position: 'relative',
+        color: 'white',
         top: -7
     }
 })
