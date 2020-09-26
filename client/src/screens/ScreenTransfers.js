@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginLeft: 20,
     marginTop: 20,
+    marginBottom: 20
   },
   parrafoSearch: {
     color: 'white',
