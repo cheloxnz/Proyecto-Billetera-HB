@@ -33,6 +33,13 @@ server.post("/:CVU", (req, res) => {
             to.update({
                 balance: balanceTo + amount2
             })
+            
+            var result = from.balance()
+            var body = {
+                
+                balance: result,
+                text: 'Transaccion exitosa!'
+            }
             Transaction.create({
                 Quantity: amount2,
                 Type: "transfer",
@@ -40,12 +47,13 @@ server.post("/:CVU", (req, res) => {
                 emisor: from.Naccount,
                 code: codes
             })
-            var result = from.balance()
-            var body = {
-                balance: result,
-                text: 'Transaccion exitosa!'
-            }
-            res.send(body)
+            .then(data => {
+                body = {
+                    ...body,
+                    transfer: data 
+                    }
+                res.send(body)
+            })
         })
         .catch(err => console.log(err))
 })

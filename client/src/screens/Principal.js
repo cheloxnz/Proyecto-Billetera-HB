@@ -21,14 +21,18 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
         getBalance(onlineUser.id)
     }, [onlineUser])
 
+
     useEffect(() => {
         if (account) { getTransfersAll(account.Naccount) }
     }, [account])
-
-    console.log(transfersAll);
+    
+   useEffect(() => {
+       if(account) { getTransfersAll( account.Naccount )}
+       getBalance(onlineUser.id)
+   },[transfersAll.length])
 
     var flag = false;
-    if (transfersAll.length > 1) flag = true;
+    if (transfersAll.length > 0) flag = true;
 
     return (
         <View style={styles.contenedorPadre}>
