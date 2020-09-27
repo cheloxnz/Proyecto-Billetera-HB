@@ -33,7 +33,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
 
     var flag = false;
     if (transfersAll.length > 0) flag = true;
-
+    
     return (
         <View style={styles.contenedorPadre}>
 
@@ -55,7 +55,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                     </View> */}
                 </View>
             </View>
-            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center', marginBottom: 20 }}>Movements</Text>
+            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center', marginBottom: 20, }}>Movements</Text>
             <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
             <View style={styles.containerTrans}>
                 {
@@ -75,7 +75,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                                         </Text>
                                         {
                                             account?.Naccount == t.receptor ?
-                                                <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> - $ {t.Quantity}</Text>
+                                                <Text style={styles.ingresos}> + ${t.Quantity}</Text> : <Text style={styles.egresos}> - ${t.Quantity}</Text>
 
                                         }
 
@@ -93,7 +93,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                                         </Text>
                                         {
                                             account?.Naccount == t.receptor ?
-                                                <Text style={styles.ingresos}> + $ {t.Quantity}</Text> : <Text style={styles.egresos}> - $ {t.Quantity}</Text>
+                                                <Text style={styles.ingresos}> + ${t.Quantity}</Text> : <Text style={styles.egresos}> - ${t.Quantity}</Text>
 
                                         }
 
@@ -167,10 +167,13 @@ const styles = StyleSheet.create({
     contentHijo: {
         width: '100%',
         height: '60%',
-        marginVertical: 10,
-        borderRadius: 10,
         backgroundColor: 'lightgray',
         opacity: 0.9,
+        position: 'absolute',
+        top: -3,
+        borderBottomLeftRadius: 22,
+        borderBottomRightRadius: 22
+    
     },
     mov: {
         textAlign: 'center',
@@ -182,7 +185,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '50%',
         marginVertical: 10,
-        borderRadius: 10,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
         backgroundColor: 'lightgray',
         opacity: 0.9,
 
@@ -199,7 +203,8 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         backgroundColor: "yellow",
         fontSize: 38,
-        opacity: 0.6,
+        opacity: 0.8,
+        padding: 5
     },
     parrafoSaldo: {
         borderRadius: 10,
@@ -208,7 +213,8 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         backgroundColor: "black",
         fontSize: 20,
-        opacity: 0.6,
+        opacity: 0.8,
+        padding: 5
     },
     contentBotones: {
         width: '100%',
@@ -224,8 +230,12 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     sortDown: {
-        color: 'white',
-        textAlign: 'center'
+        color: 'black',
+        textAlign: 'center',
+        backgroundColor: 'rgba(255,255,0, 0.8)',
+        width: '30%',
+        marginHorizontal: '35%',
+        borderRadius: 20
     },
     contentMov: {
         width: '100%',
@@ -235,22 +245,34 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     servicio: {
+        width: '60%',
 
         fontSize: 20
     },
     ingresos: {
         fontSize: 20,
-        color: 'green'
+        color: 'black',
+        backgroundColor: 'yellow',
+        borderRadius: 15,
+        width: 100,
+        textAlign: 'center',
+        width: '30%'
 
     },
     egresos: {
         fontSize: 20,
-        color: 'red'
+        color: 'white',
+        backgroundColor: 'red',
+        borderRadius: 15,
+        width: 100,
+        textAlign: 'center',
+        width: '30%'
     },
     containerTrans: {
         marginBottom: "30",
         opacity: 0.9,
-        borderRadius: 10,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
         backgroundColor: 'lightgray',
         alignItems: "center",
         marginTop: 20,
@@ -259,7 +281,7 @@ const styles = StyleSheet.create({
     },
     cta: {
         fontSize: 15,
-        fontWeight: '700'
+        fontWeight: '700',
     }
 
 })
