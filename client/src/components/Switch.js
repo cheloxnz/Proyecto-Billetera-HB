@@ -5,7 +5,7 @@ const SwitchB = () => {
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
 
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
-
+  console.log(isSwitchOn)
   return <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />;
 };
 

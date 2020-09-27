@@ -18,6 +18,7 @@ import {
   DELETE_FRIEND,
   AMOUNT_LOAD,
   DO_LOAD,
+  CARD
 } from "../actions";
 
 const initialState = {
@@ -33,7 +34,6 @@ const initialState = {
   balance: {},
   friendCVU: [],
   amount: {},
-
 };
 
 const reducer = (state = initialState, action) => {
@@ -134,6 +134,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         transfersAll: [action.payload, ...state.transfersAll]
+      }
+      case CARD: 
+      if (action.payload !== 'inactive' && action.payload !== 'active') return {...state};
+      return {
+        ...state,
+       account: {...state.account, state: action.payload }
       }
     default:
       return state;

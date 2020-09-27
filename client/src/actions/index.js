@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Card } from "react-native-paper";
 
 // CONSTANTES DE LAS ACTIONS
 export const REGISTER_USER = "REGISTER_USER";
@@ -20,6 +21,7 @@ export const ADD_FRIEND = 'ADD_FRIEND';
 export const DELETE_FRIEND = 'DELETE_FRIEND';
 export const AMOUNT_LOAD = "AMOUNT_LOAD";
 export const DO_LOAD = "DO_LOAD";
+export const CARD = 'CARD';
 
 
 
@@ -276,6 +278,19 @@ export function doLoad(amount, sucursal, dni, code) {
           payload: data
         })
       })
+  }
+}
 
+export function cardState(cvu, id, estado) {
+  return function (dispatch) {
+    axios
+    .put(`http://localhost:3005/accounts/${cvu}`, {id, estado})
+    .then(res => res.data)
+    .then(data => {
+      dispatch({
+        type: CARD,
+        payload: data
+      })
+    })
   }
 }
