@@ -73,18 +73,19 @@ server.post("/:id", (req, res) => {
 
 server.put('/:CVU', (req, res) => {  //Por parametro llega el CVU
     const { id, estado } = req.body // Recibe id de usuario, y estado que se le quiere asignar a la cuenta 'inactive' || 'active'
+    console.log(estado)
     Account.findOne({
         where: {
             CVU: req.params.CVU,
             userId: id
         }
     }).then(account => {
-        if (account.state == estado) res.send('No se puede setear el mismo estado')
-        if (estado != 'active' || estado != 'inactive') res.send('Estado no reconocido.')
+        if (account.state == estado) return res.send('No se puede setear el mismo estado')
+        if (estado !== 'active' && estado !== 'inactive') return res.send('Estado no reconocido.')
         account.update({
             state: estado
         })
-        res.send(`Estado actualizado a ${estado}`)
+        res.send(`${estado}`)
     })
         .catch(err => res.send(err))
 })

@@ -38,7 +38,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
           <View style={styles.contenedorCentral}>
 
             <View style={styles.contenedorSearch}>
-              <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {account?.dataValues?.CVU}</Text>
+              <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {<Text style={{color: 'yellow'}}>{account?.CVU}</Text>}</Text>
               <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>If you have Henry Bank, search for it by username</Text>
               <SearchBar
                 onChangeText={text => { handleContacts(text) }}
@@ -51,7 +51,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
             </View>
             <View>
               <View style={{ alignItems: "center" }}>
-                <Text style={styles.parrafoContact}>Your contacts:</Text>
+                <Text style={styles.parrafoContact}>My contacts</Text>
               </View>
               <View>
                 {data.length >= 1 ? data.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) : contacts?.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />)}
@@ -69,11 +69,11 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
           </View>
           <View style={styles.contenedorHave}>
             <Button
-              title="Do a tranfer"
+              title="Do a transfer"
               type="clear"
               titleStyle={{ color: 'white', fontSize: 18 }}
               containerStyle={{ marginVertical: 20, borderRadius: 10, backgroundColor: '#00296B', width: '30%', alignSelf: 'center' }}
-              onPress={() => navigation.navigate('Add Friend')}
+              onPress={() => navigation.navigate('InputTransfer')}
             />
           </View>
         </View>
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   },
   contenedorSearch: {
     width: '100%',
-    height: '40%',
+    //height: '40%',
 
   },
   parrafoContact: {
@@ -167,7 +167,13 @@ const styles = StyleSheet.create({
     color: 'white',
     marginLeft: 20,
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    borderBottomWidth: 2,
+    borderColor: 'yellow',
+    width: '70%',
+    position: 'relative',
+    right: 31,
+    textAlign: 'left'
   },
   parrafoSearch: {
     color: 'white',
