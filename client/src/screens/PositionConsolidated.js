@@ -169,6 +169,7 @@ function App() {
             ),
           }} />
         <Drawer.Screen name="Load" component={ScreenLoad}
+        style={{display: 'hidden'}}
           options={{
             title: 'Load',
             drawerIcon: ({ focused, size }) => (

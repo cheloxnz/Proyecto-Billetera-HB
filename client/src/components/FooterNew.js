@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     text: {
         position: 'relative',
         color: 'white',
-        top: -7
     }
 })
 
