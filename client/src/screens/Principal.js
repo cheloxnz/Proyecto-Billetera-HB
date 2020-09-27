@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     },
     contentHijo: {
         width: '100%',
-        height: '60%',
+        height: '80%',
         backgroundColor: 'lightgray',
         opacity: 0.9,
         position: 'absolute',
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     contentHijoDos: {
         marginBottom: 20,
         width: '100%',
-        height: '50%',
+        height: '100%',
         marginVertical: 10,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
@@ -193,9 +193,9 @@ const styles = StyleSheet.create({
     },
     contentInfo: {
         flex: 1,
-        height: '30%',
+        height: '100%',
         alignItems: 'center',
-        marginVertical: 25
+        marginVertical: 25,
     },
     saldo: {
         borderRadius: 10,

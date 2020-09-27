@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     imageBars: {
         width: "22%",
         height: "100%",
-        paddingRight: 10,
+        paddingRight: 130,
     },
 });
 
