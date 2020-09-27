@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     contentHijoDos: {
-        marginBottom: "20",
+        marginBottom: 20,
         width: '100%',
         height: '50%',
         marginVertical: 10,
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
         width: '30%'
     },
     containerTrans: {
-        marginBottom: "30",
+        marginBottom: 30,
         opacity: 0.9,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
