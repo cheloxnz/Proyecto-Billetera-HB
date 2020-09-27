@@ -56,6 +56,9 @@ server.post("/user/:id/add", (req, res) => {
   let user2 = User.findOne({
     where: {
       username: username
+    }, include: {
+      model: Account,
+      attributes: ['CVU']
     }
   })
   Promise.all([user1, user2])
