@@ -24,24 +24,25 @@ getBalance, balance}) => {
 		getBalance(onlineUser.id)
 },[transfersAll.length])
 
-	const handleOnChange = (e) => {
+	const handleOnChange = (name, e) => {
+		console.log(name, e)
 		if (friendCVU != 0) {
 			setState({
 			...state,
 			CVU: friendCVU,
-			amount: e.target.value
+			amount: e.nativeEvent.text
 		})
 	} else {
 		setState({
 			...state,
-			[e.target.name]: e.target.value
+			[name]: e.nativeEvent.text
 		})}
 	}
 
 	const handleTransfer = (navigation) => {
 		if (account) doTransfer(account.CVU, state.CVU, state.amount)
 		setState('')
-		navigation.navigate('Principal')
+		//navigation.navigate('Principal')
 		//hacer alerta
 	}
 
@@ -65,7 +66,7 @@ getBalance, balance}) => {
 							style={styles.textInput}
 							name='CVU'
 							value={friendCVU != 0 ? friendCVU : state.CVU ? state.CVU : '' }
-							onChange={e => handleOnChange(e)}
+							onChange={e => handleOnChange('CVU', e)}
 							editable={friendCVU != 0 ? false : state.CVU ? true : true}
 						/>
 					</View>
@@ -76,7 +77,7 @@ getBalance, balance}) => {
 							keyboardType='number-pad'
 							name='amount'
 							value={state.amount}
-							onChange={e => handleOnChange(e)} />
+							onChange={e => handleOnChange('amount', e)} />
 					</View>
 					<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > balance.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
 				</View>

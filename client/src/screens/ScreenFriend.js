@@ -14,10 +14,11 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
     const [data, setData] = React.useState([])
     const [input, setInput] = React.useState('')
 
-
+   console.log(input)
     const handleContacts = text => {
+        console.log(text)
         setInput(text)
-        Axios.get(`http://localhost:3005/contacts/addFriend?username=${text}`)
+        Axios.get(`http://192.168.100.4:3005/contacts/addFriend?username=${text}`)
             .then(user => setData(user?.data))
             .catch(err => console.log(err));
     }

@@ -60,10 +60,11 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
             <View style={styles.containerTrans}>
                 {
                     <ScrollView style={styles.contentHijoDos}>
-                        {flag ? transfersAll.map((t) => {
+                        {flag ? transfersAll.map((t, i) => {
                             if (t.Type !== "load") {
                                 return (
-                                    < View style={styles.contentMov} >
+                                   
+                                    < View style={styles.contentMov} key={i} >
 
                                         <UserAvatar size={30} bgColors={['#ccc', '#fafafa', '#ccaabb']} name="Matias Córdoba" />
 
