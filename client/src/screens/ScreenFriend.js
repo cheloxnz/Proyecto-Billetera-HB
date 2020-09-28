@@ -66,7 +66,7 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
                         </View>
                     </View>
                     <ScrollView style ={{marginTop: 10}} >
-                        {data.length >= 1 ? data.map(user => <ListFriend users={user} contacts = {contacts} text ={input} />) : null}
+                        {data.length >= 1 ? data.map((user, i) => <ListFriend users={user} contacts = {contacts} text ={input} key={i} />) : null}
                     </ScrollView>
 
                 </View>

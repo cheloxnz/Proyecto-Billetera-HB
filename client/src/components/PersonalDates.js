@@ -17,7 +17,7 @@ const Personal = ({dates}) => {
      console.log(inputs)
     return (
         <View>
-            <View style={{ width: '48%', flexDirection: 'row' }}>
+            <View style={{ width: '48%', flexDirection: 'row', marginLeft: 10 }}>
                 <Input
                     style={styles.inputPersonal}
                     label='Name'
@@ -34,7 +34,7 @@ const Personal = ({dates}) => {
                 />
             </View>
             <Divider />
-            <View style={{ width: '48%', flexDirection: 'row' }}>
+            <View style={{ width: '48%', flexDirection: 'row', marginLeft: 10}}>
                 <Input
                     style={styles.inputPersonal}
                     label='Username'
@@ -47,10 +47,10 @@ const Personal = ({dates}) => {
                     placeholder=''
                     value= {dates.email}
                 />
-                <FontAwesome name='edit' size={25} color={'white'} style={{ marginTop: 30, marginRight: 35 }} />
+                {/* <FontAwesome name='edit' size={25} color={'white'} style={{ marginTop: 30, marginRight: 35 }} /> */}
             </View>
             <Divider />
-            <View style={{ width: '48%', flexDirection: 'row' }}>
+            <View style={{ width: '48%', flexDirection: 'row', marginLeft: 10 }}>
                 <Input
                     style={styles.inputPersonal}
                     label='Date of birth'
@@ -63,10 +63,10 @@ const Personal = ({dates}) => {
                     placeholder=''
                     value= {dates.phone}
                 />
-                <FontAwesome name='edit' size={25} color={'white'} style={{ marginTop: 30, marginRight: 35 }} />
+                {/* <FontAwesome name='edit' size={25} color={'white'} style={{ marginTop: 30, marginRight: 35 }} /> */}
             </View>
             <Divider />
-            <View style={{ width: '48%', flexDirection: 'row' }}>
+            <View style={{ width: '48%', flexDirection: 'row', marginLeft: 10 }}>
                 <Input
                     style={styles.inputPersonal}
                     label='DNI'
@@ -81,7 +81,7 @@ const Personal = ({dates}) => {
                 />
             </View>
             <Divider />
-            <View style={{ width: '48%', flexDirection: 'row' }}>
+            <View style={{ width: '48%', flexDirection: 'row' , marginLeft: 10}}>
                 <Input
                     style={styles.inputPersonal}
                     label='City'
@@ -96,21 +96,21 @@ const Personal = ({dates}) => {
                 />
             </View>
             <Divider />
-            <View style={{ width: '50%', flexDirection: 'row' }}>
+            <View style={{ width: '100%', flexDirection: 'row' , marginLeft: 10}}>
                 <Input
                     style={styles.inputPersonal}
                     label='Address'
                     placeholder=''
                     value= {dates.address}
                 />
-                <FontAwesome name='edit' size={25} color={'white'} style={{ marginTop: 30, marginRight: 35 }} />
-            <Button
+                {/* <FontAwesome name='edit' size={25} color={'white'} style={{ marginTop: 30, marginRight: 35 }} /> */}
+            {/* <Button
                 title="Add a friend"
                 type="clear"
                 titleStyle={{ color: 'yellow', fontSize: 18 }}
                 containerStyle={{ borderRadius: 10, backgroundColor: 'black', width: '50%', height:'80%', marginTop: 10}}
                 onPress={() => updateDates(dates)}
-              />
+              /> */}
             </View>
         </View>
     )

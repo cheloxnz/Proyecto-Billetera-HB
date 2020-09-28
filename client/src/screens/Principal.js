@@ -70,7 +70,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
 
                                         <Text style={styles.servicio}>
 
-                                            {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { console.log(a.Naccount, t.emisor, "facu toy cagao de hambre  "); return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
+                                            {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
                                                 accounts?.map((a) => { if (a.Naccount == t.receptor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } })}
 
                                         </Text>
@@ -86,7 +86,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                                 )
                             } else {
                                 return (
-                                    < View style={styles.contentMov} >
+                                    < View style={styles.contentMov} key={i} >
 
                                         <UserAvatar size={30} bgColors={['#ccc', '#fafafa', '#ccaabb']} name="Matias Córdoba" />
                                         <Text style={styles.servicio}>

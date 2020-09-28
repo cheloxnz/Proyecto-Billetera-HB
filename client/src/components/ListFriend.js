@@ -7,7 +7,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 
-const ListFriend = ({ users, onlineUser, addFriend,contacts, text}) => {
+const ListFriend = ({ users, onlineUser, addFriend,contacts, text }) => {
     console.log('---')
     console.log(contacts)
     console.log(text)
@@ -16,7 +16,7 @@ const ListFriend = ({ users, onlineUser, addFriend,contacts, text}) => {
         <View style={styles.bg}>
             {text?.length == 0? flag = true:onlineUser?.id == users.id ? flag = true : contacts?.map((c) => {if (c.id == users.id){  flag = true; return}})}
             {flag? null :  
-                <View>
+                <View >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
                         <List.Item titleStyle={{ fontSize: 20, fontWeight: '700' }}
                             left={() =>

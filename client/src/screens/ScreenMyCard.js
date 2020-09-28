@@ -48,7 +48,7 @@ const MyCard = ({ navigation, account, cardState, onlineUser }) => {
                         </View>
                         <View style={styles.contenedorDes}>
                             <Text style={styles.parrafoDes}>
-                              {account?.state == 'inactive'?'Temporarily disable the account': 'Your account is enabled'}
+                              {account?.state == 'inactive'?'Your account is disabled': 'Your account is enabled'}
                             </Text>
                             <View style={styles.switchC}>
                                 <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />

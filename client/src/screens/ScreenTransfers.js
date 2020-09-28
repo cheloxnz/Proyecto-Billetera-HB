@@ -55,7 +55,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
                 <Text style={styles.parrafoContact}>My contacts</Text>
               </View>
               <View>
-                {data.length >= 1 ? data.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) : contacts?.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />)}
+                {data.length >= 1 ? data.map((contacts, i ) => <ContactsList contacts={contacts} navigation={navigation} key= {i} />) : contacts?.map((contacts, i) => <ContactsList contacts={contacts} navigation={navigation} key= {i} />)}
               </View>
             </View>
           </View>
