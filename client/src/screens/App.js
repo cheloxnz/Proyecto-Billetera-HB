@@ -5,9 +5,7 @@ import { getAccount } from '../actions';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import NavBar from '../components/NavBar';
 import Principal from './Principal';
-import FooterNew from '../components/FooterNew';
 import ScreenTransfers from './ScreenTransfers';
 import ForgotPasswordScreen from './ForgotPasswordScreen';
 import ScreenMyCard from './ScreenMyCard';
@@ -24,37 +22,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const Drawer = createDrawerNavigator();
 
 
-const PositionConsolidated = ({ navigation }) => {
-
-  return (
-    <View style={styles.container}>
-      {/* NAVBAR VA EN TODOS LOS SCREEN  */}
-      <NavBar navigation={navigation} />
-      <ImageBackground
-        source={require('../assets/consolidated_dot.png')}
-        style={styles.background}
-      >
-        {/* ACA SE PONE EL COMPONENTE DEL SCREEN A RENDERIZAR */}
-        <Principal navigation={navigation} />
-
-      </ImageBackground>
-
-
-      {/* FOOTER VA EN TODOS LOS SCREEN  */}
-      <FooterNew navigation={navigation} />
-    </View>
-
-  )
-}
-
-
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     top: getStatusBarHeight(),
-    justifyContent: 'space-between'
 
   },
   component: {
@@ -102,7 +74,7 @@ function App() {
           backgroundColor: 'white',
         }}
       >
-        <Drawer.Screen name="Home" component={PositionConsolidated}
+        <Drawer.Screen name="Home" component={Principal}
           options={{
             title: 'Home',
             drawerIcon: ({ focused, size }) => (

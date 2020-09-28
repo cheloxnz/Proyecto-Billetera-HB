@@ -8,38 +8,43 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { SearchBar } from 'react-native-elements';
 import Axios from 'axios';
 import ListFriend from '../components/ListFriend';
-
+import {getAllContacts} from  '../actions'
+const DB_HOST = '192.168.0.107';
 
 const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUser }) => {
     const [data, setData] = React.useState([])
     const [input, setInput] = React.useState('')
-
-   console.log(input)
+    useEffect(()=> {
+        getAllContacts(onlineUser.id)
+    },[])
+   console.log(contacts)
     const handleContacts = text => {
         console.log(text)
         setInput(text)
-        Axios.get(`http://192.168.100.4:3005/contacts/addFriend?username=${text}`)
+        Axios.get(`http://${DB_HOST}:3005/contacts/addFriend?username=${text}`)
             .then(user => setData(user?.data))
             .catch(err => console.log(err));
     }
 
     return (
+        <View style={styles.contenedorPrincipal}>
+            <NavBar navigation={navigation} />
         <ImageBackground
             source={require('../assets/consolidated_dot.png')}
             style={styles.background}>
             <View style={styles.contenedorAgregar}>
-                <NavBar navigation={navigation} />
                 <View style={styles.contenedorSecAgregar}>
-                    <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>
+                    <Text style={{ color: 'black', fontWeight: '700', fontSize: 20, textAlign: 'center', backgroundColor: 'yellow'}}>
                         Here you can add friends through username
                     </Text>
+                    <View style ={{ borderBottomColor: 'yellow', borderBottomWidth: 3}} >
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
-                        <View style={{ width: '40%', marginTop: 26, borderBottomColor: 'yellow', borderBottomWidth: 3, paddingTop: 20, paddingBottom: 20 }}>
+                        <View style={{ width: '35%', marginTop: 26,paddingTop: 10 }}>
                             <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>
                                 Username  <FontAwesome name='angle-double-right' size={26} color={'white'} />
                             </Text>
                         </View>
-                        <View style={{ width: '60%', marginTop: 12, borderBottomColor: 'yellow', borderBottomWidth: 3, paddingTop: 20, paddingBottom: 20 }}>
+                        <View style={{ width: '65%', marginTop: 12, paddingTop: 10}}>
                             <SearchBar
                                 onChangeText={text => { handleContacts(text) }}
                                 value={input}
@@ -50,17 +55,18 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
                             />
                         </View>
                     </View>
-                    <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>
-                        Enter the USERNAME without spaces or hyphens
+                    <Text style={{ color: 'white', fontWeight: '700', fontSize: 14, textAlign: 'center' }}>
+                        (Enter the USERNAME without spaces or hyphens)
                     </Text>
+                    </View>
 
                     <View>
                         <View>
-                            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>List Contacts</Text>
+                            <Text style={{ color: 'black', fontWeight: '700', fontSize: 20, textAlign: 'center', backgroundColor: 'yellow' }}>List Contacts</Text>
                         </View>
                     </View>
-                    <ScrollView>
-                        {data.length >= 1 ? data.map(contacts => <ListFriend contacts={contacts} />) : null}
+                    <ScrollView style ={{marginTop: 10}} >
+                        {data.length >= 1 ? data.map(user => <ListFriend users={user} contacts = {contacts} text ={input} />) : null}
                     </ScrollView>
 
                 </View>
@@ -72,12 +78,18 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
                 <FooterNew navigation={navigation} />
             </View>
         </ImageBackground>
+        </View>
     )
 }
 
 
 
 const styles = StyleSheet.create({
+    contenedorPrincipal: {
+        width: "100%",
+        height: "100%",
+        paddingTop: Constants.statusBarHeight,
+    },
     background: {
         flex: 1,
         width: '100%',
@@ -109,4 +121,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(ScreenFriend);
+const mapDispatchToProps = dispatch => {
+    return {
+        getAllContacts: (id) => dispatch(getAllContacts(id)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScreenFriend);

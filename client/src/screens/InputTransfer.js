@@ -7,7 +7,8 @@ import BackButton from '../components/BackButton';
 import TextInput from '../components/TextInput';
 import { Button } from 'react-native-paper';
 import { doTransfer, getAccount, getBalance } from '../actions/index'
-import DropDownPicker from 'react-native-dropdown-picker';
+import Constants from 'expo-constants';
+
 
 const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts, friendCVU , transfersAll,
 getBalance, balance}) => {
@@ -51,6 +52,7 @@ getBalance, balance}) => {
 
 
 	return (
+		<View style={styles.contenedorPrincipal}>
 		<Background>
 			<BackButton goBack={() => navigation.navigate("Transfers")} />
 			<View style={styles.container}>
@@ -84,9 +86,15 @@ getBalance, balance}) => {
 				<Button icon="cash-usd" color="#FFFFFF" mode="contained" disabled= {account?.state == 'active' ? false : true} style={styles.boton} onPress={() => {handleTransfer(navigation)}}> Transfer NOW!</Button>
 			</View>
 		</Background>
+		</View>
 	)
 }
 const styles = StyleSheet.create({
+	contenedorPrincipal: {
+    width: "100%",
+    height: "100%",
+    paddingTop: Constants.statusBarHeight,
+},
 	cont: {
 		color: theme.colors.primary,
 		fontSize: 16,

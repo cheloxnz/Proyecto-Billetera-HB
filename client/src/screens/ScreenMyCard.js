@@ -5,7 +5,11 @@ import { Switch } from 'react-native-paper';
 import ListP from '../components/ListInfo';
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
-import { cardState } from '../actions'
+import { cardState } from '../actions';
+import Constants from 'expo-constants';
+
+
+
 
 const MyCard = ({ navigation, account, cardState, onlineUser }) => {
     const [isSwitchOn, setIsSwitchOn] = React.useState(true);
@@ -33,18 +37,18 @@ const MyCard = ({ navigation, account, cardState, onlineUser }) => {
             >
                 <View style={styles.contenedorSegundo}>
                     <View style={styles.contenedorTarjeta}>
+                        <Text style={styles.infoCard}>
+                            Your card ended in {account?.card?.slice(12, 16)}
+                        </Text>
                         <View style={{ width: '100%', height: '60%', alignItems: 'center', marginTop: 20, marginBottom: 20 }}>
                             <Image
                                 style={{ width: '50%', height: '100%', resizeMode: 'center' }}
                                 source={require('../assets/card.png')}
                             />
                         </View>
-                        <Text style={styles.infoCard}>
-                            Your card ended in {account?.card?.slice(12, 16)}
-                        </Text>
                         <View style={styles.contenedorDes}>
                             <Text style={styles.parrafoDes}>
-                                Temporarily disable the account
+                              {account?.state == 'inactive'?'Temporarily disable the account': 'Your account is enabled'}
                             </Text>
                             <View style={styles.switchC}>
                                 <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
@@ -72,6 +76,7 @@ const styles = StyleSheet.create({
     contenedorCard: {
         width: "100%",
         height: "100%",
+        paddingTop: Constants.statusBarHeight,
 
     },
     contenedorSegundo: {
@@ -83,43 +88,39 @@ const styles = StyleSheet.create({
         height: '38%',
     },
     infoCard: {
+        width: '100%',
         fontSize: 20,
         marginTop: 10,
         marginRight: 70,
         fontWeight: '700',
         textAlign: 'center',
-        color: 'white'
+        color: 'black',
+        backgroundColor: 'yellow'
     },
     contenedorDes: {
         width: '100%',
-        height: '40%',
+        height: '30%',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
-        marginTop: 10,
-        marginBottom: 10,
-        backgroundColor: 'yellow'
+        backgroundColor: 'yellow',
+        alignItems: 'center'
     },
     parrafoDes: {
         width: '70%',
         fontSize: 18,
-        marginTop: 30,
         alignItems: 'flex-start',
         textAlign: 'center',
         color: 'black',
         fontWeight: '700'
     },
     switchC: {
-        width: '8%',
-        height: '20%',
         alignItems: 'flex-start',
-        marginTop: 34,
-        backgroundColor: 'black',
         borderRadius: 10,
     },
     contenedorInform: {
         width: '100%',
-        height: '50%',
-        marginTop: 90,
+        height: '40%',
+        marginTop: 70,
         alignItems: 'center'
     }
 })

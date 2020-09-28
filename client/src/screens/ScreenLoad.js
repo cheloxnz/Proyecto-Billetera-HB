@@ -4,7 +4,8 @@ import { View, StyleSheet, Text, ImageBackground, TouchableOpacity } from 'react
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
 import Input from '../components/TextInput';
-import { amountLoad } from "../actions"
+import { amountLoad } from "../actions";
+import Constants from 'expo-constants';
 
 const ScreenLoad = ({ navigation, amountLoad }) => {
     const [state, setState] = useState('')
@@ -12,12 +13,12 @@ const ScreenLoad = ({ navigation, amountLoad }) => {
     const handleOnChange = (e) => {
         setState({
             ...state,
-            amount: e.target.value
+            amount: e.nativeEvent.text
         })
     }
     console.log(state)
     return (
-        <View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
+        <View style={styles.contenedorPrincipal}>
             <NavBar navigation={navigation} />
 
             <ImageBackground
@@ -61,6 +62,11 @@ const ScreenLoad = ({ navigation, amountLoad }) => {
 
 
 const styles = StyleSheet.create({
+    contenedorPrincipal: {
+        width: "100%",
+        height: "100%",
+        paddingTop: Constants.statusBarHeight,
+    },
     background: {
         flex: 1,
         width: '100%',

@@ -9,11 +9,12 @@ import PersonalD from '../components/PersonalDates';
 
 const ScreenDates = ({ navigation }) => {
     return (
+        <View style={styles.contenedorPrincipal}>
+        <NavBar navigation={navigation} />
         <ImageBackground
             source={require('../assets/consolidated_dot.png')}
             style={styles.background}>
             <View style={styles.content}>
-                <NavBar navigation={navigation} />
                 <View style={styles.contenedorPadre}>
                     <View>
                         <Text style={{ color: 'white', fontSize: 22, textAlign: 'center', marginTop: 20 }}>
@@ -30,10 +31,16 @@ const ScreenDates = ({ navigation }) => {
                 <FooterNew navigation={navigation} />
             </View>
         </ImageBackground>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
+    contenedorPrincipal: {
+        width: "100%",
+        height: "100%",
+        paddingTop: Constants.statusBarHeight,
+    },
     content: {
         width: "100%",
         height: "100%",

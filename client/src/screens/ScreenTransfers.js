@@ -28,11 +28,12 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
 
 
   return (
+    <View style={styles.contenedorPrincipal}>
+      <NavBar navigation={navigation} />
     <ImageBackground
       source={require('../assets/consolidated_dot.png')}
       style={styles.background}>
       <View style={styles.content}>
-        <NavBar navigation={navigation} />
 
         <View style={styles.contenedorPadre}>
           <View style={styles.contenedorCentral}>
@@ -57,33 +58,37 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
                 {data.length >= 1 ? data.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) : contacts?.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />)}
               </View>
             </View>
-            <View>
-              <Button
+          </View>
+          <View style={styles.contenedorHave}>
+          <Button
                 title="Add a friend"
                 type="clear"
                 titleStyle={{ color: 'white', fontSize: 18 }}
-                containerStyle={{ marginVertical: 20, borderRadius: 10, backgroundColor: '#00296B', width: '30%', alignSelf: 'center' }}
+                containerStyle={{ marginVertical: 20, borderRadius: 10, backgroundColor: '#00296B', width: '30%', }}
                 onPress={() => navigation.navigate('Add Friend')}
               />
-            </View>
-          </View>
-          <View style={styles.contenedorHave}>
             <Button
               title="Do a transfer"
               type="clear"
               titleStyle={{ color: 'white', fontSize: 18 }}
-              containerStyle={{ marginVertical: 20, borderRadius: 10, backgroundColor: '#00296B', width: '30%', alignSelf: 'center' }}
+              containerStyle={{ marginVertical: 20, borderRadius: 10, backgroundColor: '#00296B', width: '30%', }}
               onPress={() => navigation.navigate('InputTransfer')}
             />
           </View>
         </View>
-        <FooterNew navigation={navigation} />
-      </View>
+        </View>
     </ImageBackground>
+        <FooterNew navigation={navigation} />
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  contenedorPrincipal: {
+    width: "100%",
+    height: "100%",
+    paddingTop: Constants.statusBarHeight,
+},
   content: {
     width: "100%",
     height: "100%",
@@ -136,9 +141,10 @@ const styles = StyleSheet.create({
     height: '84%',
   },
   contenedorHave: {
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
     width: '100%',
     height: '80%',
-    marginTop: 4,
     borderRadius: 10,
   },
   contenedorNo: {
