@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Button from "../components/Button";
 import Paragraph from "../components/Paragraph";
 import { registerUser, updateUserData, createAccount } from '../actions';
+import { TouchableHighlight } from 'react-native';
 
 const HomeScreen = ({ navigation, registerUser, updateUserData, onlineUser, createAccount}) => {
 
@@ -40,7 +41,7 @@ const HomeScreen = ({ navigation, registerUser, updateUserData, onlineUser, crea
   
  return (
   <Background>
-    <Button onPress={() => {
+    <TouchableHighlight onPress={() => {
       registerUser("admin@gmail.com", "12345678")
       .then((res) => updateUserData(body, 1)
       .then(createAccount(1))
@@ -54,7 +55,7 @@ const HomeScreen = ({ navigation, registerUser, updateUserData, onlineUser, crea
         )
     } }>
       <Logo />
-    </Button>
+    </TouchableHighlight>
     <Header>Henry Bank</Header>
 
     <Paragraph style={{ color: "white" }}>The Henrys virtual wallet</Paragraph>

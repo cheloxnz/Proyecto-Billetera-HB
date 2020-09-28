@@ -7,7 +7,7 @@ import Constants from 'expo-constants';
 import PersonalD from '../components/PersonalDates';
 
 
-const ScreenDates = ({ navigation }) => {
+const ScreenDates = ({ navigation, onlineUser}) => {
     return (
         <View style={styles.contenedorPrincipal}>
         <NavBar navigation={navigation} />
@@ -16,17 +16,13 @@ const ScreenDates = ({ navigation }) => {
             style={styles.background}>
             <View style={styles.content}>
                 <View style={styles.contenedorPadre}>
-                    <View>
-                        <Text style={{ color: 'white', fontSize: 22, textAlign: 'center', marginTop: 20 }}>
-                            My Dates
-                        </Text>
-                    </View>
-                    <View style={{ marginHorizontal: 10, justifyContent: 'space-evenly' }}>
-                        <Text style={{ color: 'black', fontSize: 18, marginTop: 20, backgroundColor: 'yellow', padding: 10, fontWeight: '700' }}>
+                    <View style={{alignItems: 'center' }}>
+                        <Text
+                         style={{ color: 'black', fontSize: 20, marginTop: 10, backgroundColor: 'yellow', fontWeight: '700', textAlign: 'center', width:'60%' }}>
                             Personal Information
                         </Text>
-                        <PersonalD />
                     </View>
+                        <PersonalD dates = {onlineUser}/>
                 </View>
                 <FooterNew navigation={navigation} />
             </View>
@@ -44,7 +40,6 @@ const styles = StyleSheet.create({
     content: {
         width: "100%",
         height: "100%",
-        paddingTop: Constants.statusBarHeight,
     },
     background: {
         flex: 1,
@@ -56,5 +51,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
 })
+const mapStateToProps = state => {
+    return {
+        onlineUser: state.onlineUser
+    }
+}
 
-export default ScreenDates;
+export default connect (mapStateToProps)(ScreenDates);
