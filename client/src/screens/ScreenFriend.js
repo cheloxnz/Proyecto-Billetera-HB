@@ -9,7 +9,7 @@ import { SearchBar } from 'react-native-elements';
 import Axios from 'axios';
 import ListFriend from '../components/ListFriend';
 import {getAllContacts} from  '../actions'
-const DB_HOST = '192.168.0.107';
+const DB_HOST = '192.168.100.4';
 
 const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUser }) => {
     const [data, setData] = React.useState([])
@@ -62,19 +62,14 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
 
                     <View>
                         <View>
-                            <Text style={{ color: 'black', fontWeight: '700', fontSize: 20, textAlign: 'center', backgroundColor: 'yellow' }}>List Contacts</Text>
+                            <Text style={{ color: 'black', fontWeight: '700', fontSize: 20, textAlign: 'center', backgroundColor: 'yellow' }}>Users list</Text>
                         </View>
                     </View>
-                    <ScrollView style ={{marginTop: 10}} >
+                    <ScrollView style ={{marginTop: 25}} >
                         {data.length >= 1 ? data.map((user, i) => <ListFriend users={user} contacts = {contacts} text ={input} key={i} />) : null}
                     </ScrollView>
 
                 </View>
-                <TouchableOpacity style={{ width: '100%', marginBottom: 40, marginTop: 20, alignItems: 'center', }}>
-                    <Text style={{ borderRadius: 10, width: '80%', textAlign: 'center', color: 'white', fontSize: 20, backgroundColor: '#00296B', padding: 8 }}>
-                        Verify
-                    </Text>
-                </TouchableOpacity>
                 <FooterNew navigation={navigation} />
             </View>
         </ImageBackground>

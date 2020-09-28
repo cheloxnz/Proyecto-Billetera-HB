@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Card } from "react-native-paper";
-const ip = '192.168.0.107'
+const ip = '192.168.100.4'
 
 // CONSTANTES DE LAS ACTIONS
 export const REGISTER_USER = "REGISTER_USER";

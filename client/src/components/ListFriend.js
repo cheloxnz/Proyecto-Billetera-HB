@@ -23,11 +23,11 @@ const ListFriend = ({ users, onlineUser, addFriend,contacts, text }) => {
                                 <Text style={{ fontSize: 20, color: 'black' }}> {users?.username} </Text>}
                         />
                         <TouchableHighlight
-                            style={{ backgroundColor: 'black', color: 'black', width: '20%', textAlign: 'center', marginRight: 6, marginVertical: 10, padding: 3, borderBottomLeftRadius: 7, borderTopLeftRadius: 7 }}
+                            style={{ backgroundColor: 'black', color: 'black', width: '20%', alignItems: 'center', justifyContent: 'center', marginRight: 8, marginVertical:8, padding: 3, borderRadius: 7 }}
                             onPress={() => addFriend(onlineUser.id, users.username)}
                         >
                             <Text>
-                                <FontAwesome name='plus' size={18} color={'yellow'} />
+                                <FontAwesome name='plus' size={20} color={'yellow'} />
                             </Text>
                         </TouchableHighlight>
                     </View>

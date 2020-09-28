@@ -18,6 +18,7 @@ import ScreenFriend from './ScreenFriend';
 import ScreenConfirmAmount from './ScreenConfirmAmount';
 import ScreenDates from './ScreenDates';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Axios from 'axios';
 
 const Drawer = createDrawerNavigator();
 
@@ -58,6 +59,13 @@ const mapDispatchToProps = dispatch => {
 
 
 function App() {
+  const logOut = () => {
+    console.log('conchacajeta')
+  Axios
+  .get(`http://192.168.100.4:3005/users/logout`)
+  .then(res => console.log(res))
+  .catch(res => console.log(res))
+  }
   return (
     <NavigationContainer>
       <Drawer.Navigator
@@ -201,6 +209,7 @@ function App() {
             title: 'Log Out',
             drawerIcon: ({ focused, size }) => (
               <FontAwesome
+                onPress={() => logOut()}
                 name='times'
                 size={20}
                 color={focused ? 'black' : '#ccc'}
