@@ -12,7 +12,7 @@ const SearchPayment = () => {
       onChangeText={onChangeSearch}
       value={searchQuery}
       inputStyle={{ backgroundColor: 'white' }}
-      containerStyle={{ backgroundColor: 'white', borderRadius: 8 }}
+      containerStyle={{ backgroundColor: 'black', borderRadius: 8 }}
       ForwardRef={'#g5g5g5'}
       placeholder={'Search Company...'}
     />

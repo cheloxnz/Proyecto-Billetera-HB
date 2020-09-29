@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         width: "44.35%",
         alignItems: "center",
         marginTop: 8,
+        marginLeft: 6
     },
     icon: {
         width: "11.3%",
@@ -55,8 +56,8 @@ const styles = StyleSheet.create({
     bellContent: {
         width: "44.35%",
         alignItems: "center",
-        marginTop: 6,
-        marginLeft: 70
+        marginTop: 7,
+        marginLeft: 58
     },
 
 })

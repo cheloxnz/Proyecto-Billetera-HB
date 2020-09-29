@@ -5,9 +5,9 @@ import { List, Divider } from 'react-native-paper';
 
 const ListPayment = () => (
     <ScrollView>
-        <List.Section style={{ width: '90%', backgroundColor: '#f4f4f4', borderRadius: 10, marginHorizontal: 10, marginTop: 10 }}>
-            <Divider />
+        <List.Section style={{ width: '90%', backgroundColor: '#f4f4f4', borderRadius: 10, marginTop: 10 }}>
             <List.Subheader style={{ fontSize: 25, textAlign: 'center', backgroundColor: 'yellow' }}>Last Recharges</List.Subheader>
+            <Divider />
             <Divider />
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>

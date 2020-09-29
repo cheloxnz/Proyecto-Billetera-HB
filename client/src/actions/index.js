@@ -285,13 +285,13 @@ export function doLoad(amount, sucursal, dni, code) {
 export function cardState(cvu, id, estado) {
   return function (dispatch) {
     axios
-    .put(`http://${ip}:3005/accounts/${cvu}`, {id, estado})
-    .then(res => res.data)
-    .then(data => {
-      dispatch({
-        type: CARD,
-        payload: data
+      .put(`http://${ip}:3005/accounts/${cvu}`, { id, estado })
+      .then(res => res.data)
+      .then(data => {
+        dispatch({
+          type: CARD,
+          payload: data
+        })
       })
-    })
   }
 }
