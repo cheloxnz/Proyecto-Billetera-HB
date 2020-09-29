@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Card } from "react-native-paper";
-const ip = '192.168.100.4'
+const ip = '192.168.1.34'
 
 // CONSTANTES DE LAS ACTIONS
 export const REGISTER_USER = "REGISTER_USER";
@@ -285,13 +285,13 @@ export function doLoad(amount, sucursal, dni, code) {
 export function cardState(cvu, id, estado) {
   return function (dispatch) {
     axios
-    .put(`http://${ip}:3005/accounts/${cvu}`, {id, estado})
-    .then(res => res.data)
-    .then(data => {
-      dispatch({
-        type: CARD,
-        payload: data
+      .put(`http://${ip}:3005/accounts/${cvu}`, { id, estado })
+      .then(res => res.data)
+      .then(data => {
+        dispatch({
+          type: CARD,
+          payload: data
+        })
       })
-    })
   }
 }

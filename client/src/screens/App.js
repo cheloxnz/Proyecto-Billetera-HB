@@ -60,11 +60,10 @@ const mapDispatchToProps = dispatch => {
 
 function App() {
   const logOut = () => {
-    console.log('conchacajeta')
-  Axios
-  .get(`http://192.168.100.4:3005/users/logout`)
-  .then(res => console.log(res))
-  .catch(res => console.log(res))
+    Axios
+      .get(`http://192.168.1.34:3005/users/logout`)
+      .then(res => console.log(res))
+      .catch(res => console.log(res))
   }
   return (
     <NavigationContainer>
@@ -79,7 +78,7 @@ function App() {
           borderColor: 'yellow',
           borderWidth: 2,
           marginTop: '13%',
-          backgroundColor: 'white',
+          backgroundColor: 'black',
         }}
       >
         <Drawer.Screen name="Home" component={Principal}
@@ -149,7 +148,7 @@ function App() {
             ),
           }} />
         <Drawer.Screen name="Load" component={ScreenLoad}
-        style={{display: 'hidden'}}
+          style={{ display: 'hidden' }}
           options={{
             title: 'Load',
             drawerIcon: ({ focused, size }) => (
