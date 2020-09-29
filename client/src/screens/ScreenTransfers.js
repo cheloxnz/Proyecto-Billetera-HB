@@ -38,8 +38,8 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
             <View style={styles.contenedorCentral}>
 
               <View style={styles.contenedorSearch}>
-                <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {<Text style={{ color: 'yellow' }}>{account?.CVU}</Text>}</Text>
-                <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>If you have Henry Bank, search for it by username</Text>
+                <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center', marginBottom: 10 }}>My CVU: {<Text style={{ color: 'yellow' }}>{account?.CVU}</Text>}</Text>
+                <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center', marginBottom: 10 }}>If you have Henry Bank, search for it by username</Text>
                 <SearchBar
                   onChangeText={text => { handleContacts(text) }}
                   value={input}
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
 
   },
   parrafoContact: {
-    fontSize: 20,
+    fontSize: 22,
     textAlign: 'center',
     fontWeight: '700',
     color: 'white',
