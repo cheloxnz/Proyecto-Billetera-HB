@@ -18,6 +18,7 @@ import ScreenFriend from './ScreenFriend';
 import ScreenConfirmAmount from './ScreenConfirmAmount';
 import ScreenDates from './ScreenDates';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Estadisticas from './Estadisticas';
 import Axios from 'axios';
 
 const Drawer = createDrawerNavigator();
@@ -202,6 +203,17 @@ function App() {
                 color={focused ? 'black' : '#ccc'}
               />
             ),
+          }} />
+           <Drawer.Screen name="Estadisticas" component={Estadisticas}
+          options={{
+            title: 'My stadistitsic',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='chart'
+                size={20}
+                color={focused ? 'black' : '#ccc'}
+              />
+            )
           }} />
         <Drawer.Screen name='Log Out' component={HomeScreen}
           options={{

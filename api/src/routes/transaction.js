@@ -10,11 +10,15 @@ server.post("/:CVU", (req, res) => {
     var from = Account.findOne({
         where: {
             CVU: req.params.CVU,
+        }, include: {
+            model: User
         }
     })
     var to = Account.findOne({
         where: {
             CVU: cvu,
+        }, include: {
+            model: User
         }
     })
     Promise.all([from, to])
@@ -22,6 +26,7 @@ server.post("/:CVU", (req, res) => {
             var codes = Math.floor(Math.random() * 1000)
             let from = user[0]
             let to = user[1]
+            console.log(to.dataValues)
             if (!from || !to) return res.send("Cuenta no existente.")
             if (from.state == 'inactive' || to.state == 'inactive') return res.send('Cuenta deshabilitada')
             if (from.userId == to.userId) return res.send("Transacción invalida.")
@@ -46,7 +51,8 @@ server.post("/:CVU", (req, res) => {
                 Type: "transfer",
                 receptor: to.Naccount,
                 emisor: from.Naccount,
-                code: codes
+                code: codes,
+                nombreReceptor: to.user.dataValues.name + ' ' + to.user.dataValues.surname
             })
                 .then(data => {
                     body = {
@@ -84,7 +90,8 @@ server.post('/user/load', (req, res) => {
             Type: 'load',
             code: code,
             emisor: 11111111, //cambiar despues
-            receptor: user.account.Naccount
+            receptor: user.account.Naccount,
+            nombreReceptor: user.dataValues.name + ' ' + user.dataValues.surname
         })
             .then(load => {
                 res.send(load)
@@ -131,7 +138,7 @@ server.get('/all/:acc', (req, res) => {
         }
     });
     Promise.all([transE, transR])
-
+        
         .then(trans => res.send(selectionSort(flatten(trans))))
         .catch(err => console.log(err))
 })

@@ -13,5 +13,6 @@ export { default as InputTransfer } from './InputTransfer';
 export { default as ScreenLoad } from './ScreenLoad';
 export { default as ScreenFriend } from './ScreenFriend';
 export { default as ScreenConfirmAmount } from './ScreenConfirmAmount';
+export { default as Estadisticas } from './Estadisticas'
 export { default as ScreenDates } from './ScreenDates';
 
