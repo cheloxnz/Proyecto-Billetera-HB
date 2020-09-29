@@ -3,6 +3,7 @@ const { Account, User, Transaction } = require('../db.js');
 
 server.post("/:CVU", (req, res) => {
     console.log('estoy entrando al post de trans')
+    console.log(req.body)
     var { cvu, amount } = req.body
     var amount2 = parseInt(amount)
     if (amount2 < 50) return res.send('Minimal amount is $50')

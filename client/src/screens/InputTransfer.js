@@ -7,7 +7,8 @@ import BackButton from '../components/BackButton';
 import TextInput from '../components/TextInput';
 import { Button } from 'react-native-paper';
 import { doTransfer, getAccount, getBalance } from '../actions/index'
-import DropDownPicker from 'react-native-dropdown-picker';
+import Constants from 'expo-constants';
+
 
 const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts, friendCVU , transfersAll,
 getBalance, balance}) => {
@@ -24,24 +25,25 @@ getBalance, balance}) => {
 		getBalance(onlineUser.id)
 },[transfersAll.length])
 
-	const handleOnChange = (e) => {
+	const handleOnChange = (name, e) => {
+		console.log(name, e)
 		if (friendCVU != 0) {
 			setState({
 			...state,
 			CVU: friendCVU,
-			amount: e.target.value
+			amount: e.nativeEvent.text
 		})
 	} else {
 		setState({
 			...state,
-			[e.target.name]: e.target.value
+			[name]: e.nativeEvent.text
 		})}
 	}
 
 	const handleTransfer = (navigation) => {
 		if (account) doTransfer(account.CVU, state.CVU, state.amount)
 		setState('')
-		navigation.navigate('Principal')
+		//navigation.navigate('Principal')
 		//hacer alerta
 	}
 
@@ -50,6 +52,7 @@ getBalance, balance}) => {
 
 
 	return (
+		<View style={styles.contenedorPrincipal}>
 		<Background>
 			<BackButton goBack={() => navigation.navigate("Transfers")} />
 			<View style={styles.container}>
@@ -65,7 +68,7 @@ getBalance, balance}) => {
 							style={styles.textInput}
 							name='CVU'
 							value={friendCVU != 0 ? friendCVU : state.CVU ? state.CVU : '' }
-							onChange={e => handleOnChange(e)}
+							onChange={e => handleOnChange('CVU', e)}
 							editable={friendCVU != 0 ? false : state.CVU ? true : true}
 						/>
 					</View>
@@ -76,16 +79,22 @@ getBalance, balance}) => {
 							keyboardType='number-pad'
 							name='amount'
 							value={state.amount}
-							onChange={e => handleOnChange(e)} />
+							onChange={e => handleOnChange('amount', e)} />
 					</View>
 					<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > balance.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
 				</View>
 				<Button icon="cash-usd" color="#FFFFFF" mode="contained" disabled= {account?.state == 'active' ? false : true} style={styles.boton} onPress={() => {handleTransfer(navigation)}}> Transfer NOW!</Button>
 			</View>
 		</Background>
+		</View>
 	)
 }
 const styles = StyleSheet.create({
+	contenedorPrincipal: {
+    width: "100%",
+    height: "100%",
+    paddingTop: Constants.statusBarHeight,
+},
 	cont: {
 		color: theme.colors.primary,
 		fontSize: 16,

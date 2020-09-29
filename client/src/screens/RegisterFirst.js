@@ -26,15 +26,16 @@ useEffect(() => {
   })
   const [state, setState] = useState({})
 
-  const onChange = (e) => {
+  const onChange = (name, e) => {
+    //console.log(e)
     setState({
       ...state,
-      [e.target.name]: e.target.value,
+      [name]: e.nativeEvent.text,
     })
   }
-
+  console.log(state)
   const _onSignUpPressed = () => {
-    const emailError = emailValidator(state.email,emails);
+    const emailError = emailValidator(state.email);
     const passwordError = passwordValidator(state.password);
     const confirmPasswordError = confirmPasswordValidator(
       state.password,
@@ -68,7 +69,8 @@ useEffect(() => {
         label="Email"
         returnKeyType="next"
         name='email'
-        onChange={e => onChange(e)}
+        onChange={e => onChange('email' ,e)}
+        value={state.email}
         error={!!state.emailError}
         errorText={state.emailError}
         autoCapitalize="none"
@@ -81,7 +83,8 @@ useEffect(() => {
         label="Password"
         returnKeyType="done"
         name='password'
-        onChange={e => onChange(e)}
+        onChange={e => onChange('password', e)}
+        value={state.password}
         error={!!state.passwordError}
         errorText={state.passwordError}
         secureTextEntry
@@ -91,7 +94,8 @@ useEffect(() => {
         label="Confirm password"
         returnKeyType="done"
         name='confirmPassword'
-        onChange={e => onChange(e)}
+        onChange={e => onChange('confirmPassword', e)}
+        value={state.confirmPassword}
         error={!!state.confirmPasswordError}
         errorText={state.confirmPasswordError}
         secureTextEntry

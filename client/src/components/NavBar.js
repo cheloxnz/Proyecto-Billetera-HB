@@ -43,19 +43,20 @@ const styles = StyleSheet.create({
     menuContent: {
         width: "44.35%",
         alignItems: "center",
-        marginTop: 6,
+        marginTop: 8,
     },
     icon: {
         width: "11.3%",
         alignItems: "center",
         marginTop: 6,
         justifyContent: 'center',
+        marginBottom: 5
     },
     bellContent: {
         width: "44.35%",
-        alignItems: "flex-end",
+        alignItems: "center",
         marginTop: 6,
-        marginRight: 50
+        marginLeft: 70
     },
 
 })

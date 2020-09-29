@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, Button, TouchableHighlight, Alert } from 'react-native';
 import { List, Divider } from 'react-native-paper';
 import { connect } from 'react-redux';
@@ -7,32 +7,33 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 
-const ListFriend = ({ contacts, onlineUser, addFriend }) => {
-
-
-
+const ListFriend = ({ users, onlineUser, addFriend,contacts, text }) => {
+    console.log('---')
+    console.log(contacts)
+    console.log(text)
+    var flag = false
     return (
         <View style={styles.bg}>
-            {onlineUser?.id == contacts.id ? null :
-                <View>
+            {text?.length == 0? flag = true:onlineUser?.id == users.id ? flag = true : contacts?.map((c) => {if (c.id == users.id){  flag = true; return}})}
+            {flag? null :  
+                <View >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
                         <List.Item titleStyle={{ fontSize: 20, fontWeight: '700' }}
                             left={() =>
-                                <Text style={{ fontSize: 20, color: 'black' }}> {contacts?.username} </Text>}
+                                <Text style={{ fontSize: 20, color: 'black' }}> {users?.username} </Text>}
                         />
                         <TouchableHighlight
-                            style={{ backgroundColor: 'black', color: 'black', width: '20%', textAlign: 'center', marginRight: 6, marginVertical: 10, padding: 3, borderBottomLeftRadius: 7, borderTopLeftRadius: 7 }}
-                            onPress={() => addFriend(onlineUser.id, contacts.username)}
+                            style={{ backgroundColor: 'black', color: 'black', width: '20%', alignItems: 'center', justifyContent: 'center', marginRight: 8, marginVertical:8, padding: 3, borderRadius: 7 }}
+                            onPress={() => addFriend(onlineUser.id, users.username)}
                         >
                             <Text>
-                                <FontAwesome name='plus' size={18} color={'yellow'} />
+                                <FontAwesome name='plus' size={20} color={'yellow'} />
                             </Text>
                         </TouchableHighlight>
                     </View>
                     <Divider />
-                </View>
-            }
-        </View>
+                </View>}
+    </View>
     )
 };
 
@@ -56,7 +57,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
-        onlineUser: state.onlineUser
+        onlineUser: state.onlineUser,
+        contacts: state.contacts,
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ListFriend);

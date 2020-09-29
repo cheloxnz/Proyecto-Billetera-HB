@@ -28,7 +28,7 @@ const LoginScreen = ({ navigation, loginUser, onlineUser }) => {
 
     //navigation.navigate('PositionConsolidated');
   };
-  if (onlineUser?.role == 'Client') navigation.navigate('PositionConsolidated')
+  if (onlineUser?.role == 'Client') navigation.navigate('App')
   else if (onlineUser?.city) navigation.navigate('RegisterFourty')
   else if (onlineUser?.dni) navigation.navigate('RegisterThird')
   else if (onlineUser?.role === 'User') navigation.navigate('ActiveEmail')
