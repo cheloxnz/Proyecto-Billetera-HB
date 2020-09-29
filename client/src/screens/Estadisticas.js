@@ -130,7 +130,7 @@ const Chart = ({ navigation, transfersAll, account, onlineUser }) => {
                     <View style={{ flex: 1, marginLeft: 10 }}>
                         <AreaChart
                             style={{ flex: 1 }}
-                            data={data}
+                            data={neg}
                             yAccessor={({ item }) => item.value}
                             xAccessor={({ item }) => item.date}
                             xScale={scale.scaleTime}

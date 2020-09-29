@@ -58,20 +58,27 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
                 {data.length >= 1 ? data.map((contacts, i ) => <ContactsList contacts={contacts} navigation={navigation} key= {i} />) : contacts?.map((contacts, i) => <ContactsList contacts={contacts} navigation={navigation} key= {i} />)}
               </View>
             </View>
-          <View style={styles.contenedorHave}>
-          <Button
-                title="Add a friend"
-                type="clear"
-                titleStyle={{ color: 'white', fontSize: 18 }}
-                containerStyle={{ marginVertical: 20, backgroundColor: '#00296B', width: '30%', }}
-                onPress={() => navigation.navigate('Add Friend')}
-              />
              
+          <View style={styles.contenedorHave}>
+            <Button
+                  title="Add a friend"
+                  type="clear"
+                  titleStyle={{ color: 'white', fontSize: 18 }}
+                  containerStyle={{ 
+                    marginVertical: 20, 
+                    backgroundColor: '#00296B',
+                    width: '30%', }}
+                  onPress={() => navigation.navigate('Add Friend')}
+                />
             <Button
               title="Do a transfer"
               type="clear"
               titleStyle={{ color: 'white', fontSize: 18 }}
-              containerStyle={{ marginVertical: 20, backgroundColor: '#00296B', width: '45%', position: 'relative', left: 40, borderTopLeftRadius: 20 }}
+              containerStyle={{ 
+                marginVertical: 20, 
+                backgroundColor: '#00296B', 
+                width: '30%',
+                }}
               onPress={() => navigation.navigate('InputTransfer')}
             />
       
@@ -143,12 +150,13 @@ const styles = StyleSheet.create({
     height: '84%',
   },
   contenedorHave: {
+    flexDirection:'row',
+    alignItems: 'flex-end',
     justifyContent: 'space-evenly',
-    flexDirection: 'row',
     width: '100%',
-    height: '20%',
-    position: 'absolute',
-    top: 580
+    height: '70%',
+    borderRadius: 10,
+    marginTop: 4,
   },
   contenedorNo: {
     width: '48%',
