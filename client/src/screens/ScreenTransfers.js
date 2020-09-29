@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-native-elements';
 import Constants from 'expo-constants';
 import ContactsList from '../components/ContactsList';
-import { ImageBackground, View, StyleSheet, Text, StatusBar, Alert } from 'react-native';
+import { ImageBackground, View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { friendCVU, getAllContacts } from '../actions';
 import { SearchBar } from 'react-native-elements';
 import NavBar from '../components/NavBar';
@@ -30,57 +29,58 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
   return (
     <View style={styles.contenedorPrincipal}>
       <NavBar navigation={navigation} />
-    <ImageBackground
-      source={require('../assets/consolidated_dot.png')}
-      style={styles.background}>
-      <View style={styles.content}>
+      <ImageBackground
+        source={require('../assets/consolidated_dot.png')}
+        style={styles.background}>
+        <View style={styles.content}>
 
-        <View style={styles.contenedorPadre}>
-          <View style={styles.contenedorCentral}>
+          <View style={styles.contenedorPadre}>
+            <View style={styles.contenedorCentral}>
 
-            <View style={styles.contenedorSearch}>
-              <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {<Text style={{color: 'yellow'}}>{account?.CVU}</Text>}</Text>
-              <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>If you have Henry Bank, search for it by username</Text>
-              <SearchBar
-                onChangeText={text => { handleContacts(text) }}
-                value={input}
-                inputStyle={{ backgroundColor: 'white' }}
-                containerStyle={{ backgroundColor: 'black', borderWidth: 1, borderRadius: 8 }}
-                ForwardRef={'#g5g5g5'}
-                placeholder={'Type Here...'}
-              />
-            </View>
-            <View>
-              <View style={{ alignItems: "center" }}>
-                <Text style={styles.parrafoContact}>My contacts</Text>
+              <View style={styles.contenedorSearch}>
+                <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center', marginBottom: 10 }}>My CVU: {<Text style={{ color: 'yellow' }}>{account?.CVU}</Text>}</Text>
+                <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center', marginBottom: 10 }}>If you have Henry Bank, search for it by username</Text>
+                <SearchBar
+                  onChangeText={text => { handleContacts(text) }}
+                  value={input}
+                  inputStyle={{ backgroundColor: 'white' }}
+                  containerStyle={{ backgroundColor: 'black', borderWidth: 1, borderRadius: 8 }}
+                  ForwardRef={'#g5g5g5'}
+                  placeholder={'Type Here...'}
+                />
               </View>
               <View>
-                {data.length >= 1 ? data.map((contacts, i ) => <ContactsList contacts={contacts} navigation={navigation} key= {i} />) : contacts?.map((contacts, i) => <ContactsList contacts={contacts} navigation={navigation} key= {i} />)}
+                <View style={{ alignItems: "center" }}>
+                  <Text style={styles.parrafoContact}>My contacts</Text>
+                </View>
+                <View>
+                  {data.length >= 1 ? data.map((contacts, i) => <ContactsList contacts={contacts} navigation={navigation} key={i} />) : contacts?.map((contacts, i) => <ContactsList contacts={contacts} navigation={navigation} key={i} />)}
+                </View>
+              </View>
+              <View style={styles.contenedorHave}>
+                <TouchableOpacity
+                  style={{ marginVertical: 20, backgroundColor: '#00296B', width: '35%', height: '14%' }}
+                  onPress={() => navigation.navigate('Add Friend')}
+                >
+                  <Text style={{ color: 'white', fontSize: 18, textAlign: 'center', marginTop: 14 }}>
+                    Add a friend
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={{ color: 'white', fontSize: 18, marginVertical: 20, backgroundColor: '#00296B', width: '35%', height: '14%' }}
+                  onPress={() => navigation.navigate('InputTransfer')}
+                >
+                  <Text style={{ color: 'white', fontSize: 18, textAlign: 'center', marginTop: 14 }}>
+                    Do a transfers
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
-          <View style={styles.contenedorHave}>
-          <Button
-                title="Add a friend"
-                type="clear"
-                titleStyle={{ color: 'white', fontSize: 18 }}
-                containerStyle={{ marginVertical: 20, backgroundColor: '#00296B', width: '30%', }}
-                onPress={() => navigation.navigate('Add Friend')}
-              />
-             
-            <Button
-              title="Do a transfer"
-              type="clear"
-              titleStyle={{ color: 'white', fontSize: 18 }}
-              containerStyle={{ marginVertical: 20, backgroundColor: '#00296B', width: '45%', position: 'relative', left: 40, borderTopLeftRadius: 20 }}
-              onPress={() => navigation.navigate('InputTransfer')}
-            />
-      
-          </View>
           </View>
         </View>
-        </View>
-    </ImageBackground>
-        <FooterNew navigation={navigation} />
+      </ImageBackground>
+      <FooterNew navigation={navigation} />
     </View>
   )
 }
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     paddingTop: Constants.statusBarHeight,
-},
+  },
   content: {
     width: "100%",
     height: "100%",
@@ -146,9 +146,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     flexDirection: 'row',
     width: '100%',
-    height: '20%',
-    position: 'absolute',
-    top: 580
+    height: '75%',
+    alignItems: 'flex-end',
   },
   contenedorNo: {
     width: '48%',
@@ -170,7 +169,7 @@ const styles = StyleSheet.create({
 
   },
   parrafoContact: {
-    fontSize: 20,
+    fontSize: 22,
     textAlign: 'center',
     fontWeight: '700',
     color: 'white',
