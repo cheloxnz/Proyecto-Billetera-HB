@@ -51,7 +51,7 @@ server.post("/:CVU", (req, res) => {
                 receptor: to.Naccount,
                 emisor: from.Naccount,
                 code: codes,
-                nombreReceptor: to.user.dataValues.name + '' + to.user.dataValues.surname
+                nombreReceptor: to.user.dataValues.name + ' ' + to.user.dataValues.surname
             })
                 .then(data => {
                     body = {
@@ -89,7 +89,8 @@ server.post('/user/load', (req, res) => {
             Type: 'load',
             code: code,
             emisor: 11111111, //cambiar despues
-            receptor: user.account.Naccount
+            receptor: user.account.Naccount,
+            nombreReceptor: user.dataValues.name + ' ' + user.dataValues.surname
         })
             .then(load => {
                 res.send(load)
