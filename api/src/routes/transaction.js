@@ -4,7 +4,7 @@ const { Account, User, Transaction } = require('../db.js');
 server.post("/:CVU", (req, res) => {
     console.log('estoy entrando al post de trans')
     var { cvu, amount } = req.body
-    var amount2 = parseFloat(amount)
+    var amount2 = parseInt(amount)
     if (amount2 < 50) return res.send('Minimal amount is $50')
     var from = Account.findOne({
         where: {
@@ -38,6 +38,13 @@ server.post("/:CVU", (req, res) => {
             to.update({
                 balance: balanceTo + amount2
             })
+
+            var result = from.balance()
+            var body = {
+
+                balance: result,
+                text: 'Transaccion exitosa!'
+            }
             Transaction.create({
                 Quantity: amount2,
                 Type: "transfer",
@@ -46,12 +53,13 @@ server.post("/:CVU", (req, res) => {
                 code: codes,
                 nombreReceptor: to.user.dataValues.name + '' + to.user.dataValues.surname
             })
-            var result = from.balance()
-            var body = {
-                balance: result,
-                text: 'Transaccion exitosa!'
-            }
-            res.send(body)
+                .then(data => {
+                    body = {
+                        ...body,
+                        transfer: data
+                    }
+                    res.send(body)
+                })
         })
         .catch(err => console.log(err))
 })
@@ -83,7 +91,9 @@ server.post('/user/load', (req, res) => {
             emisor: 11111111, //cambiar despues
             receptor: user.account.Naccount
         })
-        res.send('Recarga exitosa')
+            .then(load => {
+                res.send(load)
+            })
     })
         .catch(err => console.log(err))
 })
@@ -127,10 +137,42 @@ server.get('/all/:acc', (req, res) => {
     });
     Promise.all([transE, transR])
         
-        .then(trans => res.send(flatten(trans).reverse()))
+        .then(trans => res.send(selectionSort(flatten(trans))))
         .catch(err => console.log(err))
 })
 const flatten = arr => arr.reduce((acc, el) => acc.concat(el), [])
+
+
+function selectionSort(items) {
+    function swap(items, firstIndex, secondIndex) {
+        var temp = items[firstIndex];
+        items[firstIndex] = items[secondIndex];
+        items[secondIndex] = temp;
+    }
+
+    var len = items.length,
+        min;
+
+    for (i = 0; i < len; i++) {
+
+        //set minimum to this position
+        min = i;
+
+        //check the rest of the array to see if anything is smaller
+        for (j = i + 1; j < len; j++) {
+            if (items[j].id < items[min].id) {
+                min = j;
+            }
+        }
+
+        //if the minimum isn't in the position, swap it
+        if (i != min) {
+            swap(items, i, min);
+        }
+    }
+    items.reverse()
+    return (items)
+}
 
 
 module.exports = server;

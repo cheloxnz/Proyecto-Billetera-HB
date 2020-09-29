@@ -29,12 +29,12 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
             <View style={styles.contenedorAgregar}>
                 <NavBar navigation={navigation} />
                 <View style={styles.contenedorSecAgregar}>
-                    <Text style={{ backgroundColor: 'yellow', color: 'black', fontSize: 20, textAlign: 'center', marginTop: 30, paddingTop: 10, paddingBottom: 10 }}>
+                    <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>
                         Here you can add friends through username
                     </Text>
                     <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
                         <View style={{ width: '40%', marginTop: 26, borderBottomColor: 'yellow', borderBottomWidth: 3, paddingTop: 20, paddingBottom: 20 }}>
-                            <Text style={{ color: 'white', fontSize: 20, textAlign: 'center', paddingTop: 6 }}>
+                            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>
                                 Username  <FontAwesome name='angle-double-right' size={26} color={'white'} />
                             </Text>
                         </View>
@@ -49,13 +49,13 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
                             />
                         </View>
                     </View>
-                    <Text style={{ color: '#F2F2F2', fontSize: 18, textAlign: 'center', marginTop: 20 }}>
+                    <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>
                         Enter the USERNAME without spaces or hyphens
                     </Text>
 
                     <View>
                         <View>
-                            <Text style={styles.parrafoContact}>List Contacts</Text>
+                            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>List Contacts</Text>
                         </View>
                     </View>
                     <ScrollView>
@@ -63,8 +63,8 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
                     </ScrollView>
 
                 </View>
-                <TouchableOpacity style={{ width: '100%', marginBottom: 40, marginTop: 20, alignItems: 'center' }}>
-                    <Text style={{ width: '80%', textAlign: 'center', color: 'white', fontSize: 20, backgroundColor: '#00296B', padding: 8 }}>
+                <TouchableOpacity style={{ width: '100%', marginBottom: 40, marginTop: 20, alignItems: 'center', }}>
+                    <Text style={{ borderRadius: 10, width: '80%', textAlign: 'center', color: 'white', fontSize: 20, backgroundColor: '#00296B', padding: 8 }}>
                         Verify
                     </Text>
                 </TouchableOpacity>
@@ -73,6 +73,9 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
         </ImageBackground>
     )
 }
+
+
+
 const styles = StyleSheet.create({
     background: {
         flex: 1,

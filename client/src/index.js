@@ -16,7 +16,8 @@ import {
   ScreenLoad,
   ScreenFriend,
   ScreenConfirmAmount,
-  Estadisticas
+  Estadisticas,
+  ScreenDates
 } from './screens';
 
 const Router = createStackNavigator(
@@ -35,7 +36,8 @@ const Router = createStackNavigator(
     ScreenLoad,
     ScreenFriend,
     ScreenConfirmAmount,
-    Estadisticas
+    Estadisticas,
+    ScreenDates
   },
   {
     initialRouteName: 'HomeScreen',

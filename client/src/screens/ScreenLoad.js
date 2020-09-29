@@ -4,11 +4,18 @@ import { View, StyleSheet, Text, ImageBackground, TouchableOpacity } from 'react
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
 import Input from '../components/TextInput';
+import { amountLoad } from "../actions"
 
+const ScreenLoad = ({ navigation, amountLoad }) => {
+    const [state, setState] = useState('')
 
-const ScreenLoad = ({ navigation }) => {
-
-
+    const handleOnChange = (e) => {
+        setState({
+            ...state,
+            amount: e.target.value
+        })
+    }
+    console.log(state)
     return (
         <View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
             <NavBar navigation={navigation} />
@@ -19,7 +26,7 @@ const ScreenLoad = ({ navigation }) => {
             >
                 <View style={styles.contenedorLoad}>
                     <View style={{ width: '70%', height: '25%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 10 }}>
-                        <Text style={{ color: 'white', fontSize: 16, marginTop: 14, fontWeight: '700' }}>
+                        <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>
                             Amount to load
                         </Text>
                         <View style={{ width: '100%', marginTop: 20 }}>
@@ -27,12 +34,16 @@ const ScreenLoad = ({ navigation }) => {
                                 style={styles.inputAmount}
                                 label='Enter the amount'
                                 placeholder='Amount'
-                            />
+                                keyboardType='number-pad'
+                                name='amount'
+                                value={state.amount}
+                                onChange={e => handleOnChange(e)} />
+
                         </View>
 
                     </View>
                     <TouchableOpacity style={{ width: '70%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 6, marginTop: 20 }}>
-                        <Text style={{ color: 'white', padding: 20, fontSize: 20 }} onPress={() => navigation.navigate("Confirm")}>
+                        <Text style={{ fontWeight: '700', color: 'white', padding: 20, fontSize: 20 }} onPress={() => { navigation.navigate("Confirm"), amountLoad(state.amount, 1) }}>
                             Next
                         </Text>
                     </TouchableOpacity>
@@ -45,6 +56,9 @@ const ScreenLoad = ({ navigation }) => {
         </View>
     );
 }
+
+
+
 
 const styles = StyleSheet.create({
     background: {
@@ -64,4 +78,11 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ScreenLoad;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        amountLoad: (amount, sucursal) => dispatch(amountLoad(amount, sucursal))
+
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ScreenLoad);

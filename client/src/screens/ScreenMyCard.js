@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
-import Switch from '../components/Switch';
+import { Switch } from 'react-native-paper';
 import ListP from '../components/ListInfo';
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
+import { cardState } from '../actions'
 
-const MyCard = ({ navigation }) => {
+const MyCard = ({ navigation, account, cardState, onlineUser }) => {
+    const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+    const onToggleSwitch = () => {
+        setIsSwitchOn(!isSwitchOn)
+    };
+    useEffect(() => {
+        console.log('concha cajeta')
+        if (!isSwitchOn) {
+            cardState(account?.CVU, onlineUser.id, 'inactive')
+        }
+        if (isSwitchOn) {
+            cardState(account?.CVU, onlineUser.id, 'active')
+        }
+
+    }, [isSwitchOn])
     return (
         <View style={styles.contenedorCard}>
 
@@ -26,14 +40,14 @@ const MyCard = ({ navigation }) => {
                             />
                         </View>
                         <Text style={styles.infoCard}>
-                            Your card ended in:
-                            </Text>
+                            Your card ended in {account?.card?.slice(12, 16)}
+                        </Text>
                         <View style={styles.contenedorDes}>
                             <Text style={styles.parrafoDes}>
                                 Temporarily disable the account
                             </Text>
                             <View style={styles.switchC}>
-                                <Switch />
+                                <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
                             </View>
                         </View>
                     </View>
@@ -110,4 +124,17 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(null)(MyCard);
+const mapStateToProps = state => {
+    return {
+        account: state.account,
+        onlineUser: state.onlineUser
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        cardState: (cvu, id, estado) => dispatch(cardState(cvu, id, estado))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyCard);

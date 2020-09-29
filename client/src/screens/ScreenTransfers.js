@@ -38,8 +38,8 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
           <View style={styles.contenedorCentral}>
 
             <View style={styles.contenedorSearch}>
-              <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {account?.dataValues?.CVU}</Text>
-              <Text style={styles.parrafoSearch}>If you have Henry Bank, search for it by username</Text>
+              <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>My CVU: {<Text style={{color: 'yellow'}}>{account?.CVU}</Text>}</Text>
+              <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>If you have Henry Bank, search for it by username</Text>
               <SearchBar
                 onChangeText={text => { handleContacts(text) }}
                 value={input}
@@ -50,8 +50,8 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
               />
             </View>
             <View>
-              <View>
-                <Text style={styles.parrafoContact}>Contacts</Text>
+              <View style={{ alignItems: "center" }}>
+                <Text style={styles.parrafoContact}>My contacts</Text>
               </View>
               <View>
                 {data.length >= 1 ? data.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />) : contacts?.map(contacts => <ContactsList contacts={contacts} navigation={navigation} />)}
@@ -71,9 +71,9 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
             <Button
               title="Do a transfer"
               type="clear"
-              titleStyle={{ color: 'black', fontSize: 18 }}
-              containerStyle={{ marginVertical: 40, borderRadius: 10, backgroundColor: 'white', width: '50%', alignSelf: 'center' }}
-              onPress={() => { navigation.navigate('InputTransfer'), friendCVU(0) }}
+              titleStyle={{ color: 'white', fontSize: 18 }}
+              containerStyle={{ marginVertical: 20, borderRadius: 10, backgroundColor: '#00296B', width: '30%', alignSelf: 'center' }}
+              onPress={() => navigation.navigate('InputTransfer')}
             />
           </View>
         </View>
@@ -88,6 +88,10 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     paddingTop: Constants.statusBarHeight,
+  },
+  background: {
+    flex: 1,
+    width: '100%',
   },
   contenedorPadre: {
     width: '100%',
@@ -153,13 +157,23 @@ const styles = StyleSheet.create({
   },
   contenedorSearch: {
     width: '100%',
-    height: '20%',
+    //height: '40%',
+
   },
   parrafoContact: {
     fontSize: 20,
+    textAlign: 'center',
+    fontWeight: '700',
     color: 'white',
     marginLeft: 20,
-    marginBottom: 10
+    marginTop: 20,
+    marginBottom: 20,
+    borderBottomWidth: 2,
+    borderColor: 'yellow',
+    width: '70%',
+    position: 'relative',
+    right: 31,
+    textAlign: 'left'
   },
   parrafoSearch: {
     color: 'white',
@@ -199,10 +213,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
 
   },
-  background: {
-    flex: 1,
-    width: '100%',
-  },
 
 })
 
@@ -223,3 +233,5 @@ const mapStateToProps = state => {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ScreenTransfers);
+
+

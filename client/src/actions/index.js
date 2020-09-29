@@ -1,4 +1,6 @@
 import axios from "axios";
+import { Card } from "react-native-paper";
+const ip = '192.168.100.4'
 
 // CONSTANTES DE LAS ACTIONS
 export const REGISTER_USER = "REGISTER_USER";
@@ -17,15 +19,17 @@ export const GET_TRANSFERS_ALL = "GET_TRANSFERS_ALL";
 export const GET_ALL_ACCOUNTS = "GET_ALL_ACCOUNTS";
 export const FRIEND_CVU = 'FRIEND_CVU';
 export const ADD_FRIEND = 'ADD_FRIEND';
-export const DELETE_FRIEND = 'DELETE_FRIEND'
-
+export const DELETE_FRIEND = 'DELETE_FRIEND';
+export const AMOUNT_LOAD = "AMOUNT_LOAD";
+export const DO_LOAD = "DO_LOAD";
+export const CARD = 'CARD';
 
 
 
 export function registerUser(email, password) {
   return function (dispatch) {
     return axios
-      .post("http://localhost:3005/users/register", { email, password })
+      .post(`http://${ip}:3005/users/register`, { email, password })
       .then((result) => result.data)
       .then((data) => {
         dispatch({
@@ -44,7 +48,7 @@ export function loginUser(email, password) {
   }
   return function (dispatch) {
     return axios
-      .post(`http://localhost:3005/users/login`, body)
+      .post(`http://${ip}:3005/users/login`, body)
       .then((result) => result.data)
       .then((data) => {
         dispatch({ type: LOGIN_USER, payload: data });
@@ -55,7 +59,7 @@ export function loginUser(email, password) {
 export function getAllUsers() {
   return function (dispatch) {
     return axios
-      .get("http://localhost:3005/users/all")
+      .get(`http://${ip}:3005/users/all`)
       .then((result) => result.data)
       .then((data) => {
         dispatch({
@@ -70,7 +74,7 @@ export function updateUserData(body, id) {
   console.log(body + '       ' + id)
   return function (dispatch) {
     return axios
-      .put(`http://localhost:3005/users/${id}`, body)
+      .put(`http://${ip}:3005/users/${id}`, body)
       .then(result => result.data)
       .then((data) => {
         dispatch({
@@ -85,7 +89,7 @@ export function updateUserData(body, id) {
 export function activeUser(id) {
   return function (dispatch) {
     return axios
-      .put(`http://localhost:3005/users/activeUser/${id}`)
+      .put(`http://${ip}:3005/users/activeUser/${id}`)
       .then((result) => result.data)
       .then((data) => {
         dispatch({
@@ -99,7 +103,7 @@ export function activeUser(id) {
 export function createAccount(id) {
   return function (dispatch) {
     return axios
-      .post(`http://localhost:3005/accounts/${id}`)
+      .post(`http://${ip}:3005/accounts/${id}`)
       .then(result => result.data)
       .then(account => {
         dispatch({
@@ -114,14 +118,14 @@ export function postSendEmail(value) {
   console.log(value)
   return function (dispatch) {
     return axios
-      .post("http://localhost:3005/send-email", value)
+      .post(`http://${ip}:3005/send-email`, value)
   }
 }
 
 export function setPinUser(idUser, pin) {
   return function (dispatch) {
     return axios
-      .put(`http://localhost:3005/users/updatePin/${idUser}`, { pin: pin })
+      .put(`http://${ip}:3005/users/updatePin/${idUser}`, { pin: pin })
       .then(() => {
         dispatch({
           type: SET_PIN_USER,
@@ -134,7 +138,7 @@ export function setPinUser(idUser, pin) {
 export function getAllContacts(id) {
   return function (dispatch) {
     return axios
-      .get(`http://localhost:3005/contacts/user/${id}`)
+      .get(`http://${ip}:3005/contacts/user/${id}`)
       .then((result) => result.data.friends)
       .then((friends) => {
         dispatch({
@@ -148,7 +152,7 @@ export function getAllContacts(id) {
 export function getAccount(id) {
   return function (dispatch) {
     return axios
-      .get(`http://localhost:3005/accounts/${id}`)
+      .get(`http://${ip}:3005/accounts/${id}`)
       .then((result) => result.data)
       .then((data) => {
         dispatch({
@@ -164,7 +168,7 @@ export function doTransfer(CVUFrom, cvu, amount) {
   console.log(CVUFrom, cvu, amount, "los parametros")
   return function (dispatch) {
     return axios
-      .post(`http://localhost:3005/transfers/${CVUFrom}`, { cvu, amount })
+      .post(`http://${ip}:3005/transfers/${CVUFrom}`, { cvu, amount })
       .then((result) => result.data)
       .then((data) => {
         dispatch({
@@ -179,7 +183,7 @@ export function doTransfer(CVUFrom, cvu, amount) {
 export function getTransfersAll(Naccount) {
   return function (dispatch) {
     return axios
-      .get(`http://localhost:3005/transfers/all/${Naccount}`)
+      .get(`http://${ip}:3005/transfers/all/${Naccount}`)
       .then((result) => result.data)
       .then((data) => {
         dispatch({
@@ -193,7 +197,7 @@ export function getTransfersAll(Naccount) {
 export function getBalance(id) {
   return function (dispatch) {
     return axios
-      .get(`http://localhost:3005/accounts/balance/${id}`)
+      .get(`http://${ip}:3005/accounts/balance/${id}`)
       .then((result) => result.data)
       .then((data) => {
         dispatch({
@@ -207,7 +211,7 @@ export function getBalance(id) {
 export function getAllAccounts() {
   return function (dispatch) {
     return axios
-      .get(`http://localhost:3005/accounts/`)
+      .get(`http://${ip}:3005/accounts/`)
       .then((result) => result.data)
       .then((data) => {
         dispatch({
@@ -230,7 +234,7 @@ export function friendCVU(cvu) {
 export function deleteFriend(userId, id) {
   return function (dispatch) {
     axios
-      .delete(`http://localhost:3005/contacts/user/${userId}/delete/${id}`)
+      .delete(`http://${ip}:3005/contacts/user/${userId}/delete/${id}`)
       .then(res => res.data)
       .then(data => {
         dispatch({
@@ -244,7 +248,7 @@ export function deleteFriend(userId, id) {
 export function addFriend(id, username) {
   return function (dispatch) {
     axios
-      .post(`http://localhost:3005/contacts/user/${id}/add`, { username })
+      .post(`http://${ip}:3005/contacts/user/${id}/add`, { username })
       .then(res => res.data)
       .then(data => {
         dispatch({
@@ -252,5 +256,42 @@ export function addFriend(id, username) {
           payload: data
         })
       })
+  }
+}
+export function amountLoad(amount, sucursal) {
+  var obj = { amount, sucursal }
+  return function (dispatch) {
+    dispatch({
+      type: AMOUNT_LOAD,
+      payload: obj,
+    })
+  }
+}
+export function doLoad(amount, sucursal, dni, code) {
+  var load = { amount, sucursal, dni, code }
+  return function (dispatch) {
+    axios
+      .post(`http://${ip}:3005/transfers/user/load`, { load })
+      .then(res => res.data)
+      .then(data => {
+        dispatch({
+          type: DO_LOAD,
+          payload: data
+        })
+      })
+  }
+}
+
+export function cardState(cvu, id, estado) {
+  return function (dispatch) {
+    axios
+    .put(`http://${ip}:3005/accounts/${cvu}`, {id, estado})
+    .then(res => res.data)
+    .then(data => {
+      dispatch({
+        type: CARD,
+        payload: data
+      })
+    })
   }
 }

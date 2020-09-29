@@ -15,7 +15,10 @@ import {
   GET_BALANCE,
   FRIEND_CVU,
   ADD_FRIEND,
-  DELETE_FRIEND
+  DELETE_FRIEND,
+  AMOUNT_LOAD,
+  DO_LOAD,
+  CARD
 } from "../actions";
 
 const initialState = {
@@ -25,11 +28,12 @@ const initialState = {
   contacts: [],
   account: {},
   transfer: {},
-  transfersAll: {},
+  transfersAll: [],
   balance: {},
   accounts: {},
   balance: {},
-  friendCVU: []
+  friendCVU: [],
+  amount: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -70,7 +74,6 @@ const reducer = (state = initialState, action) => {
       return state;
 
     case CREATE_ACCOUNT:
-      console.log('concha rtemil puta cahjetea')
       return {
         ...state,
         account: action.account
@@ -88,7 +91,9 @@ const reducer = (state = initialState, action) => {
     case DO_TRANSFER:
       return {
         ...state,
-        transfer: action.payload
+        transfer: action.payload,
+        transfersAll: [action.payload.transfer, ...state.transfersAll],
+        balance: state.balance.balance - action.payload.transfer.Quantity
       }
     case GET_TRANSFERS_ALL:
       return {
@@ -115,14 +120,31 @@ const reducer = (state = initialState, action) => {
         ...state,
         contacts: [...state.contacts, action.payload]
       }
-    case DELETE_FRIEND: 
-    return {
-      ...state,
-     contacts: state.contacts.filter(c => c.id != action.payload.id) //seguir con esto jaja
-    }
+    case DELETE_FRIEND:
+      return {
+        ...state,
+        contacts: state.contacts.filter(c => c.id != action.payload.id) //seguir con esto jaja
+      }
+    case AMOUNT_LOAD:
+      return {
+        ...state,
+        amount: action.payload
+      }
+    case DO_LOAD:
+      return {
+        ...state,
+        transfersAll: [action.payload, ...state.transfersAll]
+      }
+      case CARD: 
+      if (action.payload !== 'inactive' && action.payload !== 'active') return {...state};
+      return {
+        ...state,
+       account: {...state.account, state: action.payload }
+      }
     default:
       return state;
   }
+
 };
 
 export default reducer;

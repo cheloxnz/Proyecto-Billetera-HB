@@ -18,6 +18,7 @@ import HomeScreen from './HomeScreen';
 import ScreenLoad from './ScreenLoad';
 import ScreenFriend from './ScreenFriend';
 import ScreenConfirmAmount from './ScreenConfirmAmount';
+import ScreenDates from './ScreenDates';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Estadisticas from './Estadisticas';
 
@@ -113,7 +114,17 @@ function App() {
               />
             ),
           }} />
-
+        <Drawer.Screen name="My Dates" component={ScreenDates}
+          options={{
+            title: 'My Dates',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='user-circle'
+                size={20}
+                color={focused ? 'black' : '#ccc'}
+              />
+            ),
+          }} />
         <Drawer.Screen name="InputTransfer" component={InputTransfer}
           options={{
             title: 'Transactions',
@@ -159,6 +170,7 @@ function App() {
             ),
           }} />
         <Drawer.Screen name="Load" component={ScreenLoad}
+        style={{display: 'hidden'}}
           options={{
             title: 'Load',
             drawerIcon: ({ focused, size }) => (
@@ -219,6 +231,17 @@ function App() {
             drawerIcon: ({ focused, size }) => (
               <FontAwesome
                 name='chart'
+                size={20}
+                color={focused ? 'black' : '#ccc'}
+              />
+            )
+          }} />
+        <Drawer.Screen name='Log Out' component={HomeScreen}
+          options={{
+            title: 'Log Out',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='times'
                 size={20}
                 color={focused ? 'black' : '#ccc'}
               />

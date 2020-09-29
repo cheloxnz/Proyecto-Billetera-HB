@@ -38,7 +38,6 @@ const RegisterFourty = ({ navigation, setPinUser, onlineUser, activeUser, create
             label="PIN"
             returnKeyType="next"
             keyboardType="numeric"
-            maxLength="6"   
             onChangeText={(text) => setInput({ value: text, error: "" })} 
             error={!!input.error}     
             errorText={input.error} 
