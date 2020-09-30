@@ -35,7 +35,7 @@ const ScreenConfirm = ({ navigation, amount, onlineUser, doLoad }) => {
                         </Text>
                         <Image style={{ height: 200, width: 200, backgroundColor: "white" }} source={require('../assets/qr.png')} />
                     </View>
-                    <TouchableOpacity onPress={() => { doLoad(amount.amount, amount.sucursal, onlineUser.dni, codigo) }} style={{ width: '70%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 6, marginTop: 20 }}>
+                    <TouchableOpacity onPress={() => { doLoad(amount.amount, amount.sucursal, onlineUser.dni, codigo), navigation.navigate("Home") }} style={{ width: '70%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 6, marginTop: 20 }}>
                         <Text style={{ color: 'white', padding: 20, fontSize: 20 }}>
                             Confirm Transaction
                         </Text>
