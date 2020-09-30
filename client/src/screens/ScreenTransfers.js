@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Constants from 'expo-constants';
 import ContactsList from '../components/ContactsList';
-import { ImageBackground, View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { ImageBackground, View, StyleSheet, Text, StatusBar, TouchableOpacity} from 'react-native';
 import { friendCVU, getAllContacts } from '../actions';
 import { SearchBar } from 'react-native-elements';
 import NavBar from '../components/NavBar';
@@ -78,29 +78,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
               </View>
             </View>
              
-          <View style={styles.contenedorHave}>
-            <Button
-                  title="Add a friend"
-                  type="clear"
-                  titleStyle={{ color: 'white', fontSize: 18 }}
-                  containerStyle={{ 
-                    marginVertical: 20, 
-                    backgroundColor: '#00296B',
-                    width: '30%', }}
-                  onPress={() => navigation.navigate('Add Friend')}
-                />
-            <Button
-              title="Do a transfer"
-              type="clear"
-              titleStyle={{ color: 'white', fontSize: 18 }}
-              containerStyle={{ 
-                marginVertical: 20, 
-                backgroundColor: '#00296B', 
-                width: '30%',
-                }}
-              onPress={() => navigation.navigate('InputTransfer')}
-            />
-          </View>
+         
           </View>
         </View>
       </ImageBackground>

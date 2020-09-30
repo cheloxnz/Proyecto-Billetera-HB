@@ -41,7 +41,7 @@ const Chart = ({ navigation, transfersAll, account, onlineUser }) => {
                 negativos.push({date: date, value: value});
                 value = 0;
                }
-            if(!a[date] && value > 0)
+            if(!a[date] )
               a[date] = Object.assign({},{value, date});
              else a[date].value += value 
             return a;
