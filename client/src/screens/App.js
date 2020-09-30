@@ -78,8 +78,7 @@ function App() {
         }}
         drawerStyle={{
           borderColor: 'yellow',
-          borderWidth: 2,
-          marginTop: '13%',
+          borderLeftWidth: 2,
           backgroundColor: 'black',
         }}
       >

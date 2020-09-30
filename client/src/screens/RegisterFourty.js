@@ -21,9 +21,8 @@ const RegisterFourty = ({ navigation, setPinUser, onlineUser, activeUser, create
 
     setPinUser(onlineUser.id, input.value)    
     activeUser(onlineUser.id);
-    console.log('concha cajeta')
     createAccount(onlineUser.id);
-    navigation.navigate("PositionConsolidated")
+    navigation.navigate('App')
   };
 
   return (
@@ -43,7 +42,7 @@ const RegisterFourty = ({ navigation, setPinUser, onlineUser, activeUser, create
             errorText={input.error} 
             value={input.value}
           />          
-          <Button mode="contained" onPress={handleConfirm}>
+          <Button mode="contained" onPress={() => {handleConfirm()}}>
             Confirm
           </Button>
         </View>
