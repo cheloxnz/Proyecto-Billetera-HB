@@ -9,7 +9,7 @@ import { SearchBar } from 'react-native-elements';
 import Axios from 'axios';
 import ListFriend from '../components/ListFriend';
 import { getAllContacts } from '../actions'
-const DB_HOST = '192.168.0.104';
+const DB_HOST = 'localhost';
 
 const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUser }) => {
     const [data, setData] = React.useState([])

@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { View, ScrollView, Text, TouchableHighlight, TouchableOpacity} from 'react-native';
 import { Avatar } from 'react-native-paper';
+import { payment } from '../actions';
+import { connect } from 'react-redux';
 
-const ListHorizontal = ({navigation}) => (
+const ListHorizontal = ({navigation, payment}) => (
 
     <View style={{ marginLeft: 10 }}>
         <Text style={{ color: 'white', fontSize: 25, marginBottom: 20, textAlign: 'center' }}>
@@ -11,21 +13,14 @@ const ListHorizontal = ({navigation}) => (
         <ScrollView
             horizontal={true}
         >   
-          <View>
-                    <TouchableOpacity onPress={() => {navigation.navigate('Home') }}  >
-                 <Avatar.Icon size={60} icon="card" style={{ marginRight: 10 }} />
-
-                    </TouchableOpacity>
-
-                </View>
               <View>
-                  <TouchableOpacity onPress={() => {navigation.navigate('Home') }}  >
+                  <TouchableOpacity onPress={() => {navigation.navigate('Input Payment'), payment('Phone') }}  >
              
             <Avatar.Icon size={60} icon="phone" style={{ marginRight: 10 }} />
                   </TouchableOpacity>
               </View>
               <View>
-                    <TouchableOpacity onPress={() => {navigation.navigate('Home') }}  >
+                    <TouchableOpacity onPress={() => {navigation.navigate('Input Payment') , payment('DirecTV')}} >
 
             <Avatar.Icon size={60} icon="television" style={{ marginRight: 10 }} />
                     </TouchableOpacity>
@@ -33,7 +28,7 @@ const ListHorizontal = ({navigation}) => (
                 </View>
             
             <View>
-                    <TouchableOpacity onPress={() => {navigation.navigate('Home') }}  >
+                    <TouchableOpacity onPress={() => {navigation.navigate('Input Payment') , payment('Netflix')}}  >
             <Avatar.Icon size={60} icon="netflix" style={{ marginRight: 10 }} />
 
                     </TouchableOpacity>
@@ -42,7 +37,7 @@ const ListHorizontal = ({navigation}) => (
             
 
             <View>
-                    <TouchableOpacity onPress={() => {navigation.navigate('Home') }}  >
+                    <TouchableOpacity onPress={() => {navigation.navigate('Input Payment'), payment('Spotify') }}  >
 
             <Avatar.Icon size={60} icon="spotify" style={{ marginRight: 10 }} />
                     </TouchableOpacity>
@@ -51,7 +46,7 @@ const ListHorizontal = ({navigation}) => (
             
 
             <View>
-                    <TouchableOpacity onPress={() => {navigation.navigate('Home') }}  >
+                    <TouchableOpacity onPress={() => {navigation.navigate('Input Payment'), payment('Steam') }}  >
 
             <Avatar.Icon size={60} icon="steam" style={{ marginRight: 10 }} />
                     </TouchableOpacity>
@@ -59,40 +54,24 @@ const ListHorizontal = ({navigation}) => (
                 </View>
             
 
-            <View>
-                    <TouchableOpacity onPress={() => {navigation.navigate('Home') }}  >
+            <View>  
+                    <TouchableOpacity onPress={() => {navigation.navigate('Input Payment') }}  >
             <Avatar.Icon size={60} icon="folder" style={{ marginRight: 10 }} />
 
                     </TouchableOpacity>
 
                 </View>
+
             
-
-            <View>
-                    <TouchableOpacity onPress={() => {navigation.navigate('Home') }}  >
-
-            <Avatar.Icon size={60} icon="phone" style={{ marginRight: 10 }} />
-                    </TouchableOpacity>
-
-                </View>
-            
-            <View>
-                    <TouchableOpacity onPress={() => {navigation.navigate('Home') }}  >
-            <Avatar.Icon size={60} icon="television" style={{ marginRight: 10 }} />
-
-                    </TouchableOpacity>
-
-                </View>
-            
-                <View>
-                    <TouchableOpacity onPress={() => {navigation.navigate('Home') }}  >
-            <Avatar.Icon size={60} icon="card" style={{ marginRight: 10 }} />
-
-                    </TouchableOpacity>
-
-                </View>
         </ScrollView>
     </View>
 );
 
-export default ListHorizontal;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    payment: (p) => dispatch(payment(p))
+  }
+}
+
+export default connect(null, mapDispatchToProps) (ListHorizontal);
