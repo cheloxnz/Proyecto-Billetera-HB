@@ -67,8 +67,10 @@ const Chart = ({ navigation, transfersAll, account, onlineUser }) => {
         setData(result)
         setNegativos(result2)
     }, [transfersAll])
-    console.log(data)
+    console.log('----------------')
     console.log(neg)
+    console.log("*******************************")
+    console.log(data)
 
 
     const axesSvg = { fontSize: 10, fill: 'grey' };
