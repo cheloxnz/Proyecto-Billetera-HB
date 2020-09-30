@@ -61,7 +61,7 @@ const RegisterSecond = ({ navigation, onlineUser, updateUserData }) => {
       <BackButton goBack={() => navigation.navigate("RegisterSecond")} />
 
       <Header>Create Account</Header>
-      <View style ={{width: '100%', flexDirection: 'row'}} >
+      <View style ={{width: '100%'}} >
       <TextInput
         styleView={{ width: "100%" }}
         label="Name"

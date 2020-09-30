@@ -18,10 +18,6 @@ const MyCard = ({ navigation }) => {
                 style={styles.background}
             >
                 <View style={styles.contenedorSegundo}>
-                    <SearchP />
-                    <View style={styles.contenedorInfoP}>
-                        <Button style={styles.recharge} title='Recharge' />
-                    </View>
                     <View style={{ marginTop: 14 }}>
                         <ListH navigation= {navigation} />
                     </View>

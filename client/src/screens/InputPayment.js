@@ -17,15 +17,16 @@ const InputPayment = ({ navigation, onlineUser, balance, getBalance, getAccount,
 	}, [])
 	const [state, setState] = React.useState('')
 
-	const handlePayment = (navigation) => {
-		doPayment(state, payment, onlineUser.dni)
-		navigation.navigate('Home')
-		//hacer alerta
-	}
-
-	const handleOnChange = (e) => {
-		setState(e.nativeEvent.text)
-	}
+        const handlePayment = (navigation) => {
+			doPayment(state, payment, onlineUser.dni)
+			setState('')
+			navigation.navigate('Home')
+			//hacer alerta
+		}
+		
+		const handleOnChange = (e) => {
+			setState(e.nativeEvent.text)
+		}
 
 	return (
 		<View style={styles.contenedorPrincipal}>
@@ -57,7 +58,13 @@ const InputPayment = ({ navigation, onlineUser, balance, getBalance, getAccount,
 						</View>
 						<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > balance.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
 					</View>
-					<Button icon="cash-usd" color="#FFFFFF" mode="contained" disabled={account?.state == 'active' ? false : true} style={styles.boton} onPress={() => { handlePayment(navigation) }}> Pay now</Button>
+					<Button 
+					    icon="cash-usd"
+					    color="#FFFFFF" 
+					    mode="contained" 
+					    disabled={account?.state == 'active' ? false : true} style={styles.boton} onPress={() => { handlePayment(navigation) }}>
+					    	 Pay now
+					</Button>
 				</View>
 			</Background>
 		</View>
@@ -99,10 +106,11 @@ const styles = StyleSheet.create({
 		color: 'white'
 	},
 	top: {
+		width: '100%',
 		position: 'absolute',
 		top: 10,
 		color: theme.colors.primary,
-		fontSize: 32,
+		fontSize: 30,
 		fontWeight: '700',
 		letterSpacing: 3,
 	},

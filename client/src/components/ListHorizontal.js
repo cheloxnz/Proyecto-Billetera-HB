@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 const ListHorizontal = ({navigation, payment}) => (
 
     <View style={{ marginLeft: 10 }}>
-        <Text style={{ color: 'white', fontSize: 25, marginBottom: 20, textAlign: 'center' }}>
-            The most popular services.
+        <Text style={{ color: 'white', fontSize: 25, marginBottom: 20, fontWeight:'bold' , textAlign: 'center', width: '90%', alignSelf: 'center'}}>
+            The most popular services
         </Text>
         <ScrollView
             horizontal={true}
