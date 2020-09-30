@@ -19,6 +19,7 @@ import ScreenConfirmAmount from './ScreenConfirmAmount';
 import ScreenDates from './ScreenDates';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Estadisticas from './Estadisticas';
+import InputPayment from './InputPayment';
 import Axios from 'axios';
 
 const Drawer = createDrawerNavigator();
@@ -222,6 +223,17 @@ function App() {
               <FontAwesome
                 onPress={() => logOut()}
                 name='times'
+                size={20}
+                color={focused ? 'black' : '#ccc'}
+              />
+            ),
+          }} />
+          <Drawer.Screen name="Input Payment" component={InputPayment}
+          options={{
+            title: 'Input Payment',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='dollar'
                 size={20}
                 color={focused ? 'black' : '#ccc'}
               />

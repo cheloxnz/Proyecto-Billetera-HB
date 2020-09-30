@@ -16,6 +16,16 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
 
     const data = ["aca van ingresos y egresos"]
 
+    const randomColors = (name) => {
+        let colors = ['#fc9803', '#1e0f66','#35c4a3']
+        if (name === 'Netflix') return '#E50914';
+        if (name === 'Spotify') return '#1DB954';
+        if (name === 'Steam') return '#1b3f55';
+        if (name === 'DirecTV') {return '#03a9f4'} 
+        else {
+            return colors[Math.floor(Math.random() * 3)]
+        } 
+    }
 
     useEffect(() => {
         getAllAccounts()
@@ -61,12 +71,12 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                 {
                     <ScrollView style={styles.contentHijoDos}>
                         {flag ? transfersAll.map((t, i) => {
-                            if (t.Type !== "load") {
+                            if (t.Type !== "load" && t.Type !== 'payment') {
                                 return (
                                    
                                     < View style={styles.contentMov} key={i} >
 
-                                        <UserAvatar size={30} bgColors={['#ccc', '#fafafa', '#ccaabb']} name="Matias Córdoba" />
+                                        <UserAvatar size={30} bgColor={randomColors()} name={t.nombreReceptor} />
 
                                         <Text style={styles.servicio}>
 
@@ -85,12 +95,31 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                                     </View>
                                 )
                             } else {
+                                if(t.Type === 'payment') {
+                                    return (
+                                        < View style={styles.contentMov} key={i} >
+    
+                                            <UserAvatar size={30} bgColor={randomColors(t.nombreReceptor)} name={t.nombreReceptor} />
+                                            <Text style={styles.servicio}>
+                                                {t.nombreReceptor}
+                                            </Text>
+                                            {
+                                                account?.Naccount == t.receptor ?
+                                                    <Text style={styles.ingresos}> + ${t.Quantity}</Text> : <Text style={styles.egresos}> - ${t.Quantity}</Text>
+    
+                                            }
+    
+                                            <Divider />
+                                        </View>
+                                    )
+
+                                } else {
                                 return (
                                     < View style={styles.contentMov} key={i} >
 
-                                        <UserAvatar size={30} bgColors={['#ccc', '#fafafa', '#ccaabb']} name="Matias Córdoba" />
+                                        <UserAvatar size={30} bgColor={'#a87332'} name={t.Type} />
                                         <Text style={styles.servicio}>
-                                            {"LOAD"}
+                                            {t.Type}
                                         </Text>
                                         {
                                             account?.Naccount == t.receptor ?
@@ -98,10 +127,10 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
 
                                         }
 
-
                                         <Divider />
                                     </View>
                                 )
+                            }
                             }
                         }) : null}
 

@@ -139,7 +139,7 @@ server.get('/all/:acc', (req, res) => {
     });
     Promise.all([transE, transR])
         
-        .then(trans => res.send(selectionSort(flatten(trans))))
+        .then(trans => (console.log(trans), res.send(selectionSort(flatten(trans))) ))
         .catch(err => console.log(err))
 })
 const flatten = arr => arr.reduce((acc, el) => acc.concat(el), [])
@@ -175,6 +175,37 @@ function selectionSort(items) {
     items.reverse()
     return (items)
 }
+server.post('/user/payment', (req, res) =>{
+    console.log(req.body)
+    const amount = parseFloat(req.body.amount)
+    const { service, code, dni} = req.body
+    User.findOne({
+        where: {
+            dni: dni
+        }, include: Account
+    }).then(user =>{
+        if (!user) return res.send('Cuenta Inexistente')
+        var userBalance = user.account.balance()
+        user.account.update({
+            balance: userBalance - amount
+        })
+        Transaction.create({
+            Quantity: amount,
+            Type: 'payment',
+            code: code,
+            emisor: user.account.Naccount,
+            receptor: 1111111,
+            nombreReceptor: service
+
+        })
+        .then(payment => {
+            res.send(payment)
+        })
+    })
+    .catch(err => console.log(err))
+
+})
+
 
 
 module.exports = server;

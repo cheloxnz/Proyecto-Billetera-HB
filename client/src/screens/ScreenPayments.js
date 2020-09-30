@@ -23,7 +23,7 @@ const MyCard = ({ navigation }) => {
                         <Button style={styles.recharge} title='Recharge' />
                     </View>
                     <View style={{ marginTop: 14 }}>
-                        <ListH />
+                        <ListH navigation= {navigation} />
                     </View>
                     <View style={styles.contenedorRecargas}>
                         <View style={{ marginTop: 10 }}>
