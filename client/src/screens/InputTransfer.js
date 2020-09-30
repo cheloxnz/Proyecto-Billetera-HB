@@ -5,7 +5,7 @@ import Background from '../components/Background'
 import { theme } from '../core/theme';
 import BackButton from '../components/BackButton';
 import TextInput from '../components/TextInput';
-import { Button } from 'react-native-paper';
+import { Modal, Portal, Button } from 'react-native-paper';
 import { doTransfer, getAccount, getBalance, TouchableOpacity } from '../actions/index'
 import Constants from 'expo-constants';
 
@@ -15,6 +15,11 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 	const [state, setState] = useState('')
 	const [transf, setTransf] = useState('')
 	const [balance2, setBalance] = useState(account.balance)
+	const [visible, setVisible] = React.useState(false);
+
+	const showModal = () => setVisible(true);
+
+	const hideModal = () => setVisible(false);
 
 	useEffect(() => {
 		if (transfer?.text) setTransf(transfer.text)
@@ -26,12 +31,12 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 	}, [transfersAll.length])
 
 	const handleOnChange = (name, e) => {
-		console.log(name, e)
+		console.log(name, e.nativeEvent.text)
 		if (friendCVU != 0) {
 			setState({
 				...state,
 				CVU: friendCVU,
-				amount: e.nativeEvent.text
+				[name]: e.nativeEvent.text
 			})
 		} else {
 			setState({
@@ -48,9 +53,16 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 		//hacer alerta
 	}
 
-	var namesList = []
-	contacts ? namesList = contacts.map((c) => c.name) : namesList = []
-
+    if (state.PIN == onlineUser.pin){
+		handleTransfer()
+		hideModal()
+		alert('Transaction in process')
+		setState({
+			CVU: friendCVU,
+			PIN: '',
+			amount: ''
+		})
+	}
 
 	return (
 		<View style={styles.contenedorPrincipal}>
@@ -84,8 +96,26 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 						</View>
 						<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > balance.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
 					</View>
-					<Button icon="cash-usd" color="#FFFFFF" mode="contained" disabled={account?.state == 'active' ? false : true} style={styles.boton} onPress={() => { handleTransfer(navigation) }}> Transfer NOW!</Button>
+					<Portal >
+						<Modal visible={visible} onDismiss={hideModal}>
+							<View style={{ height: 200, backgroundColor: 'white', width: '90%', borderRadius: 30, alignSelf: 'center' }}>
+								<Text style={{ color: 'black', fontSize: 24, textAlign: 'center', backgroundColor: 'yellow', borderRadius: 12, width: '80%', marginLeft: '10%', marginTop: '5%'}}>Type your PIN to confirm</Text>
+								<TextInput 
+								style={{width: '60%', marginLeft: '20%', borderRadius: 5, backgroundColor: 'lightgray'}}
+								label='PIN'
+								keyboardType='number-pad'
+								onChange={e => handleOnChange('PIN', e)}
+								value={state.PIN}
+								
+								></TextInput>
+							</View>
+						</Modal>
+
+					</Portal>
+					<Button icon="cash-usd" color="#FFFFFF" mode="contained" disabled={account?.state == 'active' ? false : true} style={styles.boton} onPress={() => { showModal() }}> Transfer NOW!</Button>
 				</View>
+
+
 			</Background>
 		</View>
 	)
