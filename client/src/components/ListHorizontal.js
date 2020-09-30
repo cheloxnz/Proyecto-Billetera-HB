@@ -4,8 +4,8 @@ import { Avatar } from 'react-native-paper';
 
 const ListHorizontal = () => (
 
-    <View>
-        <Text style={{ color: 'white', fontSize: 25, marginBottom: 20 }}>
+    <View style={{ marginLeft: 10 }}>
+        <Text style={{ color: 'white', fontSize: 25, marginBottom: 20, textAlign: 'center' }}>
             The most popular services.
         </Text>
         <ScrollView

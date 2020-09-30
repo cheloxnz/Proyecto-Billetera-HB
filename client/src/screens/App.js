@@ -5,9 +5,7 @@ import { getAccount } from '../actions';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import NavBar from '../components/NavBar';
 import Principal from './Principal';
-import FooterNew from '../components/FooterNew';
 import ScreenTransfers from './ScreenTransfers';
 import ForgotPasswordScreen from './ForgotPasswordScreen';
 import ScreenMyCard from './ScreenMyCard';
@@ -20,33 +18,10 @@ import ScreenFriend from './ScreenFriend';
 import ScreenConfirmAmount from './ScreenConfirmAmount';
 import ScreenDates from './ScreenDates';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Estadisticas from './Estadisticas';
+import Axios from 'axios';
 
 const Drawer = createDrawerNavigator();
-
-
-const PositionConsolidated = ({ navigation }) => {
-
-  return (
-    <View style={styles.container}>
-      {/* NAVBAR VA EN TODOS LOS SCREEN  */}
-      <NavBar navigation={navigation} />
-      <ImageBackground
-        source={require('../assets/consolidated_dot.png')}
-        style={styles.background}
-      >
-        {/* ACA SE PONE EL COMPONENTE DEL SCREEN A RENDERIZAR */}
-        <Principal navigation={navigation} />
-
-      </ImageBackground>
-
-
-      {/* FOOTER VA EN TODOS LOS SCREEN  */}
-      <FooterNew navigation={navigation} />
-    </View>
-
-  )
-}
-
 
 
 
@@ -54,7 +29,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     top: getStatusBarHeight(),
-    justifyContent: 'space-between'
 
   },
   component: {
@@ -86,6 +60,12 @@ const mapDispatchToProps = dispatch => {
 
 
 function App() {
+  const logOut = () => {
+    Axios
+      .get(`http://192.168.1.34:3005/users/logout`)
+      .then(res => console.log(res))
+      .catch(res => console.log(res))
+  }
   return (
     <NavigationContainer>
       <Drawer.Navigator
@@ -99,10 +79,10 @@ function App() {
           borderColor: 'yellow',
           borderWidth: 2,
           marginTop: '13%',
-          backgroundColor: 'white',
+          backgroundColor: 'black',
         }}
       >
-        <Drawer.Screen name="Home" component={PositionConsolidated}
+        <Drawer.Screen name="Home" component={Principal}
           options={{
             title: 'Home',
             drawerIcon: ({ focused, size }) => (
@@ -169,7 +149,7 @@ function App() {
             ),
           }} />
         <Drawer.Screen name="Load" component={ScreenLoad}
-        style={{display: 'hidden'}}
+          style={{ display: 'hidden' }}
           options={{
             title: 'Load',
             drawerIcon: ({ focused, size }) => (
@@ -224,11 +204,23 @@ function App() {
               />
             ),
           }} />
+        <Drawer.Screen name="Estadisticas" component={Estadisticas}
+          options={{
+            title: 'My Statistics',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='calculator'
+                size={20}
+                color={focused ? 'black' : '#ccc'}
+              />
+            )
+          }} />
         <Drawer.Screen name='Log Out' component={HomeScreen}
           options={{
             title: 'Log Out',
             drawerIcon: ({ focused, size }) => (
               <FontAwesome
+                onPress={() => logOut()}
                 name='times'
                 size={20}
                 color={focused ? 'black' : '#ccc'}

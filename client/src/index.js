@@ -10,12 +10,13 @@ import {
   ForgotPasswordScreen,
   RegisterThird,
   RegisterFourty,
-  PositionConsolidated,
+  App,
   BuyaSell,
   InputTransfer,
   ScreenLoad,
   ScreenFriend,
   ScreenConfirmAmount,
+  Estadisticas,
   ScreenDates
 } from './screens';
 
@@ -29,12 +30,13 @@ const Router = createStackNavigator(
     RegisterFourty,
     ActiveEmail,
     ForgotPasswordScreen,
-    PositionConsolidated,
+    App,
     BuyaSell,
     InputTransfer,
     ScreenLoad,
     ScreenFriend,
     ScreenConfirmAmount,
+    Estadisticas,
     ScreenDates
   },
   {

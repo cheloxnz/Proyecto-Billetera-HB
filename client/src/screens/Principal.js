@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Button, StyleSheet, Text, View, ScrollView, YellowBox } from 'react-native';
+import { Button, StyleSheet, Text, View, ScrollView, YellowBox , ImageBackground} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { getAccount, getTransfersAll, getAllUsers, getBalance, getAllAccounts } from '../actions';
 import { Divider } from 'react-native-paper';
 import UserAvatar from 'react-native-user-avatar';
-//import { LineChart, XAxis, Grid } from 'react-native-svg-charts'
+import Constants from 'expo-constants';
+import FooterNew from '../components/FooterNew';
+import NavBar from '../components/NavBar';
+
 
 
 const Principal = ({ navigation, getAccount, account, onlineUser,
@@ -35,10 +38,15 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
     if (transfersAll.length > 0) flag = true;
     
     return (
+        <View style={styles.contenedorPrincipal}>
+        <ImageBackground
+        source={require('../assets/consolidated_dot.png')}
+        style={styles.background}
+      >
+          <NavBar navigation={navigation} />
         <View style={styles.contenedorPadre}>
 
-            {/* ------- CONTENT ------- */}
-            <View style={styles.contentPadre}>
+             <View style={styles.contentPadre}>
                 <View style={styles.contentHijo}>
                     <View style={styles.contentInfo}>
                         <Text style={styles.cta}>N° CTA: {account?.Naccount}</Text>
@@ -46,30 +54,23 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                         <Text style={styles.parrafoSaldo}>My Balance $ {balance?.balance} </Text>
                     </View>
                 </View>
-                <View style={styles.contentBotones}>
-                    {/* <View style={styles.contentRecargar}>
-                        <Button title='Load' onPress={() => navigation.navigate('Load')} style={styles.botonRecargar} />
-                    </View>
-                    <View style={styles.contentEnviar}>
-                        <Button title='Send' onPress={() => navigation.navigate("Transfers")} style={styles.botonEnviar} />
-                    </View> */}
-                </View>
             </View>
-            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center', marginBottom: 20, }}>Movements</Text>
+            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>Movements</Text>
             <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
-            <View style={styles.containerTrans}>
+        <View style={styles.containerTrans}>
                 {
                     <ScrollView style={styles.contentHijoDos}>
-                        {flag ? transfersAll.map((t) => {
+                        {flag ? transfersAll.map((t, i) => {
                             if (t.Type !== "load") {
                                 return (
-                                    < View style={styles.contentMov} >
+                                   
+                                    < View style={styles.contentMov} key={i} >
 
                                         <UserAvatar size={30} bgColors={['#ccc', '#fafafa', '#ccaabb']} name="Matias Córdoba" />
 
                                         <Text style={styles.servicio}>
 
-                                            {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { console.log(a.Naccount, t.emisor, "facu toy cagao de hambre  "); return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
+                                            {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
                                                 accounts?.map((a) => { if (a.Naccount == t.receptor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } })}
 
                                         </Text>
@@ -85,7 +86,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                                 )
                             } else {
                                 return (
-                                    < View style={styles.contentMov} >
+                                    < View style={styles.contentMov} key={i} >
 
                                         <UserAvatar size={30} bgColors={['#ccc', '#fafafa', '#ccaabb']} name="Matias Córdoba" />
                                         <Text style={styles.servicio}>
@@ -105,18 +106,31 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                         }) : null}
 
                     </ScrollView>}
-            </View>
-        </View >
+            </View> 
+
+                </View >
+
+                          </ImageBackground>
+                <FooterNew  navigation={navigation} />
+                </View>
+
     )
 }
 
 const styles = StyleSheet.create({
-
+    contenedorPrincipal: {
+        width: "100%",
+        height: "100%",
+        paddingTop: Constants.statusBarHeight,
+    },
+    background: {
+    flex: 1,
+    width: '100%',
+  },
     contenedorPadre: {
         width: '100%',
         height: '100%',
         flex: 1,
-        justifyContent: 'space-between'
     },
 
     homeCont: {
@@ -166,7 +180,7 @@ const styles = StyleSheet.create({
     },
     contentHijo: {
         width: '100%',
-        height: '60%',
+        height: '80%',
         backgroundColor: 'lightgray',
         opacity: 0.9,
         position: 'absolute',
@@ -181,10 +195,8 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     contentHijoDos: {
-        marginBottom: 20,
         width: '100%',
-        height: '50%',
-        marginVertical: 10,
+        height: '100%',
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
         backgroundColor: 'lightgray',
@@ -193,9 +205,9 @@ const styles = StyleSheet.create({
     },
     contentInfo: {
         flex: 1,
-        height: '30%',
+        height: '100%',
         alignItems: 'center',
-        marginVertical: 25
+        marginVertical: 25,
     },
     saldo: {
         borderRadius: 10,
@@ -269,11 +281,9 @@ const styles = StyleSheet.create({
         width: '30%'
     },
     containerTrans: {
-        marginBottom: 30,
         opacity: 0.9,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
-        backgroundColor: 'lightgray',
         alignItems: "center",
         marginTop: 20,
         width: '100%',

@@ -6,11 +6,12 @@ import { theme } from '../core/theme';
 import BackButton from '../components/BackButton';
 import TextInput from '../components/TextInput';
 import { Button } from 'react-native-paper';
-import { doTransfer, getAccount, getBalance } from '../actions/index'
-import DropDownPicker from 'react-native-dropdown-picker';
+import { doTransfer, getAccount, getBalance, TouchableOpacity } from '../actions/index'
+import Constants from 'expo-constants';
 
-const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts, friendCVU , transfersAll,
-getBalance, balance}) => {
+
+const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, contacts, friendCVU, transfersAll,
+	getBalance, balance }) => {
 	const [state, setState] = useState('')
 	const [transf, setTransf] = useState('')
 	const [balance2, setBalance] = useState(account.balance)
@@ -22,26 +23,28 @@ getBalance, balance}) => {
 	}, [transfer])
 	useEffect(() => {
 		getBalance(onlineUser.id)
-},[transfersAll.length])
+	}, [transfersAll.length])
 
-	const handleOnChange = (e) => {
+	const handleOnChange = (name, e) => {
+		console.log(name, e)
 		if (friendCVU != 0) {
 			setState({
-			...state,
-			CVU: friendCVU,
-			amount: e.target.value
-		})
-	} else {
-		setState({
-			...state,
-			[e.target.name]: e.target.value
-		})}
+				...state,
+				CVU: friendCVU,
+				amount: e.nativeEvent.text
+			})
+		} else {
+			setState({
+				...state,
+				[name]: e.nativeEvent.text
+			})
+		}
 	}
 
 	const handleTransfer = (navigation) => {
 		if (account) doTransfer(account.CVU, state.CVU, state.amount)
 		setState('')
-		navigation.navigate('Principal')
+		//navigation.navigate('Principal')
 		//hacer alerta
 	}
 
@@ -50,42 +53,49 @@ getBalance, balance}) => {
 
 
 	return (
-		<Background>
-			<BackButton goBack={() => navigation.navigate("Transfers")} />
-			<View style={styles.container}>
-				<Text style={styles.top}>TRANSFER</Text>
-				<Text style={styles.from}>FROM: {onlineUser.name ? onlineUser.name.toUpperCase() + ' ' + onlineUser.surname.toUpperCase() : ''}</Text>
-				<View style={{ marginVertical: 40 }} >
-					<Text style={styles.balance}>MY BALANCE: ${balance?.balance}</Text>
-					<View style={styles.inputCvu}>
-						<Text style={styles.cont}>CVU</Text>
-						<TextInput
-							keyboardType='number-pad'
-							inputStyle={{ color: 'yellow' }}
-							style={styles.textInput}
-							name='CVU'
-							value={friendCVU != 0 ? friendCVU : state.CVU ? state.CVU : '' }
-							onChange={e => handleOnChange(e)}
-							editable={friendCVU != 0 ? false : state.CVU ? true : true}
-						/>
+		<View style={styles.contenedorPrincipal}>
+			<Background>
+				<BackButton goBack={() => navigation.navigate("Transfers")} />
+				<View style={styles.container}>
+					<Text style={styles.top}>TRANSFER</Text>
+					<Text style={styles.from}>FROM: {onlineUser.name ? onlineUser.name.toUpperCase() + ' ' + onlineUser.surname.toUpperCase() : ''}</Text>
+					<View style={{ marginVertical: 40 }} >
+						<Text style={styles.balance}>MY BALANCE: ${balance?.balance}</Text>
+						<View style={styles.inputCvu}>
+							<Text style={styles.cont}>CVU</Text>
+							<TextInput
+								keyboardType='number-pad'
+								inputStyle={{ color: 'yellow' }}
+								style={styles.textInput}
+								name='CVU'
+								value={friendCVU != 0 ? friendCVU : state.CVU ? state.CVU : ''}
+								onChange={e => handleOnChange('CVU', e)}
+								editable={friendCVU != 0 ? false : state.CVU ? true : true}
+							/>
+						</View>
+						<View style={styles.inputAmount}>
+							<Text style={styles.cont}>AMOUNT</Text>
+							<TextInput
+								style={styles.textInput}
+								keyboardType='number-pad'
+								name='amount'
+								value={state.amount}
+								onChange={e => handleOnChange('amount', e)} />
+						</View>
+						<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > balance.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
 					</View>
-					<View style={styles.inputAmount}>
-						<Text style={styles.cont}>AMOUNT</Text>
-						<TextInput
-							style={styles.textInput}
-							keyboardType='number-pad'
-							name='amount'
-							value={state.amount}
-							onChange={e => handleOnChange(e)} />
-					</View>
-					<Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold' }}>{state.amount > balance.balance ? 'You dont have that amount' : state.amount < 50 && state.amount >= 1 ? 'The minimum amount is $50' : state.amount == '' ? '' : null}</Text>
+					<Button icon="cash-usd" color="#FFFFFF" mode="contained" disabled={account?.state == 'active' ? false : true} style={styles.boton} onPress={() => { handleTransfer(navigation) }}> Transfer NOW!</Button>
 				</View>
-				<Button icon="cash-usd" color="#FFFFFF" mode="contained" disabled= {account?.state == 'active' ? false : true} style={styles.boton} onPress={() => {handleTransfer(navigation)}}> Transfer NOW!</Button>
-			</View>
-		</Background>
+			</Background>
+		</View>
 	)
 }
 const styles = StyleSheet.create({
+	contenedorPrincipal: {
+		width: "100%",
+		height: "100%",
+		paddingTop: Constants.statusBarHeight,
+	},
 	cont: {
 		color: theme.colors.primary,
 		fontSize: 16,
@@ -124,8 +134,6 @@ const styles = StyleSheet.create({
 		letterSpacing: 3,
 	},
 	boton: {
-		position: 'absolute',
-		bottom: 90,
 		borderRadius: 15,
 		paddingTop: 15,
 		paddingBottom: 15,

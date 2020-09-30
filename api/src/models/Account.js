@@ -16,7 +16,7 @@ module.exports = sequelize => {
         }, //Agregar numero de cuneeta
         balance: {
             type: DataTypes.FLOAT,
-            defaultValue: 500,
+            defaultValue: 0,
              get() {
                  return () => this.getDataValue('balance');
              },

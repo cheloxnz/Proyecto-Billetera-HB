@@ -61,8 +61,9 @@ const RegisterSecond = ({ navigation, onlineUser, updateUserData }) => {
       <BackButton goBack={() => navigation.navigate("RegisterSecond")} />
 
       <Header>Create Account</Header>
+      <View style ={{width: '100%', flexDirection: 'row'}} >
       <TextInput
-        styleView={{ width: "150px" }}
+        styleView={{ width: "100%" }}
         label="Name"
         returnKeyType="next"
         value={name.value}
@@ -116,6 +117,7 @@ const RegisterSecond = ({ navigation, onlineUser, updateUserData }) => {
         error={!!birthDate.error}
         errorText={birthDate.error}
       />
+      </View>
      
       <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
         Next
