@@ -23,6 +23,8 @@ export const DELETE_FRIEND = 'DELETE_FRIEND';
 export const AMOUNT_LOAD = "AMOUNT_LOAD";
 export const DO_LOAD = "DO_LOAD";
 export const CARD = 'CARD';
+export const DO_PAYMENT = 'DO_PAYMENT';
+export const PAYMENT = 'PAYMENT';
 
 
 
@@ -293,5 +295,28 @@ export function cardState(cvu, id, estado) {
           payload: data
         })
       })
+  }
+}
+
+export function doPayment(amount, service, dni) {
+  return function (dispatch) {
+    return axios
+      .post(`http://${ip}:3005/transfers/user/payment`, { amount,service, dni })
+      .then((result) => result.data)
+      .then((data) => {
+        dispatch({
+          type: DO_PAYMENT,
+          payload: data
+        })
+      })
+  }
+}
+
+export function payment(service) {
+  return function(dispatch) {
+    dispatch({
+      type: PAYMENT,
+      payload: service
+    })
   }
 }

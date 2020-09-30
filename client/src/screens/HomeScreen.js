@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import Button from "../components/Button";
 import Paragraph from "../components/Paragraph";
 import { registerUser, updateUserData, createAccount } from '../actions';
-import { TouchableHighlight } from 'react-native';
+import { TouchableHighlight, View } from 'react-native';
 
 const HomeScreen = ({ navigation, registerUser, updateUserData, onlineUser, createAccount}) => {
 
@@ -54,7 +54,9 @@ const HomeScreen = ({ navigation, registerUser, updateUserData, onlineUser, crea
           )
         )
     } }>
+      <View>
       <Logo />
+      </View> 
     </TouchableHighlight>
     <Header>Henry Bank</Header>
 

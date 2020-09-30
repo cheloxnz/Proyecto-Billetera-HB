@@ -8,7 +8,7 @@ module.exports = sequelize => {
         },
         Type: {
             type: DataTypes.ENUM,
-            values: ['transfer', 'load']
+            values: ['transfer', 'load', 'payment']
         },
         
         code: {
