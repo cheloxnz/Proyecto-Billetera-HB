@@ -1,20 +1,20 @@
 import React from 'react';
 import { ScrollView, View, Text, StyleSheet, TextInput } from 'react-native';
-import {Button} from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { Divider } from 'react-native-paper';
 import Input from './TextInput';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 
 
-const Personal = ({dates}) => {
+const Personal = ({ dates }) => {
     const [inputs, setInputs] = React.useState('')
     const handleOnChange = (e) => {
-       setInputs({
-         })
-         console.log(e)
-     }
-     console.log(inputs)
+        setInputs({
+        })
+        console.log(e)
+    }
+    console.log(inputs)
     return (
         <View>
             <View style={{ width: '48%', flexDirection: 'row', marginLeft: 10 }}>
@@ -22,32 +22,36 @@ const Personal = ({dates}) => {
                     style={styles.inputPersonal}
                     label='Name'
                     placeholder=''
-                    value = {dates.name}
-                    onChange = {(e) => handleOnChange(e)}
+                    value={dates.name}
+                    onChange={(e) => handleOnChange(e)}
+                    editable={false}
+
 
                 />
                 <Input
                     style={styles.inputPersonal}
                     label='Surname'
                     placeholder=''
-                    value= {dates.surname}
+                    value={dates.surname}
+                    editable={false}
                 />
             </View>
             <Divider />
-            <View style={{ width: '48%', flexDirection: 'row', marginLeft: 10}}>
+            <View style={{ width: '48%', flexDirection: 'row', marginLeft: 10 }}>
                 <Input
                     style={styles.inputPersonal}
                     label='Username'
                     placeholder=''
-                    value= {dates.username}
+                    value={dates.username}
+                    editable={false}
                 />
                 <Input
                     style={styles.inputPersonal}
                     label='Email'
                     placeholder=''
-                    value= {dates.email}
+                    value={dates.email}
+                    editable={false}
                 />
-                {/* <FontAwesome name='edit' size={25} color={'white'} style={{ marginTop: 30, marginRight: 35 }} /> */}
             </View>
             <Divider />
             <View style={{ width: '48%', flexDirection: 'row', marginLeft: 10 }}>
@@ -55,13 +59,14 @@ const Personal = ({dates}) => {
                     style={styles.inputPersonal}
                     label='Date of birth'
                     placeholder=''
-                    value= {dates.birthDate}
+                    value={dates.birthDate}
+                    editable={false}
                 />
                 <Input
                     style={styles.inputPersonal}
                     label='Phone'
                     placeholder=''
-                    value= {dates.phone}
+                    value={dates.phone}
                 />
                 {/* <FontAwesome name='edit' size={25} color={'white'} style={{ marginTop: 30, marginRight: 35 }} /> */}
             </View>
@@ -71,46 +76,42 @@ const Personal = ({dates}) => {
                     style={styles.inputPersonal}
                     label='DNI'
                     placeholder=''
-                    value= {dates.dni}
+                    value={dates.dni}
+                    editable={false}
                 />
                 <Input
                     style={styles.inputPersonal}
                     label='Postal Code'
                     placeholder=''
-                    value= {dates.postalCode}
+                    value={dates.postalCode}
+                    editable={false}
                 />
             </View>
             <Divider />
-            <View style={{ width: '48%', flexDirection: 'row' , marginLeft: 10}}>
+            <View style={{ width: '48%', flexDirection: 'row', marginLeft: 10 }}>
                 <Input
                     style={styles.inputPersonal}
                     label='City'
                     placeholder=''
-                    value= {dates.city}
+                    value={dates.city}
+                    editable={false}
                 />
                 <Input
                     style={styles.inputPersonal}
                     label='Province'
                     placeholder=''
-                    value= {dates.province}
+                    value={dates.province}
+                    editable={false}
                 />
             </View>
             <Divider />
-            <View style={{ width: '100%', flexDirection: 'row' , marginLeft: 10}}>
+            <View style={{ width: '100%', flexDirection: 'row', marginLeft: 10 }}>
                 <Input
                     style={styles.inputPersonal}
                     label='Address'
                     placeholder=''
-                    value= {dates.address}
+                    value={dates.address}
                 />
-                {/* <FontAwesome name='edit' size={25} color={'white'} style={{ marginTop: 30, marginRight: 35 }} /> */}
-            {/* <Button
-                title="Add a friend"
-                type="clear"
-                titleStyle={{ color: 'yellow', fontSize: 18 }}
-                containerStyle={{ borderRadius: 10, backgroundColor: 'black', width: '50%', height:'80%', marginTop: 10}}
-                onPress={() => updateDates(dates)}
-              /> */}
             </View>
         </View>
     )

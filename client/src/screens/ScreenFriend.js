@@ -8,16 +8,16 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { SearchBar } from 'react-native-elements';
 import Axios from 'axios';
 import ListFriend from '../components/ListFriend';
-import {getAllContacts} from  '../actions'
-const DB_HOST = '192.168.0.106';
+import { getAllContacts } from '../actions'
+const DB_HOST = '192.168.0.104';
 
 const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUser }) => {
     const [data, setData] = React.useState([])
     const [input, setInput] = React.useState('')
-    useEffect(()=> {
+    useEffect(() => {
         getAllContacts(onlineUser.id)
-    },[])
-   console.log(contacts)
+    }, [])
+    console.log(contacts)
     const handleContacts = text => {
         console.log(text)
         setInput(text)
@@ -29,50 +29,50 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
     return (
         <View style={styles.contenedorPrincipal}>
             <NavBar navigation={navigation} />
-        <ImageBackground
-            source={require('../assets/consolidated_dot.png')}
-            style={styles.background}>
-            <View style={styles.contenedorAgregar}>
-                <View style={styles.contenedorSecAgregar}>
-                    <Text style={{ color: 'black', fontWeight: '700', fontSize: 20, textAlign: 'center', backgroundColor: 'yellow'}}>
-                        Here you can add friends through username
+            <ImageBackground
+                source={require('../assets/consolidated_dot.png')}
+                style={styles.background}>
+                <View style={styles.contenedorAgregar}>
+                    <View style={styles.contenedorSecAgregar}>
+                        <Text style={{ color: 'black', fontWeight: '700', fontSize: 20, textAlign: 'center', backgroundColor: 'yellow' }}>
+                            Here you can add friends through username
                     </Text>
-                    <View style ={{ borderBottomColor: 'yellow', borderBottomWidth: 3}} >
-                    <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
-                        <View style={{ width: '35%', marginTop: 26,paddingTop: 10 }}>
-                            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>
-                                Username  <FontAwesome name='angle-double-right' size={26} color={'white'} />
-                            </Text>
-                        </View>
-                        <View style={{ width: '65%', marginTop: 12, paddingTop: 10}}>
-                            <SearchBar
-                                onChangeText={text => { handleContacts(text) }}
-                                value={input}
-                                inputStyle={{ backgroundColor: 'white' }}
-                                containerStyle={{ backgroundColor: 'black', borderWidth: 1, borderRadius: 8 }}
-                                ForwardRef={'#g5g5g5'}
-                                placeholder={'Search username'}
-                            />
-                        </View>
-                    </View>
-                    <Text style={{ color: 'white', fontWeight: '700', fontSize: 14, textAlign: 'center' }}>
-                        (Enter the USERNAME without spaces or hyphens)
+                        <View style={{ borderBottomColor: 'yellow', borderBottomWidth: 3 }} >
+                            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'center' }}>
+                                <View style={{ width: '35%', marginTop: 26, paddingTop: 10 }}>
+                                    <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>
+                                        Username  <FontAwesome name='angle-double-right' size={26} color={'white'} />
+                                    </Text>
+                                </View>
+                                <View style={{ width: '65%', marginTop: 12, paddingTop: 10 }}>
+                                    <SearchBar
+                                        onChangeText={text => { handleContacts(text) }}
+                                        value={input}
+                                        inputStyle={{ backgroundColor: 'white' }}
+                                        containerStyle={{ backgroundColor: 'black', borderWidth: 1, borderRadius: 8 }}
+                                        ForwardRef={'#g5g5g5'}
+                                        placeholder={'Search username'}
+                                    />
+                                </View>
+                            </View>
+                            <Text style={{ color: 'white', fontWeight: '700', fontSize: 14, textAlign: 'center' }}>
+                                (Enter the USERNAME without spaces or hyphens)
                     </Text>
-                    </View>
+                        </View>
 
-                    <View>
                         <View>
-                            <Text style={{ color: 'black', fontWeight: '700', fontSize: 20, textAlign: 'center', backgroundColor: 'yellow' }}>Users list</Text>
+                            <View>
+                                <Text style={{ color: 'black', fontWeight: '700', fontSize: 20, textAlign: 'center', backgroundColor: 'yellow' }}>Users list</Text>
+                            </View>
                         </View>
-                    </View>
-                    <ScrollView style ={{marginTop: 25}} >
-                        {data.length >= 1 ? data.map((user, i) => <ListFriend users={user} contacts = {contacts} text ={input} key={i} />) : null}
-                    </ScrollView>
+                        <ScrollView style={{ marginTop: 25 }} >
+                            {data.length >= 1 ? data.map((user, i) => <ListFriend users={user} contacts={contacts} text={input} key={i} />) : null}
+                        </ScrollView>
 
+                    </View>
+                    <FooterNew navigation={navigation} />
                 </View>
-                <FooterNew navigation={navigation} />
-            </View>
-        </ImageBackground>
+            </ImageBackground>
         </View>
     )
 }

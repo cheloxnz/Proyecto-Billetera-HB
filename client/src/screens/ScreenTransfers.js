@@ -77,8 +77,6 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
                 </TouchableOpacity>
               </View>
             </View>
-             
-         
           </View>
         </View>
       </ImageBackground>
@@ -145,7 +143,7 @@ const styles = StyleSheet.create({
     height: '84%',
   },
   contenedorHave: {
-    flexDirection:'row',
+    flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-evenly',
     width: '100%',

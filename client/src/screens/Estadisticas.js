@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ImageBackground, View, StyleSheet, Text, StatusBar, Alert } from 'react-native';
+import { ImageBackground, View, StyleSheet, Text, ScrollView, Alert } from 'react-native';
 import { connect } from 'react-redux'
 import { Path } from 'react-native-svg'
 import Constants from 'expo-constants';
@@ -27,7 +27,7 @@ const Chart = ({ navigation, transfersAll, account, onlineUser }) => {
         });
         //setDay(new Date(t.createdAt.substr(0, 4), t.createdAt.substr(5, 2), t.createdAt.substr(8, 2)), t.createdAt.substr(8, 2))
         // for (let i = 0; i < modelo2.length; i++) {
-       //    if (! modelo2[i].date ) modelo2[i].date
+        //    if (! modelo2[i].date ) modelo2[i].date
         //     for (let j = i; j < modelo2.length; j++) {
         //         if (modelo2[i].date == modelo2[j].date) {
         //             arr.push[modelo2[j].value]
@@ -36,23 +36,23 @@ const Chart = ({ navigation, transfersAll, account, onlineUser }) => {
         //     }
         // }
         const negativos = []
-        let result = Object.values(modelo2.reduce((a, {value, date})=>{
+        let result = Object.values(modelo2.reduce((a, { value, date }) => {
             if (value < 0) {
-                negativos.push({date: date, value: value});
+                negativos.push({ date: date, value: value });
                 value = 0;
-               }
-            if(!a[date] )
-              a[date] = Object.assign({},{value, date});
-             else a[date].value += value 
+            }
+            if (!a[date])
+                a[date] = Object.assign({}, { value, date });
+            else a[date].value += value
             return a;
-           },{}));
+        }, {}));
 
-        let result2 = Object.values(negativos.reduce((a, {value, date}) =>{
-            if(!a[date])
-            a[date] = Object.assign({},{value, date});
-           else a[date].value += value 
-          return a;
-         },{}));
+        let result2 = Object.values(negativos.reduce((a, { value, date }) => {
+            if (!a[date])
+                a[date] = Object.assign({}, { value, date });
+            else a[date].value += value
+            return a;
+        }, {}));
 
         result.forEach(m => m.date = new Date(m.date.substr(0, 4), m.date.substr(5, 2), m.date.substr(8, 2)))
         result.forEach(m => {
@@ -69,94 +69,101 @@ const Chart = ({ navigation, transfersAll, account, onlineUser }) => {
     }, [transfersAll])
     console.log(data)
     console.log(neg)
-   
+
 
     const axesSvg = { fontSize: 10, fill: 'grey' };
     const verticalContentInset = { top: 10, bottom: 10 }
     const xAxisHeight = 30
 
     return (
-        <ImageBackground
-            source={require('../assets/consolidated_dot.png')}
-            style={styles.background}>
-                {data.length >= 1 ?
-            <View style={styles.content}>
-                <NavBar navigation={navigation} />
-                <Text style={{color: 'yellow', fontSize: 24, fontWeight: "bold"}}>INGRESOS</Text>
-                <View style={{ height: 200, padding: 20, flexDirection: 'row', backgroundColor: 'white' }}>
-                    <YAxis
-                        data={data}
-                        style={{ marginBottom: xAxisHeight }}
-                        contentInset={verticalContentInset}
-                        svg={axesSvg}
-                        numberOfTicks={6}
-                        yAccessor={({ item }) => item.value}
-                    />
-                    <View style={{ flex: 1, marginLeft: 10 }}>
-                        <AreaChart
-                            style={{ flex: 1 }}
-                            data={data}
-                            yAccessor={({ item }) => item.value}
-                            xAccessor={({ item }) => item.date}
-                            xScale={scale.scaleTime}
-                            contentInset={{ top: 10, bottom: 10 }}
-                            svg={{ fill: 'rgba(50,205,50, 0.6)' }}
-                            curve={shape.curveLinear}
-                        >
-                            <Grid />
-                        </AreaChart>
-                        <XAxis
-                            xAccessor={({ item }) => item.date}
-                            scale={scale.scaleTime}
-                            style={{ marginHorizontal: -10, height: xAxisHeight }}
-                            data={data}
-                            formatLabel={(value, index) => format(value, 'dd/MM')}
-                            contentInset={{ left: 10, right: 10 }}
-                            svg={axesSvg}
-                            numberOfTicks={6}
-                        />
-                    </View>
-                </View>
-                <Text style={{color: 'yellow', fontSize: 24, fontWeight: "bold"}}>EGRESOS</Text>
-                <View style={{ height: 200, padding: 20, flexDirection: 'row', backgroundColor: 'white' }}>
-                <YAxis
-                        data={neg}
-                        style={{ marginBottom: xAxisHeight }}
-                        contentInset={verticalContentInset}
-                        svg={axesSvg}
-                        numberOfTicks={6}
-                        yAccessor={({ item }) => item.value}
-                    />
-                    <View style={{ flex: 1, marginLeft: 10 }}>
-                        <AreaChart
-                            style={{ flex: 1 }}
-                            data={neg}
-                            yAccessor={({ item }) => item.value}
-                            xAccessor={({ item }) => item.date}
-                            xScale={scale.scaleTime}
-                            contentInset={{ top: 10, bottom: 10 }}
-                            svg={{ fill: 'rgba(178,34,34, 0.6)' }}
-                            curve={shape.curveLinear}
-                        >
-                            <Grid />
-                        </AreaChart>
-                        <XAxis
-                            xAccessor={({ item }) => item.date}
-                            scale={scale.scaleTime}
-                            style={{ marginHorizontal: -10, height: xAxisHeight }}
-                            data={neg}
-                            formatLabel={(value, index) => format(value, 'dd/MM')}
-                            contentInset={{ left: 10, right: 10 }}
-                            svg={axesSvg}
-                            numberOfTicks={6}
-                        />
-                    </View>
-                    </View>
+        <View>
+            {data.length >= 1 ?
+                <View style={styles.content}>
+                    <ImageBackground
+                        source={require('../assets/consolidated_dot.png')}
+                        style={styles.background}>
+                        <NavBar navigation={navigation} />
+                        <View>
+                            <Text style={{ color: 'yellow', fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 10 }}>EQUIVALENT INCOME B/D</Text>
+                            <ScrollView>
+                                <View style={{ height: 200, padding: 20, flexDirection: 'row', backgroundColor: 'white' }}>
+                                    <YAxis
+                                        data={data}
+                                        style={{ marginBottom: xAxisHeight }}
+                                        contentInset={verticalContentInset}
+                                        svg={axesSvg}
+                                        numberOfTicks={6}
+                                        yAccessor={({ item }) => item.value}
+                                    />
+                                    <View style={{ flex: 1, marginLeft: 10 }}>
+                                        <AreaChart
+                                            style={{ flex: 1 }}
+                                            data={data}
+                                            yAccessor={({ item }) => item.value}
+                                            xAccessor={({ item }) => item.date}
+                                            xScale={scale.scaleTime}
+                                            contentInset={{ top: 10, bottom: 10 }}
+                                            svg={{ fill: 'rgba(50,205,50, 0.6)' }}
+                                            curve={shape.curveLinear}
+                                        >
+                                            <Grid />
+                                        </AreaChart>
+                                        <XAxis
+                                            xAccessor={({ item }) => item.date}
+                                            scale={scale.scaleTime}
+                                            style={{ marginHorizontal: -10, height: xAxisHeight }}
+                                            data={data}
+                                            formatLabel={(value, index) => format(value, 'dd/MM')}
+                                            contentInset={{ left: 10, right: 10 }}
+                                            svg={axesSvg}
+                                            numberOfTicks={6}
+                                        />
+                                    </View>
+                                </View>
+                            </ScrollView>
+                            <Text style={{ color: 'yellow', fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 10 }}>EQUIVALENT EXPENSES B/D</Text>
+                            <ScrollView>
+                                <View style={{ height: 200, padding: 20, flexDirection: 'row', backgroundColor: 'white' }}>
+                                    <YAxis
+                                        data={neg}
+                                        style={{ marginBottom: xAxisHeight }}
+                                        contentInset={verticalContentInset}
+                                        svg={axesSvg}
+                                        numberOfTicks={6}
+                                        yAccessor={({ item }) => item.value}
+                                    />
+                                    <View style={{ flex: 1, marginLeft: 10 }}>
+                                        <AreaChart
+                                            style={{ flex: 1 }}
+                                            data={neg}
+                                            yAccessor={({ item }) => item.value}
+                                            xAccessor={({ item }) => item.date}
+                                            xScale={scale.scaleTime}
+                                            contentInset={{ top: 10, bottom: 10 }}
+                                            svg={{ fill: 'rgba(178,34,34, 0.6)' }}
+                                            curve={shape.curveLinear}
+                                        >
+                                            <Grid />
+                                        </AreaChart>
+                                        <XAxis
+                                            xAccessor={({ item }) => item.date}
+                                            scale={scale.scaleTime}
+                                            style={{ marginHorizontal: -10, height: xAxisHeight }}
+                                            data={neg}
+                                            formatLabel={(value, index) => format(value, 'dd/MM')}
+                                            contentInset={{ left: 10, right: 10 }}
+                                            svg={axesSvg}
+                                            numberOfTicks={6}
+                                        />
+                                    </View>
+                                </View>
+                            </ScrollView>
+                        </View>
 
-
-                <FooterNew navigation={navigation} />
-            </View> : null }
-        </ImageBackground>
+                    </ImageBackground>
+                    <FooterNew navigation={navigation} />
+                </View> : null}
+        </View>
     )
 }
 
