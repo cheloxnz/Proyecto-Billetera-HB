@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Card } from "react-native-paper";
-const ip = 'localhost'
+const ip = '192.168.1.34'
 
 // CONSTANTES DE LAS ACTIONS
 export const REGISTER_USER = "REGISTER_USER";
@@ -301,7 +301,7 @@ export function cardState(cvu, id, estado) {
 export function doPayment(amount, service, dni) {
   return function (dispatch) {
     return axios
-      .post(`http://${ip}:3005/transfers/user/payment`, { amount,service, dni })
+      .post(`http://${ip}:3005/transfers/user/payment`, { amount, service, dni })
       .then((result) => result.data)
       .then((data) => {
         dispatch({
@@ -313,7 +313,7 @@ export function doPayment(amount, service, dni) {
 }
 
 export function payment(service) {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch({
       type: PAYMENT,
       payload: service

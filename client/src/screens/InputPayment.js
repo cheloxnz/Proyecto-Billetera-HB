@@ -6,26 +6,26 @@ import { theme } from '../core/theme';
 import BackButton from '../components/BackButton';
 import TextInput from '../components/TextInput';
 import { Button } from 'react-native-paper';
-import { doTransfer, getAccount, getBalance, doPayment} from '../actions/index'
+import { doTransfer, getAccount, getBalance, doPayment } from '../actions/index'
 import Constants from 'expo-constants';
 
 
-const InputPayment = ({ navigation, onlineUser, balance, getBalance, getAccount, account, payment, doPayment}) => {
-	useEffect(()=> {
+const InputPayment = ({ navigation, onlineUser, balance, getBalance, getAccount, account, payment, doPayment }) => {
+	useEffect(() => {
 		getBalance(onlineUser.id)
 		getAccount(onlineUser.id)
 	}, [])
-		const [state, setState] = React.useState('')
+	const [state, setState] = React.useState('')
 
-        const handlePayment = (navigation) => {
-			doPayment(state, payment, onlineUser.dni)
-			navigation.navigate('Principal')
-			//hacer alerta
-		}
-		
-		const handleOnChange = (e) => {
-			setState(e.nativeEvent.text)
-		}
+	const handlePayment = (navigation) => {
+		doPayment(state, payment, onlineUser.dni)
+		navigation.navigate('Home')
+		//hacer alerta
+	}
+
+	const handleOnChange = (e) => {
+		setState(e.nativeEvent.text)
+	}
 
 	return (
 		<View style={styles.contenedorPrincipal}>
@@ -43,7 +43,7 @@ const InputPayment = ({ navigation, onlineUser, balance, getBalance, getAccount,
 								style={styles.textInput}
 								name='service'
 								value={payment}
-								editable={ false }
+								editable={false}
 							/>
 						</View>
 						<View style={styles.inputAmount}>
