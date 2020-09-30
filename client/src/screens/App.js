@@ -204,12 +204,12 @@ function App() {
               />
             ),
           }} />
-           <Drawer.Screen name="Estadisticas" component={Estadisticas}
+        <Drawer.Screen name="Estadisticas" component={Estadisticas}
           options={{
-            title: 'My stadistitsic',
+            title: 'My Statistics',
             drawerIcon: ({ focused, size }) => (
               <FontAwesome
-                name='chart'
+                name='calculator'
                 size={20}
                 color={focused ? 'black' : '#ccc'}
               />

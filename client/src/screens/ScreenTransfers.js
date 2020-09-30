@@ -77,30 +77,6 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
                 </TouchableOpacity>
               </View>
             </View>
-             
-          <View style={styles.contenedorHave}>
-            <Button
-                  title="Add a friend"
-                  type="clear"
-                  titleStyle={{ color: 'white', fontSize: 18 }}
-                  containerStyle={{ 
-                    marginVertical: 20, 
-                    backgroundColor: '#00296B',
-                    width: '30%', }}
-                  onPress={() => navigation.navigate('Add Friend')}
-                />
-            <Button
-              title="Do a transfer"
-              type="clear"
-              titleStyle={{ color: 'white', fontSize: 18 }}
-              containerStyle={{ 
-                marginVertical: 20, 
-                backgroundColor: '#00296B', 
-                width: '30%',
-                }}
-              onPress={() => navigation.navigate('InputTransfer')}
-            />
-          </View>
           </View>
         </View>
       </ImageBackground>
@@ -167,7 +143,7 @@ const styles = StyleSheet.create({
     height: '84%',
   },
   contenedorHave: {
-    flexDirection:'row',
+    flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-evenly',
     width: '100%',
