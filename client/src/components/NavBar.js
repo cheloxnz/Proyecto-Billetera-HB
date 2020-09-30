@@ -22,7 +22,9 @@ const Navbar = ({ navigation }) => {
             </View>
 
             <View style={styles.bellContent}>
-                <Notification />
+                <TouchableOpacity onPress={() => navigation.navigate('My Dates')}>
+                    <Notification />
+                </TouchableOpacity>
             </View>
         </View>
 

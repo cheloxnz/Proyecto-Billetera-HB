@@ -301,7 +301,7 @@ export function cardState(cvu, id, estado) {
 export function doPayment(amount, service, dni) {
   return function (dispatch) {
     return axios
-      .post(`http://${ip}:3005/transfers/user/payment`, { amount,service, dni })
+      .post(`http://${ip}:3005/transfers/user/payment`, { amount, service, dni })
       .then((result) => result.data)
       .then((data) => {
         dispatch({
@@ -313,7 +313,7 @@ export function doPayment(amount, service, dni) {
 }
 
 export function payment(service) {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch({
       type: PAYMENT,
       payload: service

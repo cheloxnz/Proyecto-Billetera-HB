@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Button, StyleSheet, Text, View, ScrollView, YellowBox , ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ImageBackground } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { getAccount, getTransfersAll, getAllUsers, getBalance, getAllAccounts } from '../actions';
 import { Divider } from 'react-native-paper';
 import UserAvatar from 'react-native-user-avatar';
 import Constants from 'expo-constants';
+import { Avatar } from 'react-native-paper';
 import FooterNew from '../components/FooterNew';
 import NavBar from '../components/NavBar';
 
@@ -17,14 +18,14 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
     const data = ["aca van ingresos y egresos"]
 
     const randomColors = (name) => {
-        let colors = ['#fc9803', '#1e0f66','#35c4a3']
+        let colors = ['#fc9803', '#1e0f66', '#35c4a3']
         if (name === 'Netflix') return '#E50914';
         if (name === 'Spotify') return '#1DB954';
         if (name === 'Steam') return '#1b3f55';
-        if (name === 'DirecTV') {return '#03a9f4'} 
+        if (name === 'DirecTV') { return '#03a9f4' }
         else {
             return colors[Math.floor(Math.random() * 3)]
-        } 
+        }
     }
 
     useEffect(() => {
@@ -46,102 +47,102 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
 
     var flag = false;
     if (transfersAll.length > 0) flag = true;
-    
+
     return (
         <View style={styles.contenedorPrincipal}>
-        <ImageBackground
-        source={require('../assets/consolidated_dot.png')}
-        style={styles.background}
-      >
-          <NavBar navigation={navigation} />
-        <View style={styles.contenedorPadre}>
+            <ImageBackground
+                source={require('../assets/consolidated_dot.png')}
+                style={styles.background}
+            >
+                <NavBar navigation={navigation} />
+                <View style={styles.contenedorPadre}>
 
-             <View style={styles.contentPadre}>
-                <View style={styles.contentHijo}>
-                    <View style={styles.contentInfo}>
-                        <Text style={styles.cta}>N° CTA: {account?.Naccount}</Text>
-                        <Text style={styles.saldo}>{onlineUser.name + " " + onlineUser.surname}</Text>
-                        <Text style={styles.parrafoSaldo}>My Balance $ {balance?.balance} </Text>
+                    <View style={styles.contentPadre}>
+                        <View style={styles.contentHijo}>
+                            <View style={styles.contentInfo}>
+                                <Text style={styles.cta}>N° CTA: {account?.Naccount}</Text>
+                                <Text style={styles.saldo}>{onlineUser.name + " " + onlineUser.surname}</Text>
+                                <Text style={styles.parrafoSaldo}>My Balance $ {balance?.balance} </Text>
+                            </View>
+                        </View>
                     </View>
-                </View>
-            </View>
-            <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>Movements</Text>
-            <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
-        <View style={styles.containerTrans}>
-                {
-                    <ScrollView style={styles.contentHijoDos}>
-                        {flag ? transfersAll.map((t, i) => {
-                            if (t.Type !== "load" && t.Type !== 'payment') {
-                                return (
-                                   
-                                    < View style={styles.contentMov} key={i} >
+                    <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>Movements</Text>
+                    <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
+                    <View style={styles.containerTrans}>
+                        {
+                            <ScrollView style={styles.contentHijoDos}>
+                                {flag ? transfersAll.map((t, i) => {
+                                    if (t.Type !== "load" && t.Type !== 'payment') {
+                                        return (
 
-                                        <UserAvatar size={30} bgColor={randomColors()} name={t.nombreReceptor} />
+                                            < View style={styles.contentMov} key={i} >
 
-                                        <Text style={styles.servicio}>
+                                                <Avatar.Icon size={30} style={{ marginBottom: 3 }} bgColor={randomColors()} name={t.nombreReceptor} />
 
-                                            {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
-                                                accounts?.map((a) => { if (a.Naccount == t.receptor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } })}
+                                                <Text style={styles.servicio}>
 
-                                        </Text>
-                                        {
-                                            account?.Naccount == t.receptor ?
-                                                <Text style={styles.ingresos}> + ${t.Quantity}</Text> : <Text style={styles.egresos}> - ${t.Quantity}</Text>
+                                                    {account?.Naccount == t.receptor ? accounts?.map((a) => { if (a.Naccount == t.emisor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } }) :
+                                                        accounts?.map((a) => { if (a.Naccount == t.receptor) { return users.map((u) => { if (a.userId == u.id) { return u.name + " " + u.surname } }) } })}
 
+                                                </Text>
+                                                {
+                                                    account?.Naccount == t.receptor ?
+                                                        <Text style={styles.ingresos}> + ${t.Quantity}</Text> : <Text style={styles.egresos}> - ${t.Quantity}</Text>
+
+                                                }
+
+
+                                                <Divider />
+                                            </View>
+                                        )
+                                    } else {
+                                        if (t.Type === 'payment') {
+                                            return (
+                                                < View style={styles.contentMov} key={i} >
+
+                                                    <Avatar.Icon size={30} bgColor={randomColors()} name={t.nombreReceptor} />
+                                                    <Text style={styles.servicio}>
+                                                        {t.nombreReceptor}
+                                                    </Text>
+                                                    {
+                                                        account?.Naccount == t.receptor ?
+                                                            <Text style={styles.ingresos}> + ${t.Quantity}</Text> : <Text style={styles.egresos}> - ${t.Quantity}</Text>
+
+                                                    }
+
+                                                    <Divider />
+                                                </View>
+                                            )
+
+                                        } else {
+                                            return (
+                                                < View style={styles.contentMov} key={i} >
+
+                                                    <UserAvatar size={30} bgColor={'#a87332'} name={t.Type} />
+                                                    <Text style={styles.servicio}>
+                                                        {t.Type}
+                                                    </Text>
+                                                    {
+                                                        account?.Naccount == t.receptor ?
+                                                            <Text style={styles.ingresos}> + ${t.Quantity}</Text> : <Text style={styles.egresos}> - ${t.Quantity}</Text>
+
+                                                    }
+
+                                                    <Divider />
+                                                </View>
+                                            )
                                         }
+                                    }
+                                }) : null}
 
-
-                                        <Divider />
-                                    </View>
-                                )
-                            } else {
-                                if(t.Type === 'payment') {
-                                    return (
-                                        < View style={styles.contentMov} key={i} >
-    
-                                            <UserAvatar size={30} bgColor={randomColors(t.nombreReceptor)} name={t.nombreReceptor} />
-                                            <Text style={styles.servicio}>
-                                                {t.nombreReceptor}
-                                            </Text>
-                                            {
-                                                account?.Naccount == t.receptor ?
-                                                    <Text style={styles.ingresos}> + ${t.Quantity}</Text> : <Text style={styles.egresos}> - ${t.Quantity}</Text>
-    
-                                            }
-    
-                                            <Divider />
-                                        </View>
-                                    )
-
-                                } else {
-                                return (
-                                    < View style={styles.contentMov} key={i} >
-
-                                        <UserAvatar size={30} bgColor={'#a87332'} name={t.Type} />
-                                        <Text style={styles.servicio}>
-                                            {t.Type}
-                                        </Text>
-                                        {
-                                            account?.Naccount == t.receptor ?
-                                                <Text style={styles.ingresos}> + ${t.Quantity}</Text> : <Text style={styles.egresos}> - ${t.Quantity}</Text>
-
-                                        }
-
-                                        <Divider />
-                                    </View>
-                                )
-                            }
-                            }
-                        }) : null}
-
-                    </ScrollView>}
-            </View> 
+                            </ScrollView>}
+                    </View>
 
                 </View >
 
-                          </ImageBackground>
-                <FooterNew  navigation={navigation} />
-                </View>
+            </ImageBackground>
+            <FooterNew navigation={navigation} />
+        </View>
 
     )
 }
@@ -153,9 +154,9 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
     },
     background: {
-    flex: 1,
-    width: '100%',
-  },
+        flex: 1,
+        width: '100%',
+    },
     contenedorPadre: {
         width: '100%',
         height: '100%',
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
         top: -3,
         borderBottomLeftRadius: 22,
         borderBottomRightRadius: 22
-    
+
     },
     mov: {
         textAlign: 'center',
@@ -293,7 +294,7 @@ const styles = StyleSheet.create({
     ingresos: {
         fontSize: 20,
         color: 'black',
-        backgroundColor: 'yellow',
+        backgroundColor: '#00fa68',
         borderRadius: 15,
         width: 100,
         textAlign: 'center',
