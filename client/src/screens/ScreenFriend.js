@@ -11,6 +11,7 @@ import ListFriend from '../components/ListFriend';
 import { getAllContacts } from '../actions'
 const DB_HOST = '192.168.0.104';
 
+
 const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUser }) => {
     const [data, setData] = React.useState([])
     const [input, setInput] = React.useState('')
