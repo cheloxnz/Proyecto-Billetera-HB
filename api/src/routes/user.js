@@ -4,6 +4,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const codeGenerator = require("../utils/index.js");
 const { User } = require("../db");
+const { isAuthenticated } = require('./validations');
 
 //----------------------------------------------------------
 //-------------------------USUARIO--------------------------
@@ -197,11 +198,11 @@ server.post('/login', passport.authenticate('local'), function (req, res,) {
 //            LOGOUT                   |
 //-------------------------------------
 
-server.get("/logout", (req, res) => {
-  req.logout();
-  res.send('logu')
+server.post('/auth/logout', isAuthenticated, (req, res) => {
+  req.logout()
+  req.session.destroy()
+	res.send('deslogeado')
 });
-
 
 //--------------------------------------
 //              PUT PIN                |

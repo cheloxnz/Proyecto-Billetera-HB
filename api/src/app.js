@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 const morgan = require("morgan");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -10,7 +11,6 @@ const nodemailer = require("nodemailer");
 const cors = require('cors')
 
 
-const server = express();
 
 //-----------------------------------------------
 //            LOCAL STRATEGY                    |
@@ -54,17 +54,18 @@ passport.deserializeUser((id, done) => {
     .catch((err) => done(err, false));
 });
 
+const server = express();
+
 server.name = "API";
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cors())
 server.use(morgan("dev"));
+server.use(cookieParser());
 
 //-----------------------------------------------
 //           INICIALIZAR PASSPORT Y SESSION     |
 //-----------------------------------------------
-server.use(passport.initialize());
-server.use(passport.session());
 server.use(
 	require('express-session')({
 		secret: 'secret',
@@ -72,6 +73,8 @@ server.use(
 		saveUninitialize: false,
 	}),
 );
+server.use(passport.initialize());
+server.use(passport.session());
 
 
 server.use("/", routes);
