@@ -17,7 +17,6 @@ const MyCard = ({ navigation, account, cardState, onlineUser }) => {
         setIsSwitchOn(!isSwitchOn)
     };
     useEffect(() => {
-        console.log('concha cajeta')
         if (!isSwitchOn) {
             cardState(account?.CVU, onlineUser.id, 'inactive')
         }
@@ -40,9 +39,9 @@ const MyCard = ({ navigation, account, cardState, onlineUser }) => {
                         <Text style={styles.infoCard}>
                             Your card ended in {account?.card?.slice(12, 16)}
                         </Text>
-                        <View style={{ width: '100%', height: '60%', alignItems: 'center', marginTop: 20, marginBottom: 20 }}>
+                        <View style={{ width: '100%', height: '80%', alignItems: 'center', marginTop: 10, marginBottom: 10 }}>
                             <Image
-                                style={{ width: '50%', height: '100%', resizeMode: 'center' }}
+                                style={{ width: '70%', height: '100%', resizeMode: 'center' }}
                                 source={require('../assets/card.png')}
                             />
                         </View>
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
     contenedorInform: {
         width: '100%',
         height: '40%',
-        marginTop: 70,
+        marginTop: 78,
         alignItems: 'center'
     }
 })

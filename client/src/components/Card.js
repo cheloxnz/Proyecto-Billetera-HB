@@ -6,7 +6,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 const Card = ({ children }) => <FontAwesome name={'credit-card'} style={styles.imageCard} size={35}/>
 const styles = StyleSheet.create({
     imageCard: {
-        width: "42%",
+        width: "60%",
         height: "100%",
     },
 });

@@ -31,7 +31,6 @@ const InputTransfer = ({ navigation, onlineUser, account, doTransfer, transfer, 
 	}, [transfersAll.length])
 
 	const handleOnChange = (name, e) => {
-		console.log(name, e.nativeEvent.text)
 		if (friendCVU != 0) {
 			setState({
 				...state,

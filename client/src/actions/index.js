@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Card } from "react-native-paper";
-const ip = '192.168.0.104'
+const ip = 'localhost'
 
 // CONSTANTES DE LAS ACTIONS
 export const REGISTER_USER = "REGISTER_USER";
@@ -73,7 +73,6 @@ export function getAllUsers() {
 }
 
 export function updateUserData(body, id) {
-  console.log(body + '       ' + id)
   return function (dispatch) {
     return axios
       .put(`http://${ip}:3005/users/${id}`, body)
@@ -117,7 +116,6 @@ export function createAccount(id) {
 }
 
 export function postSendEmail(value) {
-  console.log(value)
   return function (dispatch) {
     return axios
       .post(`http://${ip}:3005/send-email`, value)
@@ -167,7 +165,6 @@ export function getAccount(id) {
 
 
 export function doTransfer(CVUFrom, cvu, amount) {
-  console.log(CVUFrom, cvu, amount, "los parametros")
   return function (dispatch) {
     return axios
       .post(`http://${ip}:3005/transfers/${CVUFrom}`, { cvu, amount })

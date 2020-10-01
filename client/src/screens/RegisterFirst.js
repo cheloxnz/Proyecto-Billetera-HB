@@ -27,13 +27,11 @@ useEffect(() => {
   const [state, setState] = useState({})
 
   const onChange = (name, e) => {
-    //console.log(e)
     setState({
       ...state,
       [name]: e.nativeEvent.text,
     })
   }
-  console.log(state)
   const _onSignUpPressed = () => {
     const emailError = emailValidator(state.email);
     const passwordError = passwordValidator(state.password);

@@ -18,7 +18,6 @@ const Chart = ({ navigation, transfersAll, account, onlineUser }) => {
 
     useEffect(() => {
         const modelo2 = []
-        console.log(transfersAll)
         transfersAll?.map(t => {
             modelo2.push({
                 value: onlineUser.name + ' ' + onlineUser.surname == t.nombreReceptor ? t.Quantity : - t.Quantity,
@@ -67,10 +66,6 @@ const Chart = ({ navigation, transfersAll, account, onlineUser }) => {
         setData(result)
         setNegativos(result2)
     }, [transfersAll])
-    console.log('----------------')
-    console.log(neg)
-    console.log("*******************************")
-    console.log(data)
 
 
     const axesSvg = { fontSize: 10, fill: 'grey' };
