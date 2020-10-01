@@ -60,7 +60,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                     <View style={styles.contentPadre}>
                         <View style={styles.contentHijo}>
                             <View style={styles.contentInfo}>
-                                <Text style={styles.cta}>N° CTA: {account?.Naccount}</Text>
+                                <Text style={styles.cta}>N° ACC: {account?.Naccount}</Text>
                                 <Text style={styles.saldo}>{onlineUser.name + " " + onlineUser.surname}</Text>
                                 <Text style={styles.parrafoSaldo}>My Balance $ {balance?.balance} </Text>
                             </View>

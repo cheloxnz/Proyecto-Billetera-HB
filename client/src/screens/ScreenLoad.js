@@ -15,6 +15,11 @@ const ScreenLoad = ({ navigation, amountLoad }) => {
             amount: e.nativeEvent.text
         })
     }
+    function handleNext () {
+        amountLoad(state.amount, 1)
+        navigation.navigate('Confirm')
+    
+    } 
     return (
         <View style={styles.contenedorPrincipal}>
             <NavBar navigation={navigation} />
@@ -42,7 +47,7 @@ const ScreenLoad = ({ navigation, amountLoad }) => {
 
                     </View>
                     <TouchableOpacity style={{ width: '70%', backgroundColor: '#00296B', alignItems: 'center', borderRadius: 6, marginTop: 20 }}>
-                        <Text style={{ fontWeight: '700', color: 'white', padding: 20, fontSize: 20 }} onPress={() => { navigation.navigate("Confirm"), amountLoad(state.amount, 1) }}>
+                        <Text style={{ fontWeight: '700', color: 'white', padding: 20, fontSize: 20 }} onPress={() => { handleNext () }}>
                             Next
                         </Text>
                     </TouchableOpacity>

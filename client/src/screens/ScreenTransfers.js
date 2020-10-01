@@ -72,7 +72,7 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
                   onPress={() => navigation.navigate('InputTransfer')}
                 >
                   <Text style={{ color: 'white', fontSize: 18, textAlign: 'center', marginTop: 14 }}>
-                    Do a transfers
+                    Make a transfer
                   </Text>
                 </TouchableOpacity>
               </View>
