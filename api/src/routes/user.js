@@ -174,9 +174,6 @@ server.post("/searchEmail", (req, res) => {
 
 server.put("/:id/resetPassword", (req, res) => {
   const { password } = req.body;
-  {
-    console.log(password);
-  }
   const id = req.params.id;
   User.findByPk(id)
     .then((user) => {

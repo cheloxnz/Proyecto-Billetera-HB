@@ -17,7 +17,6 @@ const MyCard = ({ navigation, account, cardState, onlineUser }) => {
         setIsSwitchOn(!isSwitchOn)
     };
     useEffect(() => {
-        console.log('concha cajeta')
         if (!isSwitchOn) {
             cardState(account?.CVU, onlineUser.id, 'inactive')
         }

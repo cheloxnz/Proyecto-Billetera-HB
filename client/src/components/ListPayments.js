@@ -8,7 +8,6 @@ const ListPayment = ({getTransfersAll, transfersAll, onlineUser}) => {
     React.useEffect(() => {
         getTransfersAll(onlineUser.Naccount)
     },[])
-    console.log(onlineUser, transfersAll)
     return (
 
 <ScrollView>
@@ -17,12 +16,6 @@ const ListPayment = ({getTransfersAll, transfersAll, onlineUser}) => {
             <Divider />
             <Divider />
 
-            {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <List.Item titleStyle={{ fontSize: 20, fontWeight: '700' }} left={() => <Text style={{ fontSize: 20 }}>Netflix</Text>} />
-                <Text style={{ fontSize: 16, marginTop: 10, marginRight: 30 }}>$500 - 15/09</Text>
-            </View>
-
-            <Divider /> */}
             {transfersAll?.map((t) => { if (t.Type === 'payment') {
                 return (
                     <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>

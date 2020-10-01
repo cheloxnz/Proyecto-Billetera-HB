@@ -21,7 +21,6 @@ server.get('/addFriend', (req, res) => {
 //--------------------------------------
 
 server.get("/user/:id", (req, res) => {
-  console.log('entreeeeeeeeeeeee')
   User.findOne({
     where: {
       id: req.params.id
@@ -47,7 +46,6 @@ server.get("/user/:id", (req, res) => {
 
 server.post("/user/:id/add", (req, res) => {
   const username = req.body.username
-  console.log(req.body)
   let user1 = User.findOne({
     where: {
       id: req.params.id
@@ -77,7 +75,6 @@ server.post("/user/:id/add", (req, res) => {
 //--------------------------------------
 
 server.delete("/user/:id/delete/:id2", (req, res) => {
-  console.log(req.body)
   let user1 = User.findOne({
     where: {
       id: req.params.id

@@ -6,7 +6,6 @@ import FooterNew from '../components/FooterNew';
 import Input from '../components/TextInput';
 import { amountLoad } from "../actions";
 import Constants from 'expo-constants';
-
 const ScreenLoad = ({ navigation, amountLoad }) => {
     const [state, setState] = useState('')
 
@@ -16,7 +15,6 @@ const ScreenLoad = ({ navigation, amountLoad }) => {
             amount: e.nativeEvent.text
         })
     }
-    console.log(state)
     return (
         <View style={styles.contenedorPrincipal}>
             <NavBar navigation={navigation} />

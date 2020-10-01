@@ -2,8 +2,6 @@ const server = require('express').Router();
 const { Account, User, Transaction } = require('../db.js');
 
 server.post("/:CVU", (req, res) => {
-    console.log('estoy entrando al post de trans')
-    console.log(req.body)
     var { cvu, amount } = req.body
     var amount2 = parseInt(amount)
     if (amount2 < 50) return res.send('Minimal amount is $50')
@@ -26,7 +24,6 @@ server.post("/:CVU", (req, res) => {
             var codes = Math.floor(Math.random() * 1000)
             let from = user[0]
             let to = user[1]
-            console.log(to.dataValues)
             if (!from || !to) return res.send("Cuenta no existente.")
             if (from.state == 'inactive' || to.state == 'inactive') return res.send('Cuenta deshabilitada')
             if (from.userId == to.userId) return res.send("Transacción invalida.")
@@ -104,29 +101,7 @@ server.post('/user/load', (req, res) => {
 //   GET TRANSACCIONES       | EN EL FRONT RENDERIZAR, SI ES EMISORNACCOUNT, MOSTRAR COMO (- $500)
 //---------------------------- SI ES 'ACCOUNTNACCOUNT' MOSTRAR (+ $500)
 
-// server.get('/emisor/:CVU', (req, res) => {
-//     console.log("entre al emisor ")
-//     Transaction.findAll({
-//         where: {
-//             emisor: req.params.CVU  // EL QUE RECIBE LA TRANSFERENCIA
-//         }
-//     })
-//         .then(trans => res.send(trans))
-//         .catch(err => console.log(err))
-// })
-
-// server.get('/receptor/:CVU', (req, res) => {
-//     Transaction.findAll({
-//         where: {
-//             receptor: req.params.CVU  // EL QUE RECIBE LA TRANSFERENCIA
-//         }
-//     })
-//         .then(trans => res.send(trans))
-//         .catch(err => console.log(err))
-// })
-
 server.get('/all/:acc', (req, res) => {
-    console.log('entro al all ')
     const transE = Transaction.findAll({
         where: {
             receptor: req.params.acc  // EL QUE ENVIA LA TRANSFERENCIA
@@ -139,7 +114,7 @@ server.get('/all/:acc', (req, res) => {
     });
     Promise.all([transE, transR])
         
-        .then(trans => (console.log(trans), res.send(selectionSort(flatten(trans))) ))
+        .then(trans =>  res.send(selectionSort(flatten(trans))) )
         .catch(err => console.log(err))
 })
 const flatten = arr => arr.reduce((acc, el) => acc.concat(el), [])
@@ -176,7 +151,6 @@ function selectionSort(items) {
     return (items)
 }
 server.post('/user/payment', (req, res) =>{
-    console.log(req.body)
     const amount = parseFloat(req.body.amount)
     const { service, code, dni} = req.body
     User.findOne({
