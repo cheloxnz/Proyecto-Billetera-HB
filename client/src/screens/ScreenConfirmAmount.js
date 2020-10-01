@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import { View, StyleSheet, Text, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import NavBar from '../components/NavBar';
@@ -6,11 +6,16 @@ import FooterNew from '../components/FooterNew';
 import CodeQR from '../components/CodeQR';
 import { doLoad } from "../actions";
 import Constants from 'expo-constants';
+import seedrandom from 'seedrandom';
 
 
-const ScreenConfirm = ({ navigation, amount, onlineUser, doLoad }) => {
-
-    var codigo = 123456
+const ScreenConfirm = ({ navigation, amount, onlineUser, doLoad, account }) => {
+    const [codigo, setCodigo] = useState(0)
+    useEffect(() => {
+        var rng = seedrandom(`${account.userId}`)
+        setCodigo(Math.floor(rng.double() * (1000000000)))
+    }, [account.userId])
+ 
 
     return (
         <View style={styles.contenedorPrincipal}>
@@ -28,7 +33,7 @@ const ScreenConfirm = ({ navigation, amount, onlineUser, doLoad }) => {
                         </Text>
                         <View style={{ width: '100%', height: '20%', marginTop: 20, backgroundColor: 'white' }}>
                             <Text style={{ color: 'black', fontSize: 28, textAlign: 'center', marginVertical: 25 }}>
-                                4848952198
+                                {codigo}
                             </Text>
                         </View>
                         <Text style={{ color: 'white', marginTop: 20, fontSize: 16 }}>
@@ -78,7 +83,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         amount: state.amount,
-        onlineUser: state.onlineUser
+        onlineUser: state.onlineUser,
+        account: state.account
     }
 }
 

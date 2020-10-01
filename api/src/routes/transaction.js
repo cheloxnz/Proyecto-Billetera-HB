@@ -68,7 +68,10 @@ server.post("/:CVU", (req, res) => {
 
 server.post('/user/load', (req, res) => {
     const { load } = req.body
-    const sucursal = load.sucursal
+    var sucursal = 0
+    while (sucursal === 0) {
+      sucursal = Math.floor(Math.random() * 3)
+    }
     const code = load.code
     const dni = load.dni
     const amount2 = parseFloat(load.amount)
@@ -86,7 +89,7 @@ server.post('/user/load', (req, res) => {
             Quantity: amount2,
             Type: 'load',
             code: code,
-            emisor: 11111111, //cambiar despues
+            emisor: sucursal,
             receptor: user.account.Naccount,
             nombreReceptor: user.dataValues.name + ' ' + user.dataValues.surname
         })
@@ -113,8 +116,8 @@ server.get('/all/:acc', (req, res) => {
         }
     });
     Promise.all([transE, transR])
-        
-        .then(trans =>  res.send(selectionSort(flatten(trans))) )
+
+        .then(trans => res.send(selectionSort(flatten(trans))))
         .catch(err => console.log(err))
 })
 const flatten = arr => arr.reduce((acc, el) => acc.concat(el), [])
@@ -150,14 +153,14 @@ function selectionSort(items) {
     items.reverse()
     return (items)
 }
-server.post('/user/payment', (req, res) =>{
+server.post('/user/payment', (req, res) => {
     const amount = parseFloat(req.body.amount)
-    const { service, code, dni} = req.body
+    const { service, code, dni } = req.body
     User.findOne({
         where: {
             dni: dni
         }, include: Account
-    }).then(user =>{
+    }).then(user => {
         if (!user) return res.send('Cuenta Inexistente')
         var userBalance = user.account.balance()
         user.account.update({
@@ -172,11 +175,11 @@ server.post('/user/payment', (req, res) =>{
             nombreReceptor: service
 
         })
-        .then(payment => {
-            res.send(payment)
-        })
+            .then(payment => {
+                res.send(payment)
+            })
     })
-    .catch(err => console.log(err))
+        .catch(err => console.log(err))
 
 })
 
