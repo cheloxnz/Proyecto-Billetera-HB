@@ -18,9 +18,7 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
     useEffect(() => {
         getAllContacts(onlineUser.id)
     }, [])
-    console.log(contacts)
     const handleContacts = text => {
-        console.log(text)
         setInput(text)
         Axios.get(`http://${DB_HOST}:3005/contacts/addFriend?username=${text}`)
             .then(user => setData(user?.data))
