@@ -20,16 +20,12 @@ _Este proyecto es una App (billetera virtual) creada en React Native(expo)._
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para ejecutar la app _
-
 ```
 -Postgres
 -NodeJS
 ```
 
 ### Instalación 🔧
-
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
 Clonar el repositorio.
 Posicionarse sobre las carpetas /api y /client y hacer "npm install" en ambos.
@@ -49,7 +45,7 @@ para ejecutar el proyecto en tu celular, instalar expo desde la PlayStore o AppS
 Ejecutar npm start en /client  y /api, en la consola de api se visualizará el siguiente mensaje:
 
 <div align="center">
-     <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/AppListen.jpeg" alt="App Listen" alt="App Listen"</img>
+     <img width="50%" src="https://github.com/cheloxnz/Proyecto-Billetera-HB/blob/master/screenshots/AppListen.png" alt="App Listen" alt="App Listen"</img>
 </div>
 
 Después de ver este mensaje, modificar la variable DB_HOST del .env por tu ip local
