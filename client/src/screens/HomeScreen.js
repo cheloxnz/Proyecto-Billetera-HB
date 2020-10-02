@@ -13,14 +13,14 @@ const HomeScreen = ({ navigation, registerUser, updateUserData, onlineUser, crea
 
   let body = 
     {
-    "phone" : 3512603969,
+    "phone" : 351288888,
     "address" : "Colon 400",
     "province" : "Cordoba",
     "postalCode" : 5000,
     "city" : "Cordoba",
     "dni" : 40159951,
-    "name" : "admin",
-    "surname" : "admin",
+    "name" : "Admin",
+    "surname" : "Admin",
     "username" : "admin",
     "birthDate" : "12/12/1200",
     "role" : "Client",
@@ -28,13 +28,13 @@ const HomeScreen = ({ navigation, registerUser, updateUserData, onlineUser, crea
     let body2 = {
      "phone" : 3512642969,
     "address" : "gral paz 400",
-    "province" : "salsipuedes",
+    "province" : "Cordoba",
     "postalCode" : 5001,
     "city" : "Cordoba",
     "dni" : 40111111,
-    "name" : "Facu",
-    "surname" : "Rivadero",
-    "username" : "facurivadero",
+    "name" : "Lionel",
+    "surname" : "Messi",
+    "username" : "LeoMessi",
     "birthDate" : "12/12/1800",
     "role" : "Client", 
     }
@@ -45,7 +45,7 @@ const HomeScreen = ({ navigation, registerUser, updateUserData, onlineUser, crea
       registerUser("admin@gmail.com", "12345678")
       .then((res) => updateUserData(body, 1)
       .then(createAccount(1))
-      .then(registerUser('facuriva@gmail.com', '12345678')
+      .then(registerUser('leomessi@gmail.com', '12345678')
         .then((res) => updateUserData(body2, 2)
         .then(createAccount(2)
           .then(createAccount(3)

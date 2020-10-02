@@ -1,6 +1,5 @@
 import axios from "axios";
-import { Card } from "react-native-paper";
-const ip = 'localhost'
+export const ip = '192.168.0.101'
 
 // CONSTANTES DE LAS ACTIONS
 export const REGISTER_USER = "REGISTER_USER";
@@ -25,6 +24,7 @@ export const DO_LOAD = "DO_LOAD";
 export const CARD = 'CARD';
 export const DO_PAYMENT = 'DO_PAYMENT';
 export const PAYMENT = 'PAYMENT';
+export const LOGOUT = 'LOGOUT'
 
 
 
@@ -315,5 +315,17 @@ export function payment(service) {
       type: PAYMENT,
       payload: service
     })
+  }
+}
+
+export function logout () {
+  return function (dispatch) {
+    return axios
+        .post(`http://${ip}:3005/users/auth/logout`, null, {withCredentials: true})
+        .then(() => {
+          dispatch({
+            type: LOGOUT,
+          })
+        })
   }
 }

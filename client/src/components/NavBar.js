@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Button } from "react-native";
-
+import { logout, getTransfersAll } from '../actions'
 import LogoMenu from "../components/LogoMenu";
 import Notification from "../components/Notification";
 import LogoPostCons from '../components/LogoPostCons';
 
-const Navbar = ({ navigation }) => {
-
+const Navbar = ({ navigation, logout, onlineUser, getTransfersAll}) => {
+    
 
     return (
         <View style={styles.header}>
@@ -16,13 +16,12 @@ const Navbar = ({ navigation }) => {
                     <LogoMenu />
                 </TouchableOpacity>
             </View>
-
-            <View style={styles.icon} >
-                <LogoPostCons />
-            </View>
+            <TouchableOpacity style = {styles.icon} onPress={ ()=> {getTransfersAll(onlineUser.id)}} >
+                    <LogoPostCons />
+            </TouchableOpacity>
 
             <View style={styles.bellContent}>
-                <TouchableOpacity onPress={() => navigation.navigate('My Dates')}>
+                <TouchableOpacity onPress={() => {logout(), navigation.navigate('HomeScreen')}}>
                     <Notification />
                 </TouchableOpacity>
             </View>
@@ -64,4 +63,17 @@ const styles = StyleSheet.create({
 
 })
 
-export default connect()(Navbar)
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout()),
+        getTransfersAll: (id) => dispatch(getTransfersAll(id))
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        onlineUser: state.onlineUser
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

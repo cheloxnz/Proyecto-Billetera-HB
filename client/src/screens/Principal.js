@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, ScrollView, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ImageBackground, SafeAreaView, RefreshControl } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { getAccount, getTransfersAll, getAllUsers, getBalance, getAllAccounts } from '../actions';
 import { Divider } from 'react-native-paper';
@@ -10,12 +10,14 @@ import { Avatar } from 'react-native-paper';
 import FooterNew from '../components/FooterNew';
 import NavBar from '../components/NavBar';
 
-
+const wait = (timeout) => {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  }
 
 const Principal = ({ navigation, getAccount, account, onlineUser,
     transfersAll, users, getBalance, balance, getTransfersAll, getAllUsers, getAllAccounts, accounts }) => {
-
-    const data = ["aca van ingresos y egresos"]
 
     const randomColors = (name) => {
         let colors = ['#fc9803', '#1e0f66', '#35c4a3']
@@ -35,7 +37,6 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
         getBalance(onlineUser.id)
     }, [onlineUser])
 
-
     useEffect(() => {
         if (account) { getTransfersAll(account.Naccount) }
     }, [account])
@@ -44,7 +45,14 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
         if (account) { getTransfersAll(account.Naccount) }
         getBalance(onlineUser.id)
     }, [transfersAll.length])
+    const [refreshing, setRefreshing] = React.useState(false);
 
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+
+        wait(500).then(() => {setRefreshing(false),getTransfersAll(onlineUser.id)});
+    }, []);
+    
     var flag = false;
     if (transfersAll.length > 0) flag = true;
 
@@ -66,11 +74,16 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                             </View>
                         </View>
                     </View>
+
+                    
                     <Text style={{ color: 'white', fontWeight: '700', fontSize: 20, textAlign: 'center' }}>Movements</Text>
                     <FontAwesome name={'chevron-circle-down'} style={styles.sortDown} size={20} />
-                    <View style={styles.containerTrans}>
+                        <SafeAreaView style={styles.containerTrans} >
                         {
-                            <ScrollView style={styles.contentHijoDos}>
+                            <ScrollView 
+                                refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> }
+                                style={styles.contentHijoDos}
+                            >
                                 {flag ? transfersAll.map((t, i) => {
                                     if (t.Type !== "load" && t.Type !== 'payment') {
                                         return (
@@ -115,12 +128,30 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                                             )
 
                                         } else {
+                                            if(t.emisor === 1){
+                                                return (
+                                                    < View style={styles.contentMov} key={i} >
+    
+                                                        <UserAvatar size={30} bgColor={'#a87332'} name={t.Type} />
+                                                        <Text style={styles.servicio}>
+                                                            RapiPago
+                                                        </Text>
+                                                        {
+                                                            account?.Naccount == t.receptor ?
+                                                                <Text style={styles.ingresos}> + ${t.Quantity}</Text> : <Text style={styles.egresos}> - ${t.Quantity}</Text>
+    
+                                                        }
+    
+                                                        <Divider />
+                                                    </View>
+                                                )
+                                            } else {
                                             return (
                                                 < View style={styles.contentMov} key={i} >
 
                                                     <UserAvatar size={30} bgColor={'#a87332'} name={t.Type} />
                                                     <Text style={styles.servicio}>
-                                                        {t.Type}
+                                                        PagoFacil
                                                     </Text>
                                                     {
                                                         account?.Naccount == t.receptor ?
@@ -133,10 +164,11 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                                             )
                                         }
                                     }
+                                    }
                                 }) : null}
 
                             </ScrollView>}
-                    </View>
+                        </SafeAreaView>
 
                 </View >
 
@@ -322,7 +354,8 @@ const styles = StyleSheet.create({
     cta: {
         fontSize: 15,
         fontWeight: '700',
-    }
+    },
+    
 
 })
 

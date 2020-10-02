@@ -74,14 +74,14 @@ const Chart = ({ navigation, transfersAll, account, onlineUser }) => {
 
     return (
         <View>
-            {data.length >= 1 ?
+            
                 <View style={styles.content}>
                     <ImageBackground
                         source={require('../assets/consolidated_dot.png')}
                         style={styles.background}>
                         <NavBar navigation={navigation} />
                         <View>
-                            <Text style={{ color: 'yellow', fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 10 }}>EQUIVALENT INCOME B/D</Text>
+                            <Text style={{ color: 'yellow', fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 10,textAlign: 'center' }}>Equivalent income by day</Text>
                             <ScrollView>
                                 <View style={{ height: 200, padding: 20, flexDirection: 'row', backgroundColor: 'white' }}>
                                     <YAxis
@@ -118,7 +118,7 @@ const Chart = ({ navigation, transfersAll, account, onlineUser }) => {
                                     </View>
                                 </View>
                             </ScrollView>
-                            <Text style={{ color: 'yellow', fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 10 }}>EQUIVALENT EXPENSES B/D</Text>
+                            <Text style={{ color: 'yellow', fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 10, textAlign: 'center' }}>Equivalent expenses by day</Text>
                             <ScrollView>
                                 <View style={{ height: 200, padding: 20, flexDirection: 'row', backgroundColor: 'white' }}>
                                     <YAxis
@@ -159,7 +159,7 @@ const Chart = ({ navigation, transfersAll, account, onlineUser }) => {
 
                     </ImageBackground>
                     <FooterNew navigation={navigation} />
-                </View> : null}
+                </View> 
         </View>
     )
 }

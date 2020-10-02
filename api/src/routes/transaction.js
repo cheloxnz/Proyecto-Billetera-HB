@@ -162,7 +162,9 @@ server.post('/user/payment', (req, res) => {
         }, include: Account
     }).then(user => {
         if (!user) return res.send('Cuenta Inexistente')
+        if (user.state == 'inactive' ) return res.send('Cuenta deshabilitada')
         var userBalance = user.account.balance()
+        if (userBalance < amount) return res.send("Saldo insuficiente.")
         user.account.update({
             balance: userBalance - amount
         })
