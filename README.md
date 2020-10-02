@@ -2,8 +2,19 @@
 
 _Este proyecto es una App (billetera virtual) creada en React Native(expo)._
 
-## Aquí puedes ver 
-https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/HomeScreen.jpeg
+## Aquí puedes ver una preview de la App
+<div align="center">
+           <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/HomeScreen.jpeg" alt="About screen" title="About screen"</img>
+           <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/CreateAccount.jpeg" alt="About screen" title="About screen"</img>
+            <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/PositionConsolidated.jpeg" alt="About screen" title="About screen"</img>
+  <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/Navigation.jpeg" alt="About screen" title="About screen"</img>
+  <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/MyContacts.jpeg" alt="About screen" title="About screen"</img>
+  <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/Recharge.jpeg" alt="About screen" title="About screen"</img>
+  <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/ScreenPayments.jpeg" alt="About screen" title="About screen"</img>
+  <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/ScreenPayment.jpeg" alt="About screen" title="About screen"</img>
+
+</div>
+
 
 ## Comenzando 🚀
 
@@ -35,43 +46,25 @@ en el archivo /client/src/actions/index.js, modificar la constante ip por "local
 Ejecutar npm start en /client y en /api de no abrir automáticamente el navegador, ingresar a esta ruta http://localhost:19006/
 para ejecutar el proyecto en tu celular, instalar expo desde la PlayStore o AppStore
 
-```
+ejecutar npm start en /client  y /api, en la consola de api se visualizará el siguiente mensaje:
 
-_Y repite_
+<div align="center">
+     <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/AppListen.jpeg" alt="App Listen" alt="App Listen"</img>
+</div>
 
-```
-hasta finalizar
-```
+Después de ver este mensaje, modificar la variable DB_HOST del .env por tu ip local
+que podes consultar haciendo ipconfig en tu consola de Windows o GitBash y en ubuntu con ip addr show como se muestra en las siguientes imágenes:
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
+<div align="center">
+     <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/iplocalWindows.jpeg" alt="IpUbuntu" alt="IpUbuntu"</img>
+     <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/iplocalUbuntu.jpeg" alt="IpWindows" alt="IpWindows"</img>
+</div>
 
-## Ejecutando las pruebas ⚙️
+Por último, modificar en /client/src/actions/index.js la constante ip por tu ip local 
+abrir http://localhost:19006/ en el navegador y escanear el codigo QR con tu app Expo.
 
-_Explica como ejecutar las pruebas automatizadas para este sistema_
-
-### Analice las pruebas end-to-end 🔩
-
-_Explica que verifican estas pruebas y por qué_
-
-```
-Da un ejemplo
-```
-
-### Y las pruebas de estilo de codificación ⌨️
-
-_Explica que verifican estas pruebas y por qué_
-
-```
-Da un ejemplo
-```
-
-## Despliegue 📦
-
-_Agrega notas adicionales sobre como hacer deploy_
 
 ## Construido con 🛠️
-
-_Menciona las herramientas que utilizaste para crear tu proyecto_
 
 * [React Native](https://reactnative.dev/) - El framework mobile usado
 * [Postgres](https://www.postgresql.org/) - Base de datos relacional
