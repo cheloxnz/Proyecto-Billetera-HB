@@ -4,7 +4,7 @@ _Este proyecto es una App (billetera virtual) creada en React Native(expo)._
 
 ## Aquí puedes ver 
 
-https://github.com/cheloxnz/Proyecto-Billetera-HB/blob/UltimaRama/screenshots/HomeScreen.jpeg
+https://github.com/cheloxnz/Proyecto-Billetera-HB/blob/master/screenshots/HomeScreen.jpeg
 
 ## Comenzando 🚀
 
