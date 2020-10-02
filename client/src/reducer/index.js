@@ -21,6 +21,7 @@ import {
   CARD,
   DO_PAYMENT,
   PAYMENT,
+  LOGOUT
 } from "../actions";
 
 const initialState = {
@@ -154,6 +155,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         payment: action.payload
+      }
+    case LOGOUT:
+      return {
+        ...state,
+        onlineUser: {}
       }
     default:
       return state;

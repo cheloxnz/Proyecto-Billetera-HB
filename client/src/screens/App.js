@@ -61,12 +61,7 @@ const mapDispatchToProps = dispatch => {
 
 
 function App() {
-  const logOut = () => {
-    Axios
-      .get(`http://192.168.1.34:3005/users/logout`)
-      .then(res => console.log(res))
-      .catch(res => console.log(res))
-  }
+  
   return (
     <NavigationContainer>
       <Drawer.Navigator
@@ -215,21 +210,10 @@ function App() {
               />
             )
           }} />
-        <Drawer.Screen name='Log Out' component={HomeScreen}
-          options={{
-            title: 'Log Out',
-            drawerIcon: ({ focused, size }) => (
-              <FontAwesome
-                onPress={() => logOut()}
-                name='times'
-                size={20}
-                color={focused ? 'black' : '#ccc'}
-              />
-            ),
-          }} />
+        
           <Drawer.Screen name="Input Payment" component={InputPayment}
           options={{
-            title: 'Input Payment',
+            title: 'Services',
             drawerIcon: ({ focused, size }) => (
               <FontAwesome
                 name='dollar'
@@ -238,6 +222,19 @@ function App() {
               />
             ),
           }} />
+           <Drawer.Screen name= 'HomeScreen' component={HomeScreen}
+           
+          options={{
+            title: '.',
+            drawerIcon: ({ focused, size }) => (
+              <FontAwesome
+                name='dollar'
+                size={20}
+                color='black'
+              />
+            ),
+          }} />
+          
       </Drawer.Navigator>
     </NavigationContainer>
   );

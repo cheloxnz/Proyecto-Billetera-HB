@@ -35,7 +35,6 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
         getBalance(onlineUser.id)
     }, [onlineUser])
 
-
     useEffect(() => {
         if (account) { getTransfersAll(account.Naccount) }
     }, [account])
@@ -115,12 +114,30 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                                             )
 
                                         } else {
+                                            if(t.emisor === 1){
+                                                return (
+                                                    < View style={styles.contentMov} key={i} >
+    
+                                                        <UserAvatar size={30} bgColor={'#a87332'} name={t.Type} />
+                                                        <Text style={styles.servicio}>
+                                                            RapiPago
+                                                        </Text>
+                                                        {
+                                                            account?.Naccount == t.receptor ?
+                                                                <Text style={styles.ingresos}> + ${t.Quantity}</Text> : <Text style={styles.egresos}> - ${t.Quantity}</Text>
+    
+                                                        }
+    
+                                                        <Divider />
+                                                    </View>
+                                                )
+                                            } else {
                                             return (
                                                 < View style={styles.contentMov} key={i} >
 
                                                     <UserAvatar size={30} bgColor={'#a87332'} name={t.Type} />
                                                     <Text style={styles.servicio}>
-                                                        {t.Type}
+                                                        PagoFacil
                                                     </Text>
                                                     {
                                                         account?.Naccount == t.receptor ?
@@ -132,6 +149,7 @@ const Principal = ({ navigation, getAccount, account, onlineUser,
                                                 </View>
                                             )
                                         }
+                                    }
                                     }
                                 }) : null}
 

@@ -7,6 +7,7 @@ import { friendCVU, getAllContacts } from '../actions';
 import { SearchBar } from 'react-native-elements';
 import NavBar from '../components/NavBar';
 import FooterNew from '../components/FooterNew';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
@@ -53,8 +54,10 @@ const ScreenTransfers = ({ navigation, getAllContacts, account, contacts, online
                 <View style={{ alignItems: "center" }}>
                   <Text style={styles.parrafoContact}>My contacts</Text>
                 </View>
-                <View>
+                <View >
+                <ScrollView>
                   {data.length >= 1 ? data.map((contacts, i) => <ContactsList contacts={contacts} navigation={navigation} key={i} />) : contacts?.map((contacts, i) => <ContactsList contacts={contacts} navigation={navigation} key={i} />)}
+                </ScrollView>
                 </View>
               </View>
               <View style={styles.contenedorHave}>
@@ -143,13 +146,14 @@ const styles = StyleSheet.create({
     height: '84%',
   },
   contenedorHave: {
+    position: 'absolute',
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-evenly',
     width: '100%',
     height: '70%',
     borderRadius: 10,
-    marginTop: 4,
+    marginTop: 250,
   },
   contenedorNo: {
     width: '48%',

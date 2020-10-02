@@ -201,7 +201,7 @@ server.post('/login', passport.authenticate('local'), function (req, res,) {
 server.post('/auth/logout', isAuthenticated, (req, res) => {
   req.logout()
   req.session.destroy()
-	res.send('deslogeado')
+  res.send('deslogeado')
 });
 
 //--------------------------------------
