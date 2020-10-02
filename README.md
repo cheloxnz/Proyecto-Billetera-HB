@@ -20,7 +20,7 @@ _Este proyecto es una App (billetera virtual) creada en React Native(expo)._
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+_Que cosas necesitas para ejecutar la app _
 
 ```
 -Postgres
@@ -46,7 +46,7 @@ en el archivo /client/src/actions/index.js, modificar la constante ip por "local
 Ejecutar npm start en /client y en /api de no abrir automáticamente el navegador, ingresar a esta ruta http://localhost:19006/
 para ejecutar el proyecto en tu celular, instalar expo desde la PlayStore o AppStore
 
-ejecutar npm start en /client  y /api, en la consola de api se visualizará el siguiente mensaje:
+Ejecutar npm start en /client  y /api, en la consola de api se visualizará el siguiente mensaje:
 
 <div align="center">
      <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/AppListen.jpeg" alt="App Listen" alt="App Listen"</img>
@@ -56,8 +56,8 @@ Después de ver este mensaje, modificar la variable DB_HOST del .env por tu ip l
 que podes consultar haciendo ipconfig en tu consola de Windows o GitBash y en ubuntu con ip addr show como se muestra en las siguientes imágenes:
 
 <div align="center">
-     <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/iplocalWindows.jpeg" alt="IpUbuntu" alt="IpUbuntu"</img>
-     <img width="22%" src="https://raw.github.com/cheloxnz/Proyecto-Billetera-HB/master/screenshots/iplocalUbuntu.jpeg" alt="IpWindows" alt="IpWindows"</img>
+     <img width="30%" src="https://github.com/cheloxnz/Proyecto-Billetera-HB/blob/master/screenshots/iplocalWindows.png" alt="IpWindows" alt="IpWindows"</img>
+     <img width="50%" src="https://github.com/cheloxnz/Proyecto-Billetera-HB/blob/master/screenshots/IplocalUbuntu.jpeg" alt="IpUbuntu" alt="IpUbuntu"</img>
 </div>
 
 Por último, modificar en /client/src/actions/index.js la constante ip por tu ip local 
@@ -71,11 +71,6 @@ abrir http://localhost:19006/ en el navegador y escanear el codigo QR con tu app
 * [NodeJS](https://nodejs.org/es/) - Entorno de ejecución para JavaScript 
 * [Expo](https://docs.expo.io/) - Marco y una plataforma para aplicaciones universales de React para construir e implementar en Android y iOS
 
-## Contribuyendo 🖇️
-
-* **Ambroggio, Guillermo** - [GuillermoAmbroggio] (https://github.com/guillermoAmbroggio)
-* **Uriona, Facundo** - [facuuriona4] (https://github.com/facuuriona4)
-
 ## Autores ✒️
 
 * **Córdoba, Matías** - [maticordoba7] (https://github.com/maticordoba7)
@@ -83,7 +78,10 @@ abrir http://localhost:19006/ en el navegador y escanear el codigo QR con tu app
 * **Lockett, Mariano** - [MakeNoise01] (https://github.com/makenoise01)
 * **Facundo, Rivadero** - [facu03] (https://github.com/facu03)
 
+## Contribuyendo 🖇️
 
+* **Ambroggio, Guillermo** - [GuillermoAmbroggio] (https://github.com/guillermoAmbroggio)
+* **Uriona, Facundo** - [facuuriona4] (https://github.com/facuuriona4)
 ## Expresiones de Gratitud 🎁
 
 * Comenta a otros sobre este proyecto 📢
