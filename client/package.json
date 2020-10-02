@@ -17,6 +17,7 @@
     "axios": "^0.20.0",
     "d3-scale": "^3.2.3",
     "date-fns": "^2.16.1",
+    "dotenv": "^8.2.0",
     "expo": "~38.0.8",
     "expo-barcode-scanner": "~8.2.1",
     "expo-constants": "~9.1.1",

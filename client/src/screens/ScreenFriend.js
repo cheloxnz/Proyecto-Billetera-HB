@@ -8,8 +8,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { SearchBar } from 'react-native-elements';
 import Axios from 'axios';
 import ListFriend from '../components/ListFriend';
-import { getAllContacts } from '../actions'
-const DB_HOST = 'localhost';
+import { getAllContacts, ip } from '../actions'
+
 
 
 const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUser }) => {
@@ -20,7 +20,7 @@ const ScreenFriend = ({ navigation, getAllContacts, account, contacts, onlineUse
     }, [])
     const handleContacts = text => {
         setInput(text)
-        Axios.get(`http://${DB_HOST}:3005/contacts/addFriend?username=${text}`)
+        Axios.get(`http://${ip}:3005/contacts/addFriend?username=${text}`)
             .then(user => setData(user?.data))
             .catch(err => console.log(err));
     }
